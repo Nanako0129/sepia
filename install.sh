@@ -294,54 +294,170 @@ bootstrap() {
     die 'installation failed; the previous checkout was restored'
   fi
 
+  failed="$CLONE_DIR.sepia-failed.$$"
+  [ ! -e "$failed" ] && [ ! -L "$failed" ] || {
+    rm -rf -- "$temp"
+    die 'temporary checkout path collision'
+  }
   mv "$temp" "$CLONE_DIR"
-  exec env SEPIA_REF="$REF" SEPIA_REPO="$REPO_URL" SEPIA_HOME="$CLONE_DIR" bash "$CLONE_DIR/install.sh"
+  if env SEPIA_REF="$REF" SEPIA_REPO="$REPO_URL" SEPIA_HOME="$CLONE_DIR" bash "$CLONE_DIR/install.sh"; then
+    exit 0
+  fi
+  mv "$CLONE_DIR" "$failed"
+  rm -rf -- "$failed"
+  die 'installation failed; the new checkout and destinations were removed'
 }
 
-install_link() {
+TX_CREATED_DIRS=()
+TX_CREATED_LINKS=()
+TX_AG_TEMP=""
+TX_WF_TEMP=""
+TX_WF_STATE_TEMP=""
+TX_AG_BACKUP=""
+TX_WF_BACKUP=""
+TX_WF_STATE_BACKUP=""
+TX_AG_BACKED_UP=0
+TX_WF_BACKED_UP=0
+TX_WF_STATE_BACKED_UP=0
+TX_AG_PUBLISHED=0
+TX_WF_PUBLISHED=0
+TX_WF_STATE_PUBLISHED=0
+
+ensure_parent() {
+  local parent current i
+  local -a missing=()
+  parent="$(dirname "$1")"
+  current="$parent"
+  while [ "$current" != "$HOME" ] && [ ! -e "$current" ] && [ ! -L "$current" ]; do
+    missing[${#missing[@]}]="$current"
+    current="$(dirname "$current")"
+  done
+  for ((i=${#missing[@]} - 1; i >= 0; i--)); do
+    TX_CREATED_DIRS[${#TX_CREATED_DIRS[@]}]="${missing[$i]}"
+  done
+  mkdir -p "$parent"
+}
+
+rollback_install() {
+  local failed=0 i path
+  set +e
+  if [ "$TX_WF_STATE_PUBLISHED" = 1 ]; then rm -rf -- "$WF_STATE" || failed=1; fi
+  if [ "$TX_WF_STATE_BACKED_UP" = 1 ]; then mv "$TX_WF_STATE_BACKUP" "$WF_STATE" || failed=1; fi
+  if [ "$TX_WF_PUBLISHED" = 1 ]; then rm -rf -- "$WF" || failed=1; fi
+  if [ "$TX_WF_BACKED_UP" = 1 ]; then mv "$TX_WF_BACKUP" "$WF" || failed=1; fi
+  if [ "$TX_AG_PUBLISHED" = 1 ]; then rm -rf -- "$AG" || failed=1; fi
+  if [ "$TX_AG_BACKED_UP" = 1 ]; then mv "$TX_AG_BACKUP" "$AG" || failed=1; fi
+  for ((i=${#TX_CREATED_LINKS[@]} - 1; i >= 0; i--)); do
+    rm -f -- "${TX_CREATED_LINKS[$i]}" || failed=1
+  done
+  for path in "$TX_AG_TEMP" "$TX_WF_TEMP" "$TX_WF_STATE_TEMP"; do
+    if [ -n "$path" ]; then rm -rf -- "$path" || failed=1; fi
+  done
+  for ((i=${#TX_CREATED_DIRS[@]} - 1; i >= 0; i--)); do
+    if [ -d "${TX_CREATED_DIRS[$i]}" ] && [ ! -L "${TX_CREATED_DIRS[$i]}" ]; then
+      rmdir "${TX_CREATED_DIRS[$i]}" || failed=1
+    fi
+  done
+  if [ "$failed" != 0 ]; then
+    printf 'sepia installer: destination rollback was incomplete; inspect paths reported above\n' >&2
+  else
+    printf 'sepia installer: restored all destinations to their pre-install state\n' >&2
+  fi
+}
+
+rollback_on_exit() {
+  local status=$?
+  trap - EXIT
+  rollback_install
+  exit "$status"
+}
+
+check_transaction_paths() {
+  local path
+  TX_AG_BACKUP="$AG.sepia-backup.$$"
+  TX_WF_BACKUP="$WF.sepia-backup.$$"
+  TX_WF_STATE_BACKUP="$WF_STATE.sepia-backup.$$"
+  for path in "$TX_AG_BACKUP" "$TX_WF_BACKUP" "$TX_WF_STATE_BACKUP"; do
+    [ ! -e "$path" ] && [ ! -L "$path" ] || die "temporary path exists: $path"
+  done
+}
+
+stage_install() {
+  local hash
+  ensure_parent "$CLAUDE"
+  ensure_parent "$CODEX"
+  ensure_parent "$GROK"
+  ensure_parent "$AG"
+  ensure_parent "$WF"
+
+  TX_AG_TEMP="$(mktemp -d "${AG}.tmp.XXXXXX")"
+  cp -R "$SKILL"/. "$TX_AG_TEMP"/
+  snapshot_dir "$TX_AG_TEMP" "$TX_AG_TEMP/$MANIFEST_NAME" || die 'canonical skill contains an unsupported file type or symlink'
+  printf 'owner=%s\nrevision=%s\n' "$OWNER" "$REF" >"$TX_AG_TEMP/$STATE_NAME"
+
+  TX_WF_TEMP="$(mktemp "${WF}.tmp.XXXXXX")"
+  TX_WF_STATE_TEMP="$(mktemp "${WF_STATE}.tmp.XXXXXX")"
+  cp "$ROOT/.agents/workflows/sepia.md" "$TX_WF_TEMP"
+  hash="$(sha256_file "$TX_WF_TEMP")"
+  printf 'owner=%s\nrevision=%s\nsha256=%s\n' "$OWNER" "$REF" "$hash" >"$TX_WF_STATE_TEMP"
+}
+
+publish_link() {
   local target="$1" destination="$2"
   if [ ! -L "$destination" ]; then
-    mkdir -p "$(dirname "$destination")"
     ln -s "$target" "$destination"
+    TX_CREATED_LINKS[${#TX_CREATED_LINKS[@]}]="$destination"
   fi
   printf 'linked  %s\n' "$destination"
 }
 
-install_skill_copy() {
-  local source="$1" destination="$2" temp backup
-  mkdir -p "$(dirname "$destination")"
-  temp="$(mktemp -d "${destination}.tmp.XXXXXX")"
-  cp -R "$source"/. "$temp"/
-  snapshot_dir "$temp" "$temp/$MANIFEST_NAME" || { rm -rf -- "$temp"; die 'canonical skill contains an unsupported file type or symlink'; }
-  printf 'owner=%s\nrevision=%s\n' "$OWNER" "$REF" >"$temp/$STATE_NAME"
-  if [ -e "$destination" ]; then
-    backup="$destination.sepia-backup.$$"
-    [ ! -e "$backup" ] && [ ! -L "$backup" ] || { rm -rf -- "$temp"; die "temporary path exists: $backup"; }
-    mv "$destination" "$backup"
-    if mv "$temp" "$destination"; then
-      rm -rf -- "$backup"
-    else
-      mv "$backup" "$destination"
-      rm -rf -- "$temp"
-      die "could not replace $destination; previous copy was restored"
-    fi
-  else
-    mv "$temp" "$destination"
+publish_skill_copy() {
+  if [ -e "$AG" ]; then
+    mv "$AG" "$TX_AG_BACKUP"
+    TX_AG_BACKED_UP=1
   fi
-  printf 'copied  %s\n' "$destination"
+  mv "$TX_AG_TEMP" "$AG"
+  TX_AG_PUBLISHED=1
+  printf 'copied  %s\n' "$AG"
 }
 
-install_workflow() {
-  local source="$1" workflow="$2" state="$3" temp temp_state hash
-  mkdir -p "$(dirname "$workflow")"
-  temp="$(mktemp "${workflow}.tmp.XXXXXX")"
-  temp_state="$(mktemp "${state}.tmp.XXXXXX")"
-  cp "$source" "$temp"
-  hash="$(sha256_file "$temp")"
-  printf 'owner=%s\nrevision=%s\nsha256=%s\n' "$OWNER" "$REF" "$hash" >"$temp_state"
-  mv -f "$temp" "$workflow"
-  mv -f "$temp_state" "$state"
-  printf 'copied  %s\n' "$workflow"
+publish_workflow() {
+  if [ -e "$WF" ]; then
+    mv "$WF" "$TX_WF_BACKUP"
+    TX_WF_BACKED_UP=1
+    mv "$WF_STATE" "$TX_WF_STATE_BACKUP"
+    TX_WF_STATE_BACKED_UP=1
+  fi
+  mv "$TX_WF_TEMP" "$WF"
+  TX_WF_PUBLISHED=1
+  mv "$TX_WF_STATE_TEMP" "$WF_STATE"
+  TX_WF_STATE_PUBLISHED=1
+  printf 'copied  %s\n' "$WF"
+}
+
+finish_install() {
+  local failed=0 path
+  trap - EXIT
+  for path in "$TX_AG_BACKUP" "$TX_WF_BACKUP" "$TX_WF_STATE_BACKUP"; do
+    if [ -e "$path" ] || [ -L "$path" ]; then rm -rf -- "$path" || failed=1; fi
+  done
+  if [ "$failed" != 0 ]; then
+    printf 'sepia installer: warning: installation succeeded but a private backup could not be removed\n' >&2
+  fi
+}
+
+install_all() {
+  check_transaction_paths
+  trap rollback_on_exit EXIT
+  stage_install
+  publish_link "$SKILL" "$CLAUDE"
+  publish_link "$SKILL" "$CODEX"
+  publish_link "$SKILL" "$GROK"
+  publish_skill_copy
+  publish_workflow
+  printf '\nInstalled revision %s at user scope.\n' "$REF"
+  printf 'Keep %s: the Claude, Codex, and Grok links use its canonical skill.\n' "$ROOT"
+  finish_install
 }
 
 uninstall_all() {
@@ -399,11 +515,4 @@ fi
 
 preflight_all "$SKILL"
 verify_clean_checkout "$ROOT" "$REF"
-install_link "$SKILL" "$CLAUDE"
-install_link "$SKILL" "$CODEX"
-install_link "$SKILL" "$GROK"
-install_skill_copy "$SKILL" "$AG"
-install_workflow "$ROOT/.agents/workflows/sepia.md" "$WF" "$WF_STATE"
-
-printf '\nInstalled revision %s at user scope.\n' "$REF"
-printf 'Keep %s: the Claude, Codex, and Grok links use its canonical skill.\n' "$ROOT"
+install_all

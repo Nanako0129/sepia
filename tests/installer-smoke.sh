@@ -47,6 +47,18 @@ install_from_bootstrap() {
   HOME="$1" SEPIA_HOME="$2" SEPIA_REPO="$3" SEPIA_REF="$4" bash "$BOOTSTRAP"
 }
 
+install_with_late_mv_failure() {
+  local name="$1" home="$2" clone="$3" repo="$4" ref="$5"
+  HOME="$home" SEPIA_HOME="$clone" SEPIA_REPO="$repo" SEPIA_REF="$ref" \
+    PATH="$MV_SHIM_DIR:$PATH" \
+    INSTALLER_TEST_REAL_MV="$REAL_MV" \
+    INSTALLER_TEST_FAIL_DEST="$home/.gemini/antigravity/global_workflows/sepia.md.sepia-install-state" \
+    INSTALLER_TEST_PUBLISHED_SKILL="$home/.gemini/config/skills/sepia/SKILL.md" \
+    INSTALLER_TEST_PUBLISHED_WORKFLOW="$home/.gemini/antigravity/global_workflows/sepia.md" \
+    INSTALLER_TEST_MARKER="$TMP/$name.marker" \
+    bash "$BOOTSTRAP"
+}
+
 assert_reject_bootstrap() {
   local name="$1" home="$2" clone="$3" repo="$4" ref="$5" before="$TMP/before-$1" after="$TMP/after-$1"
   snapshot_tree "$home" "$before"
@@ -92,7 +104,8 @@ ORIGIN="$TMP/origin.git"
 git clone -q --bare "$SOURCE" "$ORIGIN"
 git -C "$SOURCE" remote add origin "$ORIGIN"
 printf '\nfixture revision two\n' >>"$SOURCE/skills/sepia/SKILL.md"
-git -C "$SOURCE" add skills/sepia/SKILL.md
+printf '\nfixture workflow revision two\n' >>"$SOURCE/.agents/workflows/sepia.md"
+git -C "$SOURCE" add skills/sepia/SKILL.md .agents/workflows/sepia.md
 git -C "$SOURCE" commit -qm 'fixture v2'
 REF2="$(git -C "$SOURCE" rev-parse HEAD)"
 git -C "$SOURCE" push -q origin HEAD
@@ -100,6 +113,22 @@ git -C "$SOURCE" push -q origin HEAD
 BOOTSTRAP="$TMP/install.sh"
 cp "$ROOT/install.sh" "$BOOTSTRAP"
 chmod 755 "$BOOTSTRAP"
+
+MV_SHIM_DIR="$TMP/mv-shim"
+REAL_MV="$(command -v mv)"
+mkdir -p "$MV_SHIM_DIR"
+cat >"$MV_SHIM_DIR/mv" <<'SHIM'
+#!/bin/bash
+set -eu
+if [ "$#" -eq 2 ] && [ "$2" = "${INSTALLER_TEST_FAIL_DEST:-}" ] && [ ! -e "${INSTALLER_TEST_MARKER:-}" ]; then
+  grep -q 'fixture revision two' "${INSTALLER_TEST_PUBLISHED_SKILL:?}"
+  grep -q 'fixture workflow revision two' "${INSTALLER_TEST_PUBLISHED_WORKFLOW:?}"
+  : >"${INSTALLER_TEST_MARKER:?}"
+  exit 75
+fi
+exec "${INSTALLER_TEST_REAL_MV:?}" "$@"
+SHIM
+chmod 755 "$MV_SHIM_DIR/mv"
 
 make_home clean
 install_from_bootstrap "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF1" >/dev/null
@@ -118,6 +147,39 @@ install_from_bootstrap "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF2" >/dev/null
 grep -q 'fixture revision two' "$CASE_HOME/.gemini/config/skills/sepia/SKILL.md" || fail 'managed copy did not update'
 grep -q "revision=$REF2" "$CASE_HOME/.gemini/config/skills/sepia/.sepia-install-state" || fail 'managed state did not update'
 ok 'repeat managed update'
+
+make_home late_update_rollback
+install_from_bootstrap "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF1" >/dev/null
+printf 'sentinel\n' >"$CASE_HOME/keep"
+before_home="$TMP/before-late-update-home"
+after_home="$TMP/after-late-update-home"
+before_clone="$TMP/before-late-update-clone"
+after_clone="$TMP/after-late-update-clone"
+snapshot_tree "$CASE_HOME" "$before_home"
+snapshot_tree "$CASE_CLONE" "$before_clone"
+if install_with_late_mv_failure late_update "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF2" >"$TMP/late_update.out" 2>&1; then
+  fail 'late managed-update failure unexpectedly succeeded'
+fi
+[ -f "$TMP/late_update.marker" ] || fail 'late managed-update failure did not reach workflow-state publication'
+snapshot_tree "$CASE_HOME" "$after_home"
+snapshot_tree "$CASE_CLONE" "$after_clone"
+cmp -s "$before_home" "$after_home" || fail 'late managed-update failure did not restore every destination and sentinel'
+cmp -s "$before_clone" "$after_clone" || fail 'late managed-update failure did not restore the checkout byte-for-byte'
+ok 'late managed-update failure restores checkout, links, copies, state, and sentinels'
+
+make_home late_clean_rollback
+printf 'sentinel\n' >"$CASE_HOME/keep"
+before_home="$TMP/before-late-clean-home"
+after_home="$TMP/after-late-clean-home"
+snapshot_tree "$CASE_HOME" "$before_home"
+if install_with_late_mv_failure late_clean "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF2" >"$TMP/late_clean.out" 2>&1; then
+  fail 'late clean-install failure unexpectedly succeeded'
+fi
+[ -f "$TMP/late_clean.marker" ] || fail 'late clean-install failure did not reach workflow-state publication'
+[ ! -e "$CASE_CLONE" ] && [ ! -L "$CASE_CLONE" ] || fail 'late clean-install failure left the new checkout'
+snapshot_tree "$CASE_HOME" "$after_home"
+cmp -s "$before_home" "$after_home" || fail 'late clean-install failure left a partial destination or changed a sentinel'
+ok 'late clean-install failure removes checkout and every partial destination'
 
 make_home regular_file
 mkdir -p "$CASE_HOME/.claude/skills"
