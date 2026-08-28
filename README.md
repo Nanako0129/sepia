@@ -76,28 +76,35 @@ Grok also auto-discovers a Claude Code install of sepia if you have one; either 
 
 ### Antigravity
 
-No marketplace here — the native install is placing the skill folder, plus the `/sepia` slash workflow:
-
-```bash
-# install
-git clone https://github.com/Nanako0129/sepia.git ~/.sepia
-mkdir -p ~/.gemini/config/skills ~/.gemini/antigravity/global_workflows
-cp -R ~/.sepia/skills/sepia ~/.gemini/config/skills/sepia
-cp ~/.sepia/.agents/workflows/sepia.md ~/.gemini/antigravity/global_workflows/sepia.md
-
-# update
-git -C ~/.sepia pull
-rm -rf ~/.gemini/config/skills/sepia && cp -R ~/.sepia/skills/sepia ~/.gemini/config/skills/sepia
-cp ~/.sepia/.agents/workflows/sepia.md ~/.gemini/antigravity/global_workflows/sepia.md
-```
+Antigravity has no marketplace. Use the verified installer below; it creates an ownership-marked skill copy and `/sepia` workflow so later updates can detect local modifications instead of overwriting them.
 
 ### All four at once (alternative)
 
+Get the published commit SHA and `install.sh` SHA-256 as a pair from the release notes, replace the two placeholders, then run:
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Nanako0129/sepia/main/install.sh | bash
+(
+  set -e
+  SEPIA_REF='PASTE_PUBLISHED_40_HEX_COMMIT_SHA'
+  SEPIA_INSTALL_SHA256='PASTE_PUBLISHED_INSTALL_SH_SHA256'
+  installer="$(mktemp)"
+  trap 'rm -f "$installer"' EXIT
+
+  curl -fsSL "https://raw.githubusercontent.com/Nanako0129/sepia/$SEPIA_REF/install.sh" -o "$installer"
+  if command -v shasum >/dev/null 2>&1; then
+    printf '%s  %s\n' "$SEPIA_INSTALL_SHA256" "$installer" | shasum -a 256 -c -
+  else
+    printf '%s  %s\n' "$SEPIA_INSTALL_SHA256" "$installer" | sha256sum -c -
+  fi
+  SEPIA_REF="$SEPIA_REF" bash "$installer"
+)
 ```
 
-Clones the repo to `~/.sepia` (override with `SEPIA_HOME`) and installs at user scope for all four platforms; re-running the same line is also the update. Prefer to inspect first? Clone it yourself and run `./install.sh` from the checkout. Either way it installs:
+The checksum command is the pre-execution trust boundary. The installer cannot retroactively prove which bytes the shell already began executing; after that external check, it also requires the downloaded bytes, fetched commit, checkout `HEAD`, and tracked executable `install.sh` object to agree on the same full SHA. Branch names and tags are not accepted as the machine contract.
+
+The command clones to `~/.sepia` (override with an absolute `SEPIA_HOME`) and installs at user scope for all four platforms. To update or roll back, rerun the block with the new or previous published SHA/digest pair. Existing checkouts must have exactly the selected `SEPIA_REPO` origin and be clean; the installer aborts on foreign origins, untracked files, modified files, or an unexpected installer type.
+
+Every destination is checked before any destination changes. Existing paths are accepted only when positively identified as the Sepia symlink or an unmodified, ownership-marked Antigravity copy. Legacy copies and every other collision abort without a force option; move the path aside after reviewing it, then rerun. The managed layout is:
 
 | Platform | Where | Mechanism |
 |---|---|---|
@@ -105,6 +112,19 @@ Clones the repo to `~/.sepia` (override with `SEPIA_HOME`) and installs at user 
 | Codex | `~/.agents/skills/sepia` | symlink |
 | Grok Build | `~/.grok/skills/sepia` | symlink |
 | Antigravity | `~/.gemini/config/skills/sepia` + `/sepia` global workflow | copy |
+
+Safe uninstall keeps the checkout and removes only currently unmodified, positively identified managed artifacts. Rerun the same download-and-checksum block with the installed revision's published SHA/digest pair, replacing only its final line with:
+
+```bash
+SEPIA_ACTION=uninstall SEPIA_REF="$SEPIA_REF" \
+  SEPIA_HOME="${SEPIA_HOME:-$HOME/.sepia}" \
+  SEPIA_REPO="${SEPIA_REPO:-https://github.com/Nanako0129/sepia.git}" \
+  bash "$installer"
+```
+
+Keep that line inside the checksum-guarded subshell so the verified downloaded installer validates the checkout before executing its installer. If the install used `SEPIA_HOME` or `SEPIA_REPO`, pass the same values to uninstall. Uninstall preflights every artifact before removing any of them; a modified copy, unmanaged replacement, legacy unmarked path, or wrong symlink aborts and leaves all destinations and symlink targets unchanged.
+
+Maintainers publish immutable installer coordinates in two steps: resolve the release tag to its full commit with `git rev-parse '<tag>^{}'`, then compute `git show '<commit>:install.sh' | shasum -a 256`. Publish that exact SHA/digest pair in the release notes and replace the placeholders in both READMEs in a follow-up documentation commit; the tag remains a human alias, not installer input.
 
 ### Skills CLI (alternative, 77+ agents)
 

@@ -76,28 +76,35 @@ Grok 也會自動找到既有的 Claude Code sepia 安裝；兩種方式都能�
 
 ### Antigravity
 
-Antigravity 沒有 marketplace；原生安裝方式是放入 Agent Skill 資料夾，再加上 `/sepia` slash workflow：
-
-```bash
-# install
-git clone https://github.com/Nanako0129/sepia.git ~/.sepia
-mkdir -p ~/.gemini/config/skills ~/.gemini/antigravity/global_workflows
-cp -R ~/.sepia/skills/sepia ~/.gemini/config/skills/sepia
-cp ~/.sepia/.agents/workflows/sepia.md ~/.gemini/antigravity/global_workflows/sepia.md
-
-# update
-git -C ~/.sepia pull
-rm -rf ~/.gemini/config/skills/sepia && cp -R ~/.sepia/skills/sepia ~/.gemini/config/skills/sepia
-cp ~/.sepia/.agents/workflows/sepia.md ~/.gemini/antigravity/global_workflows/sepia.md
-```
+Antigravity 沒有 marketplace。請使用下方經過驗證的安裝器；它會建立帶有 ownership 標記的 skill 副本與 `/sepia` workflow，之後更新時可先偵測本機修改，不會直接覆寫。
 
 ### 四個平台一次裝完（替代方案）
 
+從 release notes 取得成對發布的 commit SHA 與 `install.sh` SHA-256，替換兩個 placeholder 後執行：
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Nanako0129/sepia/main/install.sh | bash
+(
+  set -e
+  SEPIA_REF='PASTE_PUBLISHED_40_HEX_COMMIT_SHA'
+  SEPIA_INSTALL_SHA256='PASTE_PUBLISHED_INSTALL_SH_SHA256'
+  installer="$(mktemp)"
+  trap 'rm -f "$installer"' EXIT
+
+  curl -fsSL "https://raw.githubusercontent.com/Nanako0129/sepia/$SEPIA_REF/install.sh" -o "$installer"
+  if command -v shasum >/dev/null 2>&1; then
+    printf '%s  %s\n' "$SEPIA_INSTALL_SHA256" "$installer" | shasum -a 256 -c -
+  else
+    printf '%s  %s\n' "$SEPIA_INSTALL_SHA256" "$installer" | sha256sum -c -
+  fi
+  SEPIA_REF="$SEPIA_REF" bash "$installer"
+)
 ```
 
-這會把 repo clone 到 `~/.sepia`（可用 `SEPIA_HOME` 覆寫），並以 user scope 安裝到四個平台；重跑同一行就是更新。想先檢查內容？可自行 clone，從 checkout 執行 `./install.sh`。兩種方式都會安裝到：
+checksum 指令是執行前的信任邊界。Shell 已經開始執行後，安裝器無法回頭證明先前執行的 bytes；外部檢查通過後，安裝器還會要求下載內容、抓取的 commit、checkout `HEAD` 與 Git 追蹤的可執行 `install.sh` object 全都對應同一個完整 SHA。Branch 名稱與 tag 都不能作為機器契約。
+
+這會把 repo clone 到 `~/.sepia`（可用絕對路徑的 `SEPIA_HOME` 覆寫），並以 user scope 安裝到四個平台。更新或 rollback 時，使用新版或前一版發布的 SHA/digest pair 重跑同一段。既有 checkout 的 origin 必須與指定的 `SEPIA_REPO` 完全一致，而且 worktree 必須乾淨；foreign origin、untracked file、本機修改或異常 installer type 都會中止。
+
+所有目的地都會在任何目的地變更前完成檢查。既有路徑只有在確認是 Sepia symlink，或是未修改且帶 ownership 標記的 Antigravity 副本時才會接受。舊版無標記副本及其他碰撞一律中止，沒有 force 選項；檢查後先把衝突路徑移開，再重新執行。受管理的配置如下：
 
 | 平台 | 位置 | 機制 |
 |---|---|---|
@@ -105,6 +112,19 @@ curl -fsSL https://raw.githubusercontent.com/Nanako0129/sepia/main/install.sh | 
 | Codex | `~/.agents/skills/sepia` | symlink |
 | Grok Build | `~/.grok/skills/sepia` | symlink |
 | Antigravity | `~/.gemini/config/skills/sepia` ＋ `/sepia` global workflow | copy |
+
+安全解除安裝會保留 checkout，只移除目前未修改、且能明確認定由 Sepia 管理的項目。請使用已安裝 revision 對應的 published SHA/digest pair 重跑相同的下載與 checksum block，只把最後一行換成：
+
+```bash
+SEPIA_ACTION=uninstall SEPIA_REF="$SEPIA_REF" \
+  SEPIA_HOME="${SEPIA_HOME:-$HOME/.sepia}" \
+  SEPIA_REPO="${SEPIA_REPO:-https://github.com/Nanako0129/sepia.git}" \
+  bash "$installer"
+```
+
+這一行必須留在 checksum 保護的 subshell 裡，讓通過驗證的 downloaded installer 先驗證 checkout，再執行其中的 installer。若安裝時有設定 `SEPIA_HOME` 或 `SEPIA_REPO`，解除安裝時也要傳入相同值。Uninstall 會先檢查全部項目，再移除其中任何一項；modified copy、unmanaged replacement、舊版無標記路徑或錯誤 symlink 都會讓操作中止，全部目的地與 symlink target 保持不變。
+
+維護者以兩個步驟發布不可變的 installer 座標：先用 `git rev-parse '<tag>^{}'` 把 release tag 解析為完整 commit，再執行 `git show '<commit>:install.sh' | shasum -a 256`。請在 release notes 發布完全相同的 SHA/digest pair，並在後續 documentation commit 同步替換兩份 README 的 placeholder；tag 只供人閱讀，不是 installer input。
 
 ### Skills CLI（替代方案，77+ 個 agent）
 
