@@ -71,7 +71,8 @@ standard-command contract check; `check.sh --self-test` copies the completed
 pack to a temporary directory and proves deterministic failures for a missing
 arm, missing case ID, missing routes, missing metadata, human questions not
 marked `NOT_RUN`, an invalid status, an extra grade row, and an extra arm
-section.
+section. It also rejects self-test startup when the source pack is already
+invalid.
 
 Run the checker from the repository root after all seven files are present:
 

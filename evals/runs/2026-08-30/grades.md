@@ -2,7 +2,7 @@
 
 | ID | B-OP | B-ROUTE | B-FACTS | B-I1 | B-I2 | B-I3 | B-I4 | S-OP | S-ROUTE | S-FACTS | S-I1 | S-I2 | S-I3 | S-I4 | HUMAN |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| PF3-F-WRITE | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | FAIL | PASS | PASS | FAIL | PASS | NOT_RUN |
+| PF3-F-WRITE | PASS | PASS | FAIL | PASS | PASS | FAIL | PASS | PASS | PASS | FAIL | PASS | PASS | FAIL | PASS | NOT_RUN |
 | PF3-F-REVIEW | PASS | PASS | FAIL | PASS | PASS | FAIL | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
 | PF3-F-REFACTOR | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | FAIL | PASS | PASS | PASS | PASS | NOT_RUN |
 | PF3-F-RECREATE | PASS | PASS | FAIL | PASS | FAIL | PASS | FAIL | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
@@ -15,7 +15,7 @@
 
 ### Case 1
 
-Baseline is a fiction scene beginning “At 5:10 each morning” with “Inez, the ferry mechanic,” and “Bo held the phone”; it includes “three knocks,” “horn called them back to shore,” and “moved the wrench.” Sepia instead says “Inez stood on the ferry’s wet deck and held the phone” and “Bo kept his thumb on the red button”: it never identifies Inez as the ferry mechanic or explicitly establishes Bo as a child holding the phone. Sepia still states “At 5:10 on a rainy Tuesday,” “Three knocks came through the deck,” and ends with “Why did you move the wrench?”
+Baseline is a fiction scene beginning “At 5:10 each morning” with “Inez, the ferry mechanic,” and “Bo held the phone,” but it never identifies Bo as a child; it includes “three knocks,” “horn called them back to shore,” and “moved the wrench.” Sepia instead says “Inez stood on the ferry’s wet deck and held the phone” and “Bo kept his thumb on the red button”: it never identifies Inez as the ferry mechanic or explicitly establishes Bo as a child holding the phone. Sepia still states “At 5:10 on a rainy Tuesday,” “Three knocks came through the deck,” and ends with “Why did you move the wrench?”
 
 ### Case 2
 

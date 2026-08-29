@@ -206,7 +206,7 @@ replace_with_sed() {
 }
 
 self_test() {
-  if ! run_checks >/dev/null 2>&1; then
+  if ! bash "$0" >/dev/null 2>&1; then
     incomplete 'self-test requires the complete seven-file pack; create baseline.md, sepia.md, and grades.md first'
   fi
 
@@ -239,6 +239,7 @@ self_test() {
   cp "$copy_meta" "$backup"
   replace_with_sed "$copy_meta" 's/| plugin_version | 0.2.0 |/| plugin_version | |/'
   expect_failure 'missing metadata' bash "$copy_check"
+  expect_failure 'invalid source self-test' bash "$copy_check" --self-test
   cp "$backup" "$copy_meta"
 
   cp "$copy_grades" "$backup"
