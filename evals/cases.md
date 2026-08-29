@@ -73,7 +73,7 @@ recorded for a later editor and must remain `NOT_RUN` in `grades.md`.
 | I1 | The output is a full fiction `recreate`, not a review, patch list, or sentence-by-sentence edit. |
 | I2 | The café, old song, Nina, street, unnamed summer, singer’s finish, smile, and walk into night remain recognizable. |
 | I3 | The output contains no quoted lyrics or invented passage attributed to an existing song. |
-| I4 | The generic “every ending” explanation is replaced by concrete story material without claiming facts absent from the input. |
+| I4 | The generic “every ending” explanation is replaced by concrete story material without changing the protected premise anchors. |
 
 ### PF3-P-WRITE
 
