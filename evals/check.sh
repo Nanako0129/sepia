@@ -76,6 +76,18 @@ section_has_literal() {
   ' "$file"
 }
 
+section_field_count() {
+  id=$1
+  field=$2
+  file=$3
+  awk -v id="$id" -v field="$field" '
+    $0 == "### " id { found = 1; next }
+    found && $0 ~ "^###[[:space:]]" { exit }
+    found && index($0, "| " field " |") == 1 { count++ }
+    END { print count + 0 }
+  ' "$file"
+}
+
 check_inventory() {
   expected=$(printf '%s\n' \
     README.md \
@@ -108,14 +120,9 @@ check_cases() {
     [ "$(heading_count "$id" "$CASES" '###')" -eq 1 ] || fail "cases.md must contain one H3 section for $id"
     section_has_body "$id" "$CASES" '###' || fail "cases.md section $id is empty"
     section_has_literal "$id" "$route" "$CASES" || fail "cases.md section $id has the wrong route"
-  done
-  [ "$(grep -F -c '| Original input |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight original inputs"
-  [ "$(grep -F -c '| Exact request |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight exact requests"
-  [ "$(grep -F -c '| Protected facts / voice |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight protected-facts/voice fields"
-  [ "$(grep -F -c '| Human-only questions |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight human-only question fields"
-  [ "$(grep -F -c '| Route |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight route fields"
-  for invariant in I1 I2 I3 I4; do
-    [ "$(grep -F -c "| $invariant |" "$CASES")" -eq 8 ] || fail "cases.md must provide $invariant for all eight cases"
+    for field in 'Original input' 'Exact request' 'Protected facts / voice' 'Human-only questions' I1 I2 I3 I4; do
+      [ "$(section_field_count "$id" "$field" "$CASES")" -eq 1 ] || fail "cases.md section $id must contain exactly one $field field"
+    done
   done
   grep -F -i -q 'no copyrighted passages' "$CASES" || fail "cases.md must state that inputs contain no copyrighted passages"
 }
@@ -271,6 +278,13 @@ self_test() {
   cp "$copy_cases" "$backup"
   replace_with_sed "$copy_cases" 's/| Route | Fiction; `write` |/| Route | Professional prose; PR reply; `review` |/'
   expect_failure 'wrong route value' bash "$copy_check"
+  cp "$backup" "$copy_cases"
+
+  cp "$copy_cases" "$backup"
+  replace_with_sed "$copy_cases" '/^| Exact request | Write a short literary scene /d'
+  replace_with_sed "$copy_cases" '/^### PF3-F-REVIEW$/a\
+| Exact request | moved duplicate |'
+  expect_failure 'misplaced required field' bash "$copy_check"
   cp "$backup" "$copy_cases"
 
   cp "$copy_meta" "$backup"
