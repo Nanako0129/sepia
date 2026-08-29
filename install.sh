@@ -82,7 +82,7 @@ verify_installer_entry() {
 verify_running_installer() {
   local root="$1" revision="$2" oid
   oid="$(verify_installer_entry "$root" "$revision")"
-  [ "$(git_safe -C "$root" hash-object "$SCRIPT_SRC")" = "$oid" ]
+  [ "$(git_safe -C "$root" hash-object --no-filters -- "$SCRIPT_SRC")" = "$oid" ]
 }
 
 verify_origin() {
@@ -91,20 +91,80 @@ verify_origin() {
   [ "$origins" = "$REPO_URL" ] || die "$root has a foreign or ambiguous origin; expected exactly $REPO_URL"
 }
 
+verify_payload() {
+  local root="$1" revision="$2" record metadata mode type oid path relative entry flag actual_oid
+  local expected_count=0 actual_count=0 found_installer=0 found_skill=0 found_workflow=0
+
+  while IFS= read -r -d '' record; do
+    flag="${record%% *}"
+    case "$flag" in
+      [a-z]|S) die "$root payload index contains assume-unchanged or skip-worktree flags" ;;
+    esac
+  done < <(git_safe -C "$root" ls-files -z -v -- install.sh skills/sepia .agents/workflows/sepia.md)
+
+  while IFS= read -r -d '' record; do
+    metadata="${record%%$'\t'*}"
+    path="${record#*$'\t'}"
+    read -r mode type oid <<<"$metadata"
+    [ "$type" = blob ] || die "revision $revision payload contains a non-file entry: $path"
+    case "$path" in
+      install.sh)
+        [ "$mode" = 100755 ] || die "revision $revision does not contain install.sh as an executable regular file"
+        found_installer=1
+        ;;
+      skills/sepia/*)
+        case "$mode" in 100644|100755) ;; *) die "revision $revision payload has an unsupported mode at $path" ;; esac
+        [ "$path" = skills/sepia/SKILL.md ] && found_skill=1
+        ;;
+      .agents/workflows/sepia.md)
+        case "$mode" in 100644|100755) ;; *) die "revision $revision payload has an unsupported mode at $path" ;; esac
+        found_workflow=1
+        ;;
+      *) die "revision $revision payload has an unexpected path: $path" ;;
+    esac
+    expected_count=$((expected_count + 1))
+  done < <(git_safe -C "$root" ls-tree -r -z --full-tree "$revision" -- install.sh skills/sepia .agents/workflows/sepia.md)
+
+  [ "$found_installer" = 1 ] || die "revision $revision is missing install.sh"
+  [ "$found_skill" = 1 ] || die "revision $revision is missing skills/sepia/SKILL.md"
+  [ "$found_workflow" = 1 ] || die "revision $revision is missing .agents/workflows/sepia.md"
+  [ -d "$root/skills/sepia" ] && [ ! -L "$root/skills/sepia" ] || die "$root/skills/sepia must be a real directory"
+  [ -e "$root/install.sh" ] || [ -L "$root/install.sh" ] || die "$root/install.sh is missing"
+  [ -e "$root/.agents/workflows/sepia.md" ] || [ -L "$root/.agents/workflows/sepia.md" ] ||
+    die "$root/.agents/workflows/sepia.md is missing"
+
+  while IFS= read -r -d '' path; do
+    relative="${path#"$root"/}"
+    entry="$(git_safe -C "$root" ls-tree "$revision" -- ":(literal)$relative")"
+    [ -n "$entry" ] || die "$root payload has an unexpected path: $relative"
+    read -r mode type oid _ <<<"$entry"
+    [ "$type" = blob ] && [ -f "$path" ] && [ ! -L "$path" ] ||
+      die "$root payload path has an unexpected type: $relative"
+    case "$mode" in
+      100755) [ -x "$path" ] || die "$root payload path must be executable: $relative" ;;
+      100644) [ ! -x "$path" ] || die "$root payload path must not be executable: $relative" ;;
+      *) die "revision $revision payload has an unsupported mode at $relative" ;;
+    esac
+    actual_oid="$(git_safe -C "$root" hash-object --no-filters -- "$relative")"
+    [ "$actual_oid" = "$oid" ] || die "$root payload does not match revision $revision: $relative"
+    actual_count=$((actual_count + 1))
+  done < <(find "$root/install.sh" "$root/skills/sepia" "$root/.agents/workflows/sepia.md" -mindepth 0 ! -type d -print0)
+
+  [ "$actual_count" = "$expected_count" ] || die "$root payload paths do not match revision $revision"
+}
+
 verify_clean_checkout() {
-  local root="$1" expected="$2" head oid
+  local root="$1" expected="$2" head
   if [ -L "$root/.git" ] || { [ ! -d "$root/.git" ] && [ ! -f "$root/.git" ]; }; then
     die "$root/.git has an unexpected type"
   fi
   git_safe -C "$root" rev-parse --is-inside-work-tree >/dev/null 2>&1 || die "$root is not a Git checkout"
   verify_origin "$root"
-  [ -f "$root/install.sh" ] && [ ! -L "$root/install.sh" ] || die "$root/install.sh must be a regular file, not a symlink"
   [ -z "$(git_safe -C "$root" status --porcelain=v1 --untracked-files=all)" ] ||
     die "$root is dirty or contains untracked files; refusing to execute or replace its installer"
   head="$(git_safe -C "$root" rev-parse 'HEAD^{commit}')"
   [ "$head" = "$expected" ] || die "$root HEAD $head does not match SEPIA_REF $expected"
-  oid="$(verify_installer_entry "$root" "$expected")"
-  [ "$(git_safe -C "$root" hash-object install.sh)" = "$oid" ] || die "$root/install.sh does not match revision $expected"
+  verify_payload "$root" "$expected"
 }
 
 snapshot_dir() {
@@ -250,7 +310,7 @@ prepare_checkout() {
 }
 
 bootstrap() {
-  local expected_skill="$CLONE_DIR/skills/sepia" temp backup failed current oid
+  local expected_skill="$CLONE_DIR/skills/sepia" temp backup failed current
   if [ -e "$CLONE_DIR" ] || [ -L "$CLONE_DIR" ]; then
     [ -d "$CLONE_DIR" ] && [ ! -L "$CLONE_DIR" ] || die "$CLONE_DIR exists but is not a real directory"
     [ -d "$CLONE_DIR/.git" ] && [ ! -L "$CLONE_DIR/.git" ] || die "$CLONE_DIR/.git must be a real directory"
@@ -259,9 +319,7 @@ bootstrap() {
     [ -z "$(git_safe -C "$CLONE_DIR" status --porcelain=v1 --untracked-files=all)" ] ||
       die "$CLONE_DIR is dirty or contains untracked files; refusing to execute or replace its installer"
     current="$(git_safe -C "$CLONE_DIR" rev-parse 'HEAD^{commit}')"
-    oid="$(verify_installer_entry "$CLONE_DIR" "$current")"
-    [ "$(git_safe -C "$CLONE_DIR" hash-object install.sh)" = "$oid" ] ||
-      die "$CLONE_DIR/install.sh does not match its current HEAD"
+    verify_payload "$CLONE_DIR" "$current"
   elif [ "$ACTION" = uninstall ]; then
     die "$CLONE_DIR does not exist; there is no verified installer to run"
   fi
@@ -504,9 +562,6 @@ ROOT="$(git_safe -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)" || die
 [ "$(cd "$ROOT" && pwd -P)" = "$SCRIPT_DIR" ] || die 'install.sh must be run from the checkout root'
 verify_clean_checkout "$ROOT" "$REF"
 SKILL="$ROOT/skills/sepia"
-[ -d "$SKILL" ] && [ ! -L "$SKILL" ] || die 'canonical skills/sepia directory is missing or is a symlink'
-[ -z "$(find "$SKILL" -type l -print -quit)" ] || die 'canonical skills/sepia must not contain symlinks'
-[ -f "$ROOT/.agents/workflows/sepia.md" ] && [ ! -L "$ROOT/.agents/workflows/sepia.md" ] || die 'canonical workflow is missing or is a symlink'
 
 if [ "$ACTION" = uninstall ]; then
   uninstall_all

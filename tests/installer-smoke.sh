@@ -87,6 +87,11 @@ make_clone() {
   git -C "$1" checkout -q --detach "$2"
 }
 
+assert_empty_porcelain() {
+  [ -z "$(git -C "$1" status --porcelain=v1 --untracked-files=all)" ] ||
+    fail "$2 did not reproduce an empty porcelain status"
+}
+
 SOURCE="$TMP/source"
 mkdir -p "$SOURCE/skills" "$SOURCE/.agents/workflows"
 cp "$ROOT/install.sh" "$SOURCE/install.sh"
@@ -140,7 +145,7 @@ done
 [ -f "$CASE_HOME/.gemini/config/skills/sepia/.sepia-install-state" ] || fail 'Antigravity skill is unmarked'
 [ -f "$CASE_HOME/.gemini/config/skills/sepia/.sepia-install-manifest" ] || fail 'Antigravity skill lacks a manifest'
 [ -f "$CASE_HOME/.gemini/antigravity/global_workflows/sepia.md.sepia-install-state" ] || fail 'workflow is unmarked'
-ok 'clean local-file bootstrap install'
+ok 'clean verified payload installs'
 
 install_from_bootstrap "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF2" >/dev/null
 [ "$(git -C "$CASE_CLONE" rev-parse HEAD)" = "$REF2" ] || fail 'managed update did not select REF2'
@@ -240,6 +245,34 @@ make_clone "$CASE_CLONE" "$REF2"
 printf 'untracked\n' >"$CASE_CLONE/untracked"
 printf 'sentinel\n' >"$CASE_HOME/keep"
 assert_reject_bootstrap untracked_checkout "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF2"
+
+make_home assume_unchanged_payload
+make_clone "$CASE_CLONE" "$REF2"
+git -C "$CASE_CLONE" update-index --assume-unchanged skills/sepia/SKILL.md
+printf 'hidden payload edit\n' >>"$CASE_CLONE/skills/sepia/SKILL.md"
+printf 'sentinel\n' >"$CASE_HOME/keep"
+assert_empty_porcelain "$CASE_CLONE" assume_unchanged_payload
+assert_reject_bootstrap assume_unchanged_payload "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF2"
+grep -q 'payload index' "$TMP/assume_unchanged_payload.out" || fail 'assume-unchanged payload rejection used the wrong gate'
+
+make_home skip_worktree_payload
+make_clone "$CASE_CLONE" "$REF2"
+git -C "$CASE_CLONE" update-index --skip-worktree skills/sepia/SKILL.md
+printf 'hidden payload edit\n' >>"$CASE_CLONE/skills/sepia/SKILL.md"
+printf 'sentinel\n' >"$CASE_HOME/keep"
+assert_empty_porcelain "$CASE_CLONE" skip_worktree_payload
+assert_reject_bootstrap skip_worktree_payload "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF2"
+grep -q 'payload index' "$TMP/skip_worktree_payload.out" || fail 'skip-worktree payload rejection used the wrong gate'
+
+make_home ignored_payload_addition
+make_clone "$CASE_CLONE" "$REF2"
+printf '/skills/sepia/ignored-added\n' >>"$CASE_CLONE/.git/info/exclude"
+printf 'ignored payload\n' >"$CASE_CLONE/skills/sepia/ignored-added"
+git -C "$CASE_CLONE" check-ignore -q skills/sepia/ignored-added || fail 'ignored payload fixture is not ignored'
+printf 'sentinel\n' >"$CASE_HOME/keep"
+assert_empty_porcelain "$CASE_CLONE" ignored_payload_addition
+assert_reject_bootstrap ignored_payload_addition "$CASE_HOME" "$CASE_CLONE" "$ORIGIN" "$REF2"
+grep -q 'unexpected path' "$TMP/ignored_payload_addition.out" || fail 'ignored payload rejection used the wrong gate'
 
 make_home symlinked_installer
 make_clone "$CASE_CLONE" "$REF2"
