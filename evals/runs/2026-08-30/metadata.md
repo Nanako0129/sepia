@@ -26,8 +26,9 @@ were populated after both regenerated arm artifacts existed.
 | sepia_role | executor |
 | sepia_model | gpt-5.6-luna |
 | sepia_reasoning | configured reasoning max |
-| agent_isolation | independent fresh agents |
-| baseline_forbidden_inputs | `skills/sepia`; `evals/runs/2026-08-30/sepia.md` |
+| agent_isolation | independent fresh agents; cross-arm reads prohibited |
+| skill_capability_isolation | NOT_PROVEN: host exposed `.agents/skills/sepia` alias |
+| baseline_forbidden_inputs | direct reads of `skills/sepia`; `.agents/skills/sepia`; `evals/runs/2026-08-30/sepia.md` |
 | sepia_forbidden_inputs | `evals/runs/2026-08-30/baseline.md` |
 | temperature | not exposed |
 | token_cap | not exposed |
@@ -50,8 +51,9 @@ this run uses the checked Markdown arm artifacts rather than a native runner.
 | human_preference | NOT_RUN |
 | statistical_efficacy | NOT_CLAIMED |
 | detector_accuracy | NOT_CLAIMED |
+| skill_effect | NOT_CLAIMED |
 | generalization | NOT_CLAIMED |
 
 The result is descriptive for this run and does not measure human preference,
-human-likeness, statistical efficacy, detector accuracy, causality, or
-generalization.
+human-likeness, statistical efficacy, detector accuracy, skill effect,
+causality, or generalization.

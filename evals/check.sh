@@ -156,11 +156,12 @@ check_metadata() {
   required_literal "$META" '| sepia_role | executor |'
   required_literal "$META" '| sepia_model | gpt-5.6-luna |'
   required_literal "$META" '| sepia_reasoning | configured reasoning max |'
-  required_literal "$META" '| baseline_forbidden_inputs | `skills/sepia`; `evals/runs/2026-08-30/sepia.md` |'
+  required_literal "$META" '| baseline_forbidden_inputs | direct reads of `skills/sepia`; `.agents/skills/sepia`; `evals/runs/2026-08-30/sepia.md` |'
   required_literal "$META" '| sepia_forbidden_inputs | `evals/runs/2026-08-30/baseline.md` |'
   required_literal "$META" '| temperature | not exposed |'
   required_literal "$META" '| token_cap | not exposed |'
-  required_literal "$META" '| agent_isolation | independent fresh agents |'
+  required_literal "$META" '| agent_isolation | independent fresh agents; cross-arm reads prohibited |'
+  required_literal "$META" '| skill_capability_isolation | NOT_PROVEN: host exposed `.agents/skills/sepia` alias |'
   required_literal "$META" '| grader_role | executor |'
   required_literal "$META" '| grader_model | gpt-5.6-luna |'
   required_literal "$META" '| grader_reasoning | configured reasoning max |'
@@ -168,6 +169,7 @@ check_metadata() {
   required_literal "$META" '| human_preference | NOT_RUN |'
   required_literal "$META" '| statistical_efficacy | NOT_CLAIMED |'
   required_literal "$META" '| detector_accuracy | NOT_CLAIMED |'
+  required_literal "$META" '| skill_effect | NOT_CLAIMED |'
   required_literal "$META" '| external_spend | NONE |'
 }
 
