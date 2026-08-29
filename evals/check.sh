@@ -64,6 +64,18 @@ section_has_body() {
   ' "$file"
 }
 
+section_has_literal() {
+  id=$1
+  literal=$2
+  file=$3
+  awk -v id="$id" -v literal="$literal" '
+    $0 == "### " id { found = 1; next }
+    found && $0 ~ "^###[[:space:]]" { exit }
+    found && $0 == literal { matched = 1 }
+    END { exit !matched }
+  ' "$file"
+}
+
 check_inventory() {
   expected=$(printf '%s\n' \
     README.md \
@@ -82,9 +94,20 @@ check_inventory() {
 check_cases() {
   [ -f "$CASES" ] || incomplete "missing cases.md"
   for id in $IDS; do
+    case "$id" in
+      PF3-F-WRITE) route='| Route | Fiction; `write` |' ;;
+      PF3-F-REVIEW) route='| Route | Fiction; `review` |' ;;
+      PF3-F-REFACTOR) route='| Route | Fiction; `refactor` |' ;;
+      PF3-F-RECREATE) route='| Route | Fiction; `recreate` |' ;;
+      PF3-P-WRITE) route='| Route | Professional prose; release notes; `write` |' ;;
+      PF3-P-REVIEW) route='| Route | Professional prose; PR reply; `review` |' ;;
+      PF3-P-REFACTOR) route='| Route | Professional prose; postmortem; `refactor` |' ;;
+      PF3-P-RECREATE) route='| Route | Professional prose; technical article; `recreate` |' ;;
+    esac
     [ "$(count_occurrences "$id" "$CASES")" -eq 1 ] || fail "cases.md must contain $id exactly once"
     [ "$(heading_count "$id" "$CASES" '###')" -eq 1 ] || fail "cases.md must contain one H3 section for $id"
     section_has_body "$id" "$CASES" '###' || fail "cases.md section $id is empty"
+    section_has_literal "$id" "$route" "$CASES" || fail "cases.md section $id has the wrong route"
   done
   [ "$(grep -F -c '| Original input |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight original inputs"
   [ "$(grep -F -c '| Exact request |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight exact requests"
@@ -243,6 +266,11 @@ self_test() {
   cp "$copy_cases" "$backup"
   replace_with_sed "$copy_cases" '/^| Route |/d'
   expect_failure 'missing routes' bash "$copy_check"
+  cp "$backup" "$copy_cases"
+
+  cp "$copy_cases" "$backup"
+  replace_with_sed "$copy_cases" 's/| Route | Fiction; `write` |/| Route | Professional prose; PR reply; `review` |/'
+  expect_failure 'wrong route value' bash "$copy_check"
   cp "$backup" "$copy_cases"
 
   cp "$copy_meta" "$backup"

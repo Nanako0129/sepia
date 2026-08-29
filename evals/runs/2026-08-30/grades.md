@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | PF3-F-WRITE | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | FAIL | PASS | PASS | FAIL | PASS | NOT_RUN |
 | PF3-F-REVIEW | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
-| PF3-F-REFACTOR | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
+| PF3-F-REFACTOR | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | FAIL | PASS | NOT_RUN |
 | PF3-F-RECREATE | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
 | PF3-P-WRITE | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
 | PF3-P-REVIEW | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
@@ -23,7 +23,7 @@ Baseline labels the supplied sequence—“wallet beside the bakery,” return t
 
 ### Case 3
 
-Both outputs provide the required two stages. Baseline gives “Defects:” before the revised story and retains “blue eyes,” “long brown hair,” the “narrow road,” truck and “ditch,” the “rope,” the driver’s rescue, fear, and relief while removing the stacked body cues. Sepia likewise labels “Defects:” and “Revised story:”, keeps the same rescue sequence, and replaces the original body-emotion stack with “Leah was afraid” and “She was relieved.” Neither adds a character or event or keeps the explanatory courage lesson.
+Both outputs provide the required two stages. Baseline gives “Defects:” before the revised story and retains “blue eyes,” “long brown hair,” the “narrow road,” truck and “ditch,” the “rope,” the driver’s rescue, fear, and relief while removing the stacked body cues. Sepia likewise labels “Defects:” and “Revised story:”, keeps the same rescue sequence, and replaces the original body-emotion stack with “Leah was afraid” and “She was relieved,” but still joins “Her blue eyes stayed on it while her long brown hair whipped across her face” in one appearance sentence, so S-I3 fails. Neither adds a character or event or keeps the explanatory courage lesson.
 
 ### Case 4
 
