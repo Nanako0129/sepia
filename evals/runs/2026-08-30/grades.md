@@ -3,7 +3,7 @@
 | ID | B-OP | B-ROUTE | B-FACTS | B-I1 | B-I2 | B-I3 | B-I4 | S-OP | S-ROUTE | S-FACTS | S-I1 | S-I2 | S-I3 | S-I4 | HUMAN |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | PF3-F-WRITE | PASS | PASS | FAIL | PASS | PASS | FAIL | PASS | PASS | PASS | FAIL | PASS | PASS | FAIL | PASS | NOT_RUN |
-| PF3-F-REVIEW | PASS | PASS | FAIL | PASS | PASS | FAIL | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
+| PF3-F-REVIEW | PASS | PASS | FAIL | PASS | PASS | FAIL | FAIL | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
 | PF3-F-REFACTOR | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | FAIL | PASS | PASS | PASS | PASS | NOT_RUN |
 | PF3-F-RECREATE | PASS | PASS | FAIL | PASS | FAIL | PASS | FAIL | PASS | PASS | PASS | PASS | PASS | PASS | PASS | NOT_RUN |
 | PF3-P-WRITE | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | FAIL | PASS | PASS | PASS | FAIL | NOT_RUN |
@@ -19,7 +19,7 @@ Baseline is a fiction scene beginning “At 5:10 each morning” with “Inez, t
 
 ### Case 2
 
-Baseline is diagnosis-only, with “Character and stakes,” “Connection,” and “Ending and theme,” and quotes “honesty always brings happiness”; it only says “found the lost wallet” and does not identify the bakery or walk home. Sepia explicitly covers “between the bakery and home” and “finding the wallet, returning it, receiving thanks, and walking home.”
+Baseline is diagnosis-only, with “Character and stakes,” “Connection,” and “Ending and theme,” and quotes “honesty always brings happiness”; it only says “found the lost wallet” and does not identify the bakery or walk home. It also never marks the unsupported jeopardy, reveal, or allusive-gesture dimensions as not applicable. Sepia explicitly says “There is no jeopardy or reveal” and identifies “no named real-world reference, fourth-wall gesture, or direct reader address,” while covering “between the bakery and home” and “finding the wallet, returning it, receiving thanks, and walking home.”
 
 ### Case 3
 
