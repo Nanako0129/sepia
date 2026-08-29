@@ -1,7 +1,7 @@
 # PF3-EVAL-V1 run metadata
 
 This file records the execution contract for the two arms. The grader fields
-were populated after both immutable arm artifacts existed.
+were populated after both regenerated arm artifacts existed.
 
 ## Provenance
 
@@ -11,7 +11,7 @@ were populated after both immutable arm artifacts existed.
 | parent_commit | b5a70677e8cd2ef6eaff828d12ad5ade9eaedc68 |
 | plugin_version | 0.2.0 |
 | generation_date | 2026-08-30 Asia/Taipei |
-| utc_timestamp | 2026-08-29T16:29:57Z |
+| utc_timestamp | 2026-08-29T20:48:39Z |
 | grader_role | executor |
 | grader_model | gpt-5.6-luna |
 | grader_reasoning | configured reasoning max |

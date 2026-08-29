@@ -69,10 +69,10 @@ The native runner is not used: local `claude plugin eval init --bare` on Claude
 2.1.251 returned early-access exit 1. `check.sh` is therefore a Bash 3.2 and
 standard-command contract check; `check.sh --self-test` copies the completed
 pack to a temporary directory and proves deterministic failures for a missing
-arm, missing case ID, missing routes, missing metadata, human questions not
-marked `NOT_RUN`, an invalid status, an extra grade row, and an extra arm
-section. It also rejects self-test startup when the source pack is already
-invalid.
+arm, missing case ID, wrong case heading level, missing routes, missing
+metadata, human questions not marked `NOT_RUN`, an invalid status, an extra
+grade row, and an extra arm section. It also rejects self-test startup when the
+source pack is already invalid.
 
 Run the checker from the repository root after all seven files are present:
 

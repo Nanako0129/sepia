@@ -47,16 +47,18 @@ count_occurrences() {
 heading_count() {
   id=$1
   file=$2
-  awk -v id="$id" '$0 ~ ("^##[#]?[[:space:]]+" id "([[:space:]]|$)") { count++ } END { print count + 0 }' "$file"
+  level=${3:-'##[#]?'}
+  awk -v id="$id" -v level="$level" '$0 ~ ("^" level "[[:space:]]+" id "([[:space:]]|$)") { count++ } END { print count + 0 }' "$file"
 }
 
 section_has_body() {
   id=$1
   file=$2
-  awk -v id="$id" '
+  level=${3:-'##[#]?'}
+  awk -v id="$id" -v level="$level" '
     BEGIN { found = 0; body = 0 }
-    $0 ~ ("^##[#]?[[:space:]]+" id "([[:space:]]|$)") { found = 1; next }
-    found && $0 ~ "^##[#]?[[:space:]]" { exit }
+    $0 ~ ("^" level "[[:space:]]+" id "([[:space:]]|$)") { found = 1; next }
+    found && $0 ~ ("^" level "[[:space:]]") { exit }
     found && $0 !~ "^[[:space:]]*$" { body = 1 }
     END { exit !(found && body) }
   ' "$file"
@@ -81,8 +83,8 @@ check_cases() {
   [ -f "$CASES" ] || incomplete "missing cases.md"
   for id in $IDS; do
     [ "$(count_occurrences "$id" "$CASES")" -eq 1 ] || fail "cases.md must contain $id exactly once"
-    [ "$(heading_count "$id" "$CASES")" -eq 1 ] || fail "cases.md must contain one H2/H3 section for $id"
-    section_has_body "$id" "$CASES" || fail "cases.md section $id is empty"
+    [ "$(heading_count "$id" "$CASES" '###')" -eq 1 ] || fail "cases.md must contain one H3 section for $id"
+    section_has_body "$id" "$CASES" '###' || fail "cases.md section $id is empty"
   done
   [ "$(grep -F -c '| Original input |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight original inputs"
   [ "$(grep -F -c '| Exact request |' "$CASES")" -eq 8 ] || fail "cases.md must provide eight exact requests"
@@ -102,8 +104,8 @@ check_arm() {
   [ "$(grep -E -c '^##[[:space:]]+' "$arm")" -eq 8 ] || fail "$label arm must contain exactly eight H2 sections"
   for id in $IDS; do
     [ "$(count_occurrences "$id" "$arm")" -eq 1 ] || fail "$label arm must contain $id exactly once"
-    [ "$(heading_count "$id" "$arm")" -eq 1 ] || fail "$label arm must contain one H2/H3 section for $id"
-    section_has_body "$id" "$arm" || fail "$label arm section $id is empty"
+    [ "$(heading_count "$id" "$arm" '##')" -eq 1 ] || fail "$label arm must contain one H2 section for $id"
+    section_has_body "$id" "$arm" '##' || fail "$label arm section $id is empty"
   done
 }
 
@@ -229,6 +231,11 @@ self_test() {
   cp "$copy_cases" "$backup"
   replace_with_sed "$copy_cases" '/^##[#]* PF3-F-WRITE$/d'
   expect_failure 'missing ID' bash "$copy_check"
+  cp "$backup" "$copy_cases"
+
+  cp "$copy_cases" "$backup"
+  replace_with_sed "$copy_cases" 's/^### PF3-F-WRITE$/## PF3-F-WRITE/'
+  expect_failure 'wrong case heading level' bash "$copy_check"
   cp "$backup" "$copy_cases"
 
   cp "$copy_cases" "$backup"

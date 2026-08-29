@@ -47,13 +47,13 @@ recorded for a later editor and must remain `NOT_RUN` in `grades.md`.
 |---|---|
 | Route | Fiction; `refactor` |
 | Original input | Leah’s blue eyes watched the narrow road while her long brown hair whipped around her face. Her heart pounded, her stomach twisted, and cold sweat gathered as the rescue truck slid toward the ditch. She knew she had to be brave. Leah took a deep breath, grabbed the rope, and pulled the driver to safety. She felt relieved and understood that courage means acting despite fear. |
-| Exact request | Refactor this story minimally. Preserve its structure, facts, and voice while reducing stacked appearance and body-emotion cues and the explanatory moral ending. Add no events or characters. |
+| Exact request | Refactor this story minimally. First give a concise defect list, then provide the revised story. Preserve its structure, facts, and voice while reducing stacked appearance and body-emotion cues and the explanatory moral ending. Add no events or characters. |
 | Protected facts / voice | Leah, her blue eyes and long brown hair, the narrow road, the rescue truck and ditch, the rope, the driver’s rescue, fear, and relief. Preserve the linear order and minimal in-place revision. |
 | Human-only questions | Does the edit still sound like the original narrator? Would an editor consider the reduction restrained rather than a new story? |
 
 | Invariant | Observable check |
 |---|---|
-| I1 | The output is a minimal fiction `refactor`, not a fresh story, diagnosis, or explanation. |
+| I1 | The output is a two-stage fiction `refactor`: a concise defect list followed by the minimal revised story. |
 | I2 | Leah, the narrow road, rescue truck, ditch, rope, driver, and rescue outcome remain in linear order. |
 | I3 | The appearance and embodied-emotion cluster is reduced or varied without deleting the scene’s fear and relief. |
 | I4 | The output adds no event or character and removes or concretizes the explanatory “courage” lesson. |
@@ -115,7 +115,7 @@ recorded for a later editor and must remain `NOT_RUN` in `grades.md`.
 |---|---|
 | Route | Professional prose; postmortem; `refactor` |
 | Original input | At 14:00 the deploy failed and the team rolled it back. We fixed the problem and service recovered. We will improve monitoring. Everyone worked hard. |
-| Exact request | Refactor this into a concise, blameless postmortem while preserving every known fact. Mark missing timestamps, commands, mechanism, metrics, and owners as `TODO`; do not invent a root cause. |
+| Exact request | Refactor this into a concise, blameless postmortem while preserving every known incident fact. Remove the generic praise. Mark missing timestamps, commands, mechanism, metrics, and owners as `TODO`; do not invent a root cause. |
 | Protected facts / voice | At 14:00 a deploy failed; the team rolled back; service recovered; monitoring improvement is intended; no cause, command, metric, or owner is supplied. Use a blameless, mechanism-focused postmortem voice and explicit `TODO`s. |
 | Human-only questions | Would an incident reviewer see the missing mechanism represented honestly? Is the action item specific without pretending an owner is known? |
 
