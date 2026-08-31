@@ -1,6 +1,6 @@
 # sepia
 
-**English** | [繁體中文](README.zh-TW.md)
+**English** | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md)
 
 > De-AI writing at the layer that actually gives AI away. Fiction gets its narrative architecture repaired before anyone touches word choice; professional documents (release notes, PR replies, postmortems, tickets, technical articles) each get rules matched to their venue.
 
