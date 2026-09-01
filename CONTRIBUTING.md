@@ -18,6 +18,8 @@ Avoid unrelated cleanup in a feature or documentation PR. If a change needs a ne
 
 ### Issue required before implementation
 
+> Security exception: Suspected vulnerabilities and embargoed fixes must not use public issues. Report them privately through [GitHub Security Advisories](https://github.com/Nanako0129/sepia/security/advisories/new) and wait for maintainer coordination. Security fixes coordinated through that channel are exempt from the public issue-first and `Closes #N` requirements until disclosure is approved. Do not ask for or share exploit details or secrets in public.
+
 Open an issue and receive explicit maintainer agreement on its scope before writing code or opening a PR. A label, reaction, or lack of response is not approval.
 
 | Issue first | Examples |
@@ -32,7 +34,7 @@ A direct PR is allowed only when every condition below is true.
 | Direct-PR exception | Required boundary |
 |---|---|
 | Change type | A typo or broken link in one existing documentation file |
-| Behavior | No command, URL target, version, number, claim, policy, or runtime behavior changes |
+| Behavior | No command, version, number, claim, policy, or runtime behavior changes. A broken-link-only fix may replace the target URL solely to repair that existing link; every other URL target change requires an approved issue. |
 | Maintenance | No new file, dependency, adapter, locale, workflow, or continuing obligation |
 
 When uncertain, open an issue. A non-trivial PR opened before issue approval may be closed without implementation review.
@@ -51,7 +53,7 @@ Every proposal issue must be decision-ready.
 | Acceptance criteria | Checks that prove the outcome |
 | Verification plan | Exact commands or manual checks |
 | Compatibility | Migration, update, rollback, and existing-user impact |
-| Security | Permissions, credentials, external services, and trust boundaries |
+| Security | Permissions, credentials, external services, and trust boundaries. Public issues must contain only redacted, non-sensitive security impact; use the private advisory channel above for details. |
 | Maintenance owner | Who will keep a new locale, adapter, workflow, or integration current |
 
 | Proposal type | Additional evidence |
