@@ -37,6 +37,7 @@ Exit status is 0 when every declaration agrees and the required files all
 declare, 1 otherwise. The unit tests live in tests/test_check_versions.py.
 """
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -62,15 +63,20 @@ REQUIRED = (
 
 
 def _iter_files(root):
-    for path in sorted(root.rglob("*")):
-        if not path.is_file():
-            continue
-        # Only the directories BELOW root count: a repository checked out at
-        # /work/venv/sepia must not have every file skipped because an
-        # ancestor happens to be named venv (review round 5).
-        if any(part in SKIP_DIRS for part in path.relative_to(root).parts[:-1]):
-            continue
-        yield path
+    """Walk root, pruning skipped directories instead of filtering afterwards.
+
+    rglob enumerated every descendant, including a full node_modules or
+    .venv, and only then discarded them, so the skip list prevented parsing
+    but not the traversal cost (review round 7). os.walk prunes in place.
+    Walking from root also means only directories BELOW root can match: a
+    repository checked out at /work/venv/sepia is unaffected by its ancestor
+    name (review round 5). Both listings are sorted so the report order is
+    stable across platforms.
+    """
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS)
+        for name in sorted(filenames):
+            yield Path(dirpath) / name
 
 
 def _valid(value):

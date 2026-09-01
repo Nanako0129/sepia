@@ -284,6 +284,16 @@ class CheckVersionsCase(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("surrounding whitespace", report)
 
+    def test_manifests_inside_skipped_directories_are_not_scanned(self):
+        # A vendored manifest deep in node_modules must not fail the check;
+        # the walk prunes these directories instead of reading and then
+        # discarding them.
+        code, report = self.run_check(
+            {"node_modules/dep/.claude-plugin/plugin.json": {"name": "dep", "version": "9.9.9"}}
+        )
+        self.assertEqual(code, 0)
+        self.assertNotIn("9.9.9", report)
+
     def test_a_repository_under_a_skipped_ancestor_name_still_scans(self):
         # Review round five: SKIP_DIRS applied to absolute path parts made a
         # checkout at .../venv/<repo> skip every file and report all required
