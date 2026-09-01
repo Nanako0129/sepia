@@ -61,6 +61,22 @@ REQUIRED = (
     "skills/sepia/SKILL.md",
 )
 
+# A direct-child key that a YAML parser would resolve to `version` under a
+# spelling other than exactly `version:` — a quoted key, or whitespace before
+# the colon. Ruby Psych reads these as the same key and keeps the last value,
+# so an alternate spelling slips past the duplicate guard: one stale exact key
+# plus one alternate-spelled new value reads as a single, stale declaration.
+# Per review the spelling is restricted rather than parsed: the set is closed,
+# but the restriction is smaller and keeps the scanner a scanner.
+ALT_VERSION_KEY_RE = re.compile(r"""^(?:(["'])version\1|version\s)\s*:""")
+
+# The same rule one level up: a top-level key that YAML would read as
+# `metadata` under a spelling other than exactly `metadata:`. Psych resolves
+# a quoted "metadata": to the same key and keeps that block's value, while
+# the equality check here read it as a different key and closed the block,
+# so only the first exact-spelling block was counted (review on PR #41).
+ALT_METADATA_KEY_RE = re.compile(r"""^(?:(["'])metadata\1|metadata\s)\s*:""")
+
 
 def _iter_files(root):
     """Walk root, pruning skipped directories instead of filtering afterwards.
@@ -150,7 +166,10 @@ def read_frontmatter_version(path, rel):
     `metadata:` counts. Inline metadata (flow mappings, scalars) is refused
     with instructions to use block style: two review rounds of quoted-span and
     nested-brace edge cases traced back to hand-parsing flow, and the refusal
-    is loud and names its own fix. A line scan rather than a YAML parser, carrying two pieces of
+    is loud and names its own fix. Declaring version more than once is an
+    error, not a first-wins pick: duplicate-tolerant YAML parsers commonly
+    keep the last value, so picking the first can pass on a stale one
+    (issue #39). A line scan rather than a YAML parser, carrying two pieces of
     state: entering the frontmatter's `metadata:` key opens the block and the
     next top-level key closes it, and the block's first child fixes the
     indentation that direct children must sit at. Anything deeper belongs to a
@@ -183,6 +202,7 @@ def read_frontmatter_version(path, rel):
 
     in_metadata = False
     child_indent = None
+    declared = []
     for line in lines[1:close]:
         if not line.strip():
             continue
@@ -192,6 +212,12 @@ def read_frontmatter_version(path, rel):
             # top-level key that closes the block (review round 4).
             continue
         if not line[:1].isspace():
+            if ALT_METADATA_KEY_RE.match(line):
+                key = line.split(":", 1)[0].rstrip()
+                return None, [(rel,
+                    f"a metadata key must be spelled exactly 'metadata:'; "
+                    f"found {key!r}, which YAML reads as the same key and "
+                    "which slips past the duplicate guard, rewrite it")]
             head, sep, rest = line.partition(":")
             if head.strip() == "metadata" and sep:
                 rest = rest.split(" #")[0].strip()
@@ -219,7 +245,24 @@ def read_frontmatter_version(path, rel):
             continue
         stripped = line.strip()
         if stripped.startswith("version:"):
-            return _frontmatter_scalar(stripped[len("version:"):], rel)
+            declared.append(stripped[len("version:"):])
+        elif ALT_VERSION_KEY_RE.match(stripped):
+            key = stripped.split(":", 1)[0].rstrip()
+            return None, [(rel,
+                f"a version key must be spelled exactly 'version:'; found "
+                f"{key!r}, which YAML reads as the same key and which slips "
+                "past the duplicate guard, rewrite it")]
+    if len(declared) > 1:
+        # Returning on the first key would keep a stale value alive: YAML
+        # parsers that tolerate duplicate mapping keys commonly retain the
+        # LAST one, so first-wins can agree with the manifests while the
+        # effective version differs. Present-but-wrong, so it is an error,
+        # never a pick (issue #39).
+        return None, [(rel,
+            f"metadata declares version {len(declared)} times; duplicate "
+            "keys are invalid, keep exactly one")]
+    if declared:
+        return _frontmatter_scalar(declared[0], rel)
     return None, []
 
 

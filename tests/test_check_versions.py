@@ -183,6 +183,121 @@ class CheckVersionsCase(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("skills/sepia/SKILL.md: required", report)
 
+    def test_duplicate_version_keys_are_invalid_not_first_wins(self):
+        # Issue #39: with a stale first key matching the manifests, first-wins
+        # passed while a duplicate-tolerant YAML parser would take the LAST
+        # value. Duplicates are an error, never a pick.
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ["name: sepia", "metadata:", '  version: "0.4.0"', '  version: "9.9.9"']
+                )
+            }
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("declares version 2 times", report)
+
+    def test_duplicate_version_keys_with_equal_values_are_still_invalid(self):
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ["name: sepia", "metadata:", '  version: "0.4.0"', '  version: "0.4.0"']
+                )
+            }
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("declares version 2 times", report)
+
+    def test_alternate_spellings_of_the_metadata_key_are_invalid(self):
+        # Same rule one level up (review on PR #41): "metadata": resolves to
+        # the same key in YAML, but the equality check read it as a different
+        # key and closed the block, so a stale exact-spelling block passed
+        # while the quoted block held the effective newer version.
+        for opener in ('"metadata":', "'metadata':", 'metadata :'):
+            code, report = self.run_check(
+                {
+                    "skills/sepia/SKILL.md": skill_md(
+                        ["name: sepia", "metadata:", '  version: "0.4.0"',
+                         opener, '  version: "9.9.9"']
+                    )
+                }
+            )
+            self.assertEqual(code, 1, f"{opener} should be invalid")
+            self.assertIn("spelled exactly 'metadata:'", report)
+
+    def test_a_lone_alternate_metadata_spelling_is_also_invalid(self):
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ["name: sepia", '"metadata":', '  version: "0.4.0"']
+                )
+            }
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("spelled exactly 'metadata:'", report)
+
+    def test_other_quoted_top_level_keys_are_not_flagged(self):
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ['"author": x', "name: sepia", "metadata:", '  version: "0.4.0"']
+                )
+            }
+        )
+        self.assertEqual(code, 0)
+
+    def test_alternate_spellings_of_the_version_key_are_invalid(self):
+        # Review on PR #41: "version": / 'version': / version : resolve to the
+        # same key in YAML (Psych keeps the last value), so an alternate
+        # spelling slipped past the duplicate counter, one stale exact key
+        # plus one alternate-spelled new value read as a single declaration.
+        # Spelling is restricted rather than parsed.
+        for line in ('"version": "9.9.9"', "'version': \"9.9.9\"", 'version : "9.9.9"'):
+            code, report = self.run_check(
+                {
+                    "skills/sepia/SKILL.md": skill_md(
+                        ["name: sepia", "metadata:", '  version: "0.4.0"', f"  {line}"]
+                    )
+                }
+            )
+            self.assertEqual(code, 1, f"{line} should be invalid")
+            self.assertIn("spelled exactly", report)
+
+    def test_an_alternate_spelling_alone_is_also_invalid(self):
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ["name: sepia", "metadata:", '  "version": "0.4.0"']
+                )
+            }
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("spelled exactly", report)
+
+    def test_other_quoted_keys_at_child_level_are_not_flagged(self):
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ["name: sepia", "metadata:", '  "author": "x"', '  version: "0.4.0"']
+                )
+            }
+        )
+        self.assertEqual(code, 0)
+
+    def test_two_metadata_blocks_each_declaring_a_version_are_invalid(self):
+        # A duplicated metadata key with a version in each block is the same
+        # ambiguity one level up; the count spans the whole frontmatter.
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ["name: sepia", "metadata:", '  version: "0.4.0"',
+                     "license: MIT", "metadata:", '  version: "9.9.9"']
+                )
+            }
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("declares version 2 times", report)
+
     def test_a_utf8_bom_before_the_frontmatter_is_tolerated(self):
         # Editors on Windows add a BOM; real frontmatter loaders tolerate it.
         # Exact-line delimiter matching must not turn an invisible byte into
