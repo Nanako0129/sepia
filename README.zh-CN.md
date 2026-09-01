@@ -43,13 +43,13 @@ sepia 把这些研究测得的差距，连同 [`research/`](research/) 里整理
 | refactor | `/sepia-refactor` | `$sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | 在原文上做最小修改 |
 | recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | 根据原始事实与意图重新撰写 |
 
-通用 router 仍可通过 `/sepia`（Claude Code、Grok Build、Antigravity）或 `$sepia`（Codex）使用。操作 wrapper 依赖同一套 package 里的标准 skill，不支持单独安装；请安装完整 plugin package。这张表只记录 package 语法；本次变更尚未实际测试安装后的 UI 与 runtime 行为。
+通用 router 仍可通过 `/sepia`（Claude Code、Grok Build、Antigravity）或 `$sepia`（Codex）使用。操作 wrapper 依赖同一套 package 里的标准 skill，不支持单独安装；请安装完整 plugin package。这张表仅记录 package 的调用语法；本次变更尚未实际测试安装后的 UI 与 runtime 行为。
 
 ## 实验性功能：叠加语气／风格 skill
 
 v0.4.0 起，sepia 定义了与语气／风格类 skill（极简主义方法、品牌语调、persona 指南）叠加使用的接口。采用 opt-in：你明确说明已启用语气／风格 skill，sepia 才会在原路由之上加载 `references/voice-skills.md`；未明确说明则不加载，sepia 也永远不会自己注入美学。
 
-接口约定摘要：sepia 的架构决策先行，语气技法选择性应用（每篇选择 3–5 种代表性技法，代表性结尾公式偶尔故意打破）。review 只报告语气／风格的已知代价、不直接修改，但一致性问题不因此减弱：语气风格不能绕过节奏检查。在专业文档路由中，venue 仍决定语域，发生直接冲突时交由你决定。这个接口的依据是一次极简规格样本的盲审实验，属单一案例，不是量化证据。
+接口约定摘要：sepia 的架构决策先行，语气技法选择性应用（每篇选择 3–5 种代表性技法，代表性结尾公式偶尔故意打破）。review 只报告语气／风格的已知代价、不直接修改，但一致性问题不因此减弱：语气风格不能免除节奏检查。在专业文档路由中，venue 仍决定语域，发生直接冲突时交由你决定。这个接口的依据是一次极简规格样本的盲审实验，属单一案例，不是量化证据。
 
 ## 安装
 
