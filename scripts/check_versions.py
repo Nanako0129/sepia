@@ -61,21 +61,28 @@ REQUIRED = (
     "skills/sepia/SKILL.md",
 )
 
-# A direct-child key that a YAML parser would resolve to `version` under a
-# spelling other than exactly `version:` — a quoted key, or whitespace before
-# the colon. Ruby Psych reads these as the same key and keeps the last value,
-# so an alternate spelling slips past the duplicate guard: one stale exact key
-# plus one alternate-spelled new value reads as a single, stale declaration.
-# Per review the spelling is restricted rather than parsed: the set is closed,
-# but the restriction is smaller and keeps the scanner a scanner.
-ALT_VERSION_KEY_RE = re.compile(r"""^(?:(["'])version\1|version\s)\s*:""")
+# The canonical key grammar for the two scanned levels (issue #42). Every
+# non-blank, non-comment line at top level or at metadata's direct-child level
+# must carry a plain-scalar key: a bare word followed immediately by ':' and
+# then whitespace or end of line. Everything else — quoted keys, escapes,
+# whitespace before the colon, anchors, tags, flow, complex keys — is one
+# invalid case with one message. This replaced two rounds of enumerated
+# spelling blocklists that could not terminate: an escaped key such as
+# "version" is textually distinct from every enumerated spelling yet
+# resolves to `version` in real parsers, and escapes can only live inside
+# quoted keys, so banning non-plain keys closes the class without decoding
+# anything. Within this grammar the line scanner and any YAML parser read
+# identical keys, which is the property every prior finding exploited the
+# absence of.
+PLAIN_KEY_RE = re.compile(r"^[A-Za-z0-9._-]+:(?:\s|$)")
 
-# The same rule one level up: a top-level key that YAML would read as
-# `metadata` under a spelling other than exactly `metadata:`. Psych resolves
-# a quoted "metadata": to the same key and keeps that block's value, while
-# the equality check here read it as a different key and closed the block,
-# so only the first exact-spelling block was counted (review on PR #41).
-ALT_METADATA_KEY_RE = re.compile(r"""^(?:(["'])metadata\1|metadata\s)\s*:""")
+
+def _key_error(rel, line):
+    head = line.split(":", 1)[0].strip() or line.strip()
+    return (rel,
+            f"a frontmatter key must be a plain word followed by ':'; found "
+            f"{head!r}; quoted, spaced, escaped, or otherwise decorated key "
+            "forms are invalid, rewrite it")
 
 
 def _iter_files(root):
@@ -203,6 +210,7 @@ def read_frontmatter_version(path, rel):
     in_metadata = False
     child_indent = None
     declared = []
+    metadata_blocks = 0
     for line in lines[1:close]:
         if not line.strip():
             continue
@@ -212,15 +220,16 @@ def read_frontmatter_version(path, rel):
             # top-level key that closes the block (review round 4).
             continue
         if not line[:1].isspace():
-            if ALT_METADATA_KEY_RE.match(line):
-                key = line.split(":", 1)[0].rstrip()
-                return None, [(rel,
-                    f"a metadata key must be spelled exactly 'metadata:'; "
-                    f"found {key!r}, which YAML reads as the same key and "
-                    "which slips past the duplicate guard, rewrite it")]
-            head, sep, rest = line.partition(":")
-            if head.strip() == "metadata" and sep:
-                rest = rest.split(" #")[0].strip()
+            if not PLAIN_KEY_RE.match(line):
+                # The canonical grammar (issue #42): a non-plain key here is
+                # invalid regardless of what it says. A quoted "other" key is
+                # textually indistinguishable from a disguised metadata key,
+                # so there is no safe allowance smaller than this one.
+                return None, [_key_error(rel, line)]
+            key = line.split(":", 1)[0]
+            if key == "metadata":
+                metadata_blocks += 1
+                rest = line.partition(":")[2].split(" #")[0].strip()
                 if rest:
                     # An inline value (flow mapping or scalar) is refused, not
                     # parsed. The flow parser this replaces produced two review
@@ -244,14 +253,20 @@ def read_frontmatter_version(path, rel):
         if indent != child_indent:
             continue
         stripped = line.strip()
-        if stripped.startswith("version:"):
+        if not PLAIN_KEY_RE.match(stripped):
+            # Same grammar at metadata's child level; the spec already types
+            # metadata as a string-to-string map, so nothing stricter than a
+            # plain key was ever valid here.
+            return None, [_key_error(rel, stripped)]
+        if stripped.split(":", 1)[0] == "version":
             declared.append(stripped[len("version:"):])
-        elif ALT_VERSION_KEY_RE.match(stripped):
-            key = stripped.split(":", 1)[0].rstrip()
-            return None, [(rel,
-                f"a version key must be spelled exactly 'version:'; found "
-                f"{key!r}, which YAML reads as the same key and which slips "
-                "past the duplicate guard, rewrite it")]
+    if metadata_blocks > 1:
+        # Duplicate blocks are the same last-wins ambiguity as duplicate
+        # version keys: a parser keeps the LAST block entirely, so a stale
+        # first block can hold the only version the scanner sees.
+        return None, [(rel,
+            f"metadata is declared {metadata_blocks} times; duplicate keys "
+            "are invalid, keep exactly one")]
     if len(declared) > 1:
         # Returning on the first key would keep a stale value alive: YAML
         # parsers that tolerate duplicate mapping keys commonly retain the
