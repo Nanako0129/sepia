@@ -1,0 +1,24 @@
+name: version consistency
+
+# The checker and its tests are standard-library Python, so there is nothing
+# to install and no lockfile to keep current. ubuntu-latest ships a python3,
+# so no setup step is needed either.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: unit tests for the checker
+        run: python3 -m unittest discover -s tests -v
+      - name: version consistency
+        run: python3 scripts/check_versions.py
