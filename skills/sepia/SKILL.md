@@ -3,7 +3,7 @@ name: sepia
 description: Make AI-generated writing read as human-written, in fiction and in professional prose. Repairs the narrative architecture of fiction and stories (based on StoryScope, arXiv:2604.03136); routes professional text through domain rules for release notes, announcements, PR and issue replies, code-review comments, incident postmortems, tickets, work orders, technical articles, and blog posts. Four operations - write, review (diagnose AI tells without editing), refactor (minimal in-place edits), recreate (full rewrite). Use when asked to humanize, de-AI, unslop, or strip AI flavor from any text; when writing or revising any of these document types; or whenever output must not read as machine-written.
 license: MIT
 metadata:
-  version: "0.4.0"
+  version: "0.4.1"
 ---
 
 # Sepia — de-AI writing
