@@ -223,7 +223,7 @@ class CheckVersionsCase(unittest.TestCase):
                 }
             )
             self.assertEqual(code, 1, f"{opener} should be invalid")
-            self.assertIn("spelled exactly 'metadata:'", report)
+            self.assertIn("plain word followed by ':'", report)
 
     def test_a_lone_alternate_metadata_spelling_is_also_invalid(self):
         code, report = self.run_check(
@@ -234,9 +234,12 @@ class CheckVersionsCase(unittest.TestCase):
             }
         )
         self.assertEqual(code, 1)
-        self.assertIn("spelled exactly 'metadata:'", report)
+        self.assertIn("plain word followed by ':'", report)
 
-    def test_other_quoted_top_level_keys_are_not_flagged(self):
+    def test_any_quoted_top_level_key_is_invalid(self):
+        # Reversal of an earlier allowance (issue #42): a quoted "other" key is
+        # textually indistinguishable from an escaped "version" or
+        # "metadata", so the only safe grammar bans non-plain keys outright.
         code, report = self.run_check(
             {
                 "skills/sepia/SKILL.md": skill_md(
@@ -244,7 +247,8 @@ class CheckVersionsCase(unittest.TestCase):
                 )
             }
         )
-        self.assertEqual(code, 0)
+        self.assertEqual(code, 1)
+        self.assertIn("plain word followed by ':'", report)
 
     def test_alternate_spellings_of_the_version_key_are_invalid(self):
         # Review on PR #41: "version": / 'version': / version : resolve to the
@@ -261,7 +265,7 @@ class CheckVersionsCase(unittest.TestCase):
                 }
             )
             self.assertEqual(code, 1, f"{line} should be invalid")
-            self.assertIn("spelled exactly", report)
+            self.assertIn("plain word followed by ':'", report)
 
     def test_an_alternate_spelling_alone_is_also_invalid(self):
         code, report = self.run_check(
@@ -272,9 +276,11 @@ class CheckVersionsCase(unittest.TestCase):
             }
         )
         self.assertEqual(code, 1)
-        self.assertIn("spelled exactly", report)
+        self.assertIn("plain word followed by ':'", report)
 
-    def test_other_quoted_keys_at_child_level_are_not_flagged(self):
+    def test_any_quoted_child_key_is_invalid(self):
+        # Same reversal at metadata's child level (issue #42); the spec types
+        # metadata as a string-to-string map with plain keys anyway.
         code, report = self.run_check(
             {
                 "skills/sepia/SKILL.md": skill_md(
@@ -282,7 +288,46 @@ class CheckVersionsCase(unittest.TestCase):
                 )
             }
         )
-        self.assertEqual(code, 0)
+        self.assertEqual(code, 1)
+        self.assertIn("plain word followed by ':'", report)
+
+    def test_escaped_key_spellings_are_invalid_by_construction(self):
+        # The finding that forced the grammar (issue #42): \u0073 decodes to
+        # "s", so "ver\u0073ion" is version to a YAML parser while matching
+        # no enumerated spelling. Escapes only live inside quoted keys, so
+        # the plain-key grammar closes the class without decoding.
+        for lines in (
+            ["name: sepia", "metadata:", '  version: "0.4.0"', '  "ver\u0073ion": "9.9.9"'],
+            ["name: sepia", "metadata:", '  version: "0.4.0"', '"meta\u0064ata":', '  version: "9.9.9"'],
+        ):
+            code, report = self.run_check({"skills/sepia/SKILL.md": skill_md(lines)})
+            self.assertEqual(code, 1)
+            self.assertIn("plain word followed by ':'", report)
+
+    def test_anchored_or_tagged_keys_are_invalid(self):
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ["name: sepia", "metadata:", '  &v version: "0.4.0"']
+                )
+            }
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("plain word followed by ':'", report)
+
+    def test_duplicate_exact_metadata_blocks_are_invalid_even_without_two_versions(self):
+        # Last-wins one level up: a parser keeps the LAST block entirely, so
+        # a stale first block can hold the only version the scanner sees.
+        code, report = self.run_check(
+            {
+                "skills/sepia/SKILL.md": skill_md(
+                    ["name: sepia", "metadata:", '  version: "0.4.0"',
+                     "license: MIT", "metadata:", '  author: "x"']
+                )
+            }
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("metadata is declared 2 times", report)
 
     def test_two_metadata_blocks_each_declaring_a_version_are_invalid(self):
         # A duplicated metadata key with a version in each block is the same
@@ -296,7 +341,7 @@ class CheckVersionsCase(unittest.TestCase):
             }
         )
         self.assertEqual(code, 1)
-        self.assertIn("declares version 2 times", report)
+        self.assertIn("metadata is declared 2 times", report)
 
     def test_a_utf8_bom_before_the_frontmatter_is_tolerated(self):
         # Editors on Windows add a BOM; real frontmatter loaders tolerate it.
