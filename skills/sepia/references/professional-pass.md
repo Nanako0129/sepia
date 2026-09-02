@@ -46,7 +46,7 @@ For long-form (articles, postmortems), also run the outline test and QUD check i
 SEPIA REVIEW — <document type, venue>
 Loaded: <files used>
 Model: author=<value> executor=<value>   (value: unknown | <family> version=unknown | <family> <release>; a release is an exact tag like Fable 5.1 or GPT-5.6 — "GPT-5" alone is a family, write "GPT version=unknown")
-Prose layer: <operative | prior | none>
+Prose layer: <family>=<operative | prior> per loaded family, or none   (e.g. "Claude=operative GPT=prior")
 Venue corpus: <artifacts sampled, or "none — using domain baseline">
 Failed: <#n check-name — quoted evidence>   (one line per failed check)
 Passed: <check numbers only>

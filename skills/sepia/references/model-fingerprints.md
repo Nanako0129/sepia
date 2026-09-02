@@ -21,11 +21,11 @@ Stable source identities live in the repository research ledger; single-letter a
 | Avoids dream sequences entirely | A dream is available if the story wants one (do not force it — absence is only a tell in aggregate) |
 | Setting mood drifts to uncanny/haunted | Vary the atmospheric register |
 
-### Prose layer (V; Claude Fable 5.1, `ANTHROPIC-FABLE-5-1-PROMPTING`)
+### Prose layer (V; Claude Fable 5.1 and Claude Mythos 5.1, `ANTHROPIC-FABLE-5-1-PROMPTING`)
 
 | Vendor-stated default | Handling |
 |---|---|
-| Mannered prose: metaphor and flourish where a literal phrase exists | The block below. Operative or prior per the model-identity rule in `SKILL.md`: operative when the executor is Claude Fable 5.1, a prior on any other or unknown Claude version. When Claude is the *author*, hunt metaphor standing in for an available literal phrase |
+| Mannered prose: metaphor and flourish where a literal phrase exists | The block below. Operative or prior per the model-identity rule in `SKILL.md`: operative when the executor is Claude Fable 5.1 or Claude Mythos 5.1 (the page names both), a prior on any other or unknown Claude version. When Claude is the *author*, hunt metaphor standing in for an available literal phrase |
 | Denser than Fable 5: longer sentences, fewer paragraph breaks | Split run-ons (style-pass §1, row 2); break paragraphs where the topic turns |
 | Less bold, fewer headers and lists than earlier Claude | Sparse formatting is not evidence of a human author. Do not add anti-formatting rules to compensate |
 

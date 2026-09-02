@@ -84,7 +84,7 @@ Cite by quoting a short phrase, not by paragraph number. Keep the report descrip
 SEPIA DIAGNOSIS — <title>
 Scope: heuristic triage; corpus references only; no authorship probability or validated aggregate detector
 Model: author=<value> executor=<value>   (value: unknown | <family> version=unknown | <family> <release>; a release is an exact tag like Fable 5.1 or GPT-5.6 — "GPT-5" alone is a family, write "GPT version=unknown")
-Prose layer: <operative | prior | none>
+Prose layer: <family>=<operative | prior> per loaded family, or none   (e.g. "Claude=operative GPT=prior")
 Group A: observed signals …; n/a … (narrator commentary — "It was then she learned…"; …)
 Group B: observed signals … (…)
 Group C: observed signals …; n/a … (…)
