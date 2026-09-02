@@ -73,7 +73,7 @@ Keep responses focused, brief, and concise. Keep disclaimers and caveats short, 
 | "A direct, opinionated style with minimal validation-forward phrasing and sparing emoji use" | Absence of validation openers and emoji is this release's default, not evidence of a human. Stance (check 4) is usually present; look instead at density and specificity |
 | Response length "calibrated to how complex it judges the task to be" | Length varies with the task by default; uniform length across tasks would be the tell, not variation |
 
-Consulted with no prose-layer statement (2026-09-03): the Claude Sonnet 5 page says only that "prose style on long-form writing may shift"; Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 have no model-specific prompting page. Those releases load nothing for the prose layer.
+Consulted with no prose-layer statement (2026-09-03): the Claude Sonnet 5 page says only that "prose style on long-form writing may shift"; Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 have no model-specific prompting page. Those releases have no operative row; per the rule in `SKILL.md`, the Claude prose tables above apply to them as priors.
 
 ## GPT
 
@@ -113,7 +113,7 @@ The vendor scopes its statements to the series (Gemini 3 Flash through Gemini 3.
 
 | Vendor-stated default | Handling |
 |---|---|
-| "By default, Gemini 3 is less verbose and prefers providing direct, efficient answers"; a conversational or "chatty" persona appears only when explicitly prompted | Terse and unadorned is this series' default, so brevity is not evidence of a human here. Check density in the other direction (professional-pass check 2): required caveats and next steps dropped for efficiency. In fiction, expect clipped exposition; apply the narrative layer at full strength |
+| "By default, Gemini 3 is less verbose and prefers providing direct, efficient answers"; a conversational or "chatty" persona appears only when explicitly prompted | Terse and unadorned is this series' default, so brevity is not evidence of a human here. Check density in the other direction (professional-pass check 2): required caveats and next steps dropped for efficiency. In fiction, expect clipped exposition |
 
 ## DeepSeek
 
