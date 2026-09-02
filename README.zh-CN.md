@@ -49,7 +49,7 @@ sepia 把这些研究测得的差距，连同 [`research/`](research/) 里整理
 
 v0.4.0 起，sepia 定义了与语气／风格类 skill（极简主义方法、品牌语调、persona 指南）叠加使用的接口。采用 opt-in：你明确说明已启用语气／风格 skill，sepia 才会在原路由之上加载 `references/voice-skills.md`；未明确说明则不加载，sepia 也永远不会自己注入美学。
 
-接口约定摘要：sepia 的架构决策先行，语气技法选择性应用（每篇选择 3–5 种代表性技法，代表性结尾公式偶尔故意打破）。review 只报告语气／风格的已知代价、不直接修改，但一致性问题不因此减弱：语气风格不能免除节奏检查。在专业文档路由中，venue 仍决定语域，发生直接冲突时交由你决定。这个接口的依据是一次极简规格样本的盲审实验，属单一案例，不是量化证据。
+接口约定摘要：sepia 的架构决策先行，语气技法选择性应用（每篇选择 3–5 种代表性技法，代表性结尾公式偶尔故意打破）。review 只报告语气／风格的已知代价、不直接修改，但一致性问题不因此减弱：语气风格不能免除节奏检查。在专业文档路由中，venue 仍决定语域，发生直接冲突时交由你决定。这个接口的依据是一次极简主义样本的盲审实验，属单一案例，不是量化证据。
 
 ## 安装
 
@@ -167,6 +167,6 @@ sepia/
 
 完整摘要与链接见 [`research/`](research/)。主要来源：StoryScope ([arXiv:2604.03136](https://arxiv.org/abs/2604.03136)); LAMP ([CHI 2025](https://arxiv.org/abs/2409.14509)); Measuring AI Slop ([arXiv:2509.19163](https://arxiv.org/abs/2509.19163)); Reinhart et al. ([PNAS 2025](https://arxiv.org/abs/2410.16107)); Russell et al. ([ACL 2025](https://arxiv.org/abs/2501.15654)); NarraBench ([arXiv:2510.09869](https://arxiv.org/abs/2510.09869)); Echoes in AI ([PNAS 2025](https://arxiv.org/abs/2501.00273)); QUDsim ([COLM 2025](https://arxiv.org/abs/2504.09373)); Beguš ([2024](https://arxiv.org/abs/2310.12902)); Beyond Checkmate ([EMNLP 2025](https://arxiv.org/abs/2501.19301)); Nonaka & Perry ([2025](https://arxiv.org/abs/2510.18932)); Chakrabarty et al. ([2026](https://arxiv.org/abs/2510.13939)).
 
-## 授权
+## 许可证
 
 MIT
