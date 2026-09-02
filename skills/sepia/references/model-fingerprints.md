@@ -41,7 +41,7 @@ Scope: this block governs expository and professional prose. On the fiction rout
 
 | Vendor-stated default | Handling |
 |---|---|
-| Un-steered, elaborates past the task: "surveying options it won't pursue, explaining root causes at length, producing heavily-structured PR descriptions, or writing comments that narrate what the next line does" | As the executor's layer, the vendor's brevity instruction below is operative. As the author's layer, hunt option surveys, root-cause essays, and structure that outweighs the content (professional-pass checks 2, 3, 6) |
+| Un-steered, elaborates past the task: "surveying options it won't pursue, explaining root causes at length, producing heavily-structured PR descriptions, or writing comments that narrate what the next line does" | The brevity instruction below, operative or prior per the model-identity rule in `SKILL.md`: operative for a role whose release is Claude Fable 5 or Claude Mythos 5, a prior for any other Claude release. As the author's layer: hunt option surveys, root-cause essays, and structure that outweighs the content (professional-pass checks 2, 3, 6). As the executor's layer: apply the instruction to what you write |
 | In long agentic sessions, "dense arrow-chain shorthand, deep implementation detail, references to thinking the user never saw, or overly technical phrasing" | Hunt arrow chains, hyphen-stacked compounds, and labels the reader never saw defined; expand them into sentences (style-pass §6 read-aloud test) |
 
 The vendor's brevity instruction, verbatim (compared against the source page 2026-09-03, matched):
@@ -56,7 +56,7 @@ The way to keep output short is to be selective about what you include (drop det
 
 | Vendor-stated default | Handling |
 |---|---|
-| "Default user-facing responses run longer than prior Opus models'"; effort changes thinking volume, not visible length | Density (professional-pass check 2) is the high-prior check. As the executor's layer, the vendor's conciseness instruction below is operative |
+| "Default user-facing responses run longer than prior Opus models'"; effort changes thinking volume, not visible length | Density (professional-pass check 2) is the high-prior check. The conciseness instruction below, operative or prior per the model-identity rule in `SKILL.md`: operative for a role whose release is Claude Opus 5, a prior for any other Claude release; as the executor's layer, apply it to what you write |
 | Written files "are often longer than on prior models": filler sections, redundant summaries, boilerplate | Hunt the fractal-summary shape and sections that exist for completeness (professional-pass checks 6, 7). Vendor instruction: "Match the length of written documents to what the task needs: cover the substance, but do not pad with filler sections, redundant summaries, or boilerplate." |
 | "Narrates readily during agentic work": announces what it is about to do; narrates corrections to earlier statements more than prior models | In produced text, cut announcements of intent and corrections that change nothing for the reader |
 
