@@ -7,7 +7,7 @@ Two layers, two kinds of evidence, kept in separate tables:
 
 Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local: S = StoryScope, V = vendor guidance. Corrections are Sepia inferences unless a source explicitly tested the intervention.
 
-**Which rows apply is decided by the model-identity rule in `SKILL.md` (Routing), not here.** In short: the author model's family selects the narrative layer as priors; the author's or executor's family selects the prose layer, which is *operative* only on an exact version match and a *prior* otherwise. Nothing in this file infers a model from the prose — attribution by reading is not the classifier that produced the 68.4%.
+**Which rows apply is decided by the model-identity rule in `SKILL.md` (Routing), not here.** In short: each role (author, executor) is resolved on its own; a role's family selects its narrative layer as priors when that role's model produced or is producing the story, and its prose layer on every route — *operative* only when the release matches the table's tag, a *prior* otherwise. Nothing in this file infers a model from the prose — attribution by reading is not the classifier that produced the 68.4%.
 
 ## Claude
 
@@ -25,7 +25,7 @@ Stable source identities live in the repository research ledger; single-letter a
 
 | Vendor-stated default | Handling |
 |---|---|
-| Mannered prose: metaphor and flourish where a literal phrase exists | The block below. Operative or prior per the model-identity rule in `SKILL.md`: operative when the executor is Claude Fable 5.1 or Claude Mythos 5.1 (the page names both), a prior on any other or unknown Claude version. When Claude is the *author*, hunt metaphor standing in for an available literal phrase |
+| Mannered prose: metaphor and flourish where a literal phrase exists | The block below, operative or prior per the model-identity rule in `SKILL.md`: operative for a role whose release is Claude Fable 5.1 or Claude Mythos 5.1 (the page names both), a prior for any other or unknown Claude release. As the author's layer: hunt metaphor standing in for an available literal phrase in the given text. As the executor's layer: apply the block to what you write |
 | Denser than Fable 5: longer sentences, fewer paragraph breaks | Split run-ons (style-pass §1, row 2); break paragraphs where the topic turns |
 | Less bold, fewer headers and lists than earlier Claude | Sparse formatting is not evidence of a human author. Do not add anti-formatting rules to compensate |
 
