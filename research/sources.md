@@ -44,7 +44,7 @@ Verbatim vendor blocks embedded in `model-fingerprints.md` (Fable 5.1 mannered p
 
 ### Consulted with no prose-layer statement
 
-Recorded so the search is not repeated. None of these pages says anything about how its model writes by default; the corresponding families or releases load nothing for the prose layer.
+Recorded so the search is not repeated. None of these pages says anything about how its model writes by default. A family with no prose table at all (DeepSeek, Kimi) loads nothing for the prose layer; a release inside a family that has tables (the Claude releases below) has no operative row and takes the family's tables as priors, per the rule in `SKILL.md`.
 
 | Source | Location | Consulted | What it contains instead |
 |---|---|---|---|

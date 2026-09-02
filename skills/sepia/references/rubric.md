@@ -85,7 +85,7 @@ SEPIA DIAGNOSIS — <title>
 Scope: heuristic triage; corpus references only; no authorship probability or validated aggregate detector
 Model: author=<value> executor=<value>   (value: unknown | <family> version=unknown | <family> <release>; a release is an exact tag like Fable 5.1 or GPT-5.6 — "GPT-5" alone is a family, write "GPT version=unknown")
 Narrative layer: author=<prior | none> executor=<prior | none>
-Prose layer: author=<operative | prior | none> executor=<operative | prior | none>
+Prose layer: author=<operative | prior | none> executor=<operative | prior | none>   (operative = the release's own table is operative and the family's other tables are priors)
 Group A: observed signals …; n/a … (narrator commentary — "It was then she learned…"; …)
 Group B: observed signals … (…)
 Group C: observed signals …; n/a … (…)

@@ -7,7 +7,7 @@ Two layers, two kinds of evidence, kept in separate tables:
 
 Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local: S = StoryScope, V = vendor guidance. Corrections are Sepia inferences unless a source explicitly tested the intervention.
 
-**Which rows apply is decided by the model-identity rule in `SKILL.md` (Routing), not here.** In short: each role (author, executor) is resolved on its own; a role's family selects its narrative layer as priors when that role's model produced or is producing the story, and its prose layer on every route — *operative* only when the release matches the table's tag, a *prior* otherwise. Nothing in this file infers a model from the prose — attribution by reading is not the classifier that produced the 68.4%.
+**Which rows apply is decided by the model-identity rule in `SKILL.md` (Routing), not here.** In short: each role (author, executor) is resolved on its own; a role's family selects its narrative layer as priors when that role's model produced or is producing the story, and its prose layer on every route — a table is *operative* only when the release matches its tag, a *prior* otherwise, so a role with a matching table has that one operative and the family's other tables as priors. Nothing in this file infers a model from the prose — attribution by reading is not the classifier that produced the 68.4%.
 
 ## Claude
 
