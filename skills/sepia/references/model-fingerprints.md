@@ -3,7 +3,7 @@
 Two layers, two kinds of evidence, kept in separate tables:
 
 - **Narrative layer (measured).** Each frontier model diverges from the *other AIs* on its own signature features (StoryScope §5, Table 17; 6-way attribution 68.4% macro-F1 from narrative features alone). See [StoryScope arXiv v6](https://arxiv.org/abs/2604.03136v6) for the pinned study. Measured on specific versions (Sonnet 4.6, GPT-5.4, Gemini 3 Flash, DeepSeek V3.2, Kimi K2.5, 2026). Fiction only.
-- **Prose layer (vendor guidance, unmeasured).** What a model's own vendor says its current release does at the sentence level, taken from the vendor's prompting documentation. Tagged with the exact release the page names. Applies to professional prose and to fiction narration alike, at the style-pass step only — never before the narrative and discourse passes.
+- **Prose layer (vendor guidance, unmeasured).** What a model's own vendor says its current release does at the sentence level, taken from the vendor's prompting documentation. Tagged with the exact release the page names. Loaded on every route at the style-pass step only — never before the narrative and discourse passes — and written by the vendors for user-facing expository output: on the fiction route it applies to the non-narrative text an operation produces (the report, a summary for the user), and reaches narration only where a table's own scope note says so; otherwise `narrative-pass.md` §5 and the narrative layer govern narration.
 
 Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local: S = StoryScope, V = vendor guidance. Corrections are Sepia inferences unless a source explicitly tested the intervention.
 
@@ -35,13 +35,13 @@ The vendor's own instruction, verbatim (compared against the source page 2026-09
 Mannered prose substitutes metaphor and flourish for direct statement. Instead of "a parameter worth varying," the mannered writer produces "a dial worth turning." Instead of "this point still matters," they write "this point earns its keep." The phrases exist to display the writer, not to convey the idea, and readers can tell. That is why mannered prose irritates: it makes the reader work harder so the writer can perform. It is also imprecise. Metaphors drag in connotations the writer did not choose and cannot control. The fix is to say what you mean. When a literal phrase is available, use it.
 ```
 
-Scope: this block governs expository and professional prose. On the fiction route it is subordinate to `narrative-pass.md` §5 — §5's emotion-mode band and its one-or-two-embodied-peaks rule decide where metaphor stays, and the block applies only to narration outside those peaks. It is not a metaphor ban, and no figure from §5 is a metaphor budget.
+Scope note: this block is the one instruction in this section that does reach narration on the fiction route, and only subordinate to `narrative-pass.md` §5 — §5's emotion-mode band and its one-or-two-embodied-peaks rule decide where metaphor stays, and the block applies to narration outside those peaks. It is not a metaphor ban, and no figure from §5 is a metaphor budget.
 
 ### Prose layer (V; Claude Fable 5 and Claude Mythos 5, `ANTHROPIC-FABLE-5-PROMPTING`)
 
 | Vendor-stated default | Handling |
 |---|---|
-| Un-steered, elaborates past the task: "surveying options it won't pursue, explaining root causes at length, producing heavily-structured PR descriptions, or writing comments that narrate what the next line does" | The brevity instruction below, operative or prior per the model-identity rule in `SKILL.md`: operative for a role whose release is Claude Fable 5 or Claude Mythos 5, a prior for any other Claude release. As the author's layer: hunt option surveys, root-cause essays, and structure that outweighs the content (professional-pass checks 2, 3, 6). As the executor's layer: apply the instruction to what you write |
+| Un-steered, elaborates past the task: "surveying options it won't pursue, explaining root causes at length, producing heavily-structured PR descriptions, or writing comments that narrate what the next line does" | The brevity instruction below, operative or prior per the model-identity rule in `SKILL.md`: operative for a role whose release is Claude Fable 5 or Claude Mythos 5, a prior for any other Claude release. As the author's layer: hunt option surveys, root-cause essays, and structure that outweighs the content (professional-pass checks 2, 3, 6). As the executor's layer: apply the instruction to the non-narrative text you write, per the route scope in this file's header |
 | In long agentic sessions, "dense arrow-chain shorthand, deep implementation detail, references to thinking the user never saw, or overly technical phrasing" | Hunt arrow chains, hyphen-stacked compounds, and labels the reader never saw defined; expand them into sentences (style-pass §6 read-aloud test) |
 
 The vendor's brevity instruction, verbatim (compared against the source page 2026-09-03, matched):
@@ -56,7 +56,7 @@ The way to keep output short is to be selective about what you include (drop det
 
 | Vendor-stated default | Handling |
 |---|---|
-| "Default user-facing responses run longer than prior Opus models'"; effort changes thinking volume, not visible length | Density (professional-pass check 2) is the high-prior check. The conciseness instruction below, operative or prior per the model-identity rule in `SKILL.md`: operative for a role whose release is Claude Opus 5, a prior for any other Claude release; as the executor's layer, apply it to what you write |
+| "Default user-facing responses run longer than prior Opus models'"; effort changes thinking volume, not visible length | Run density (professional-pass check 2) at the role's operative or prior strength. The conciseness instruction below, operative or prior per the model-identity rule in `SKILL.md`: operative for a role whose release is Claude Opus 5, a prior for any other Claude release; as the executor's layer, apply it to the non-narrative text you write, per the route scope in this file's header |
 | Written files "are often longer than on prior models": filler sections, redundant summaries, boilerplate | Hunt the fractal-summary shape and sections that exist for completeness (professional-pass checks 6, 7). Vendor instruction: "Match the length of written documents to what the task needs: cover the substance, but do not pad with filler sections, redundant summaries, or boilerplate." |
 | "Narrates readily during agentic work": announces what it is about to do; narrates corrections to earlier statements more than prior models | In produced text, cut announcements of intent and corrections that change nothing for the reader |
 
@@ -91,8 +91,8 @@ Consulted with no prose-layer statement (2026-09-03): the Claude Sonnet 5 page s
 
 | Vendor-stated default | Handling |
 |---|---|
-| More concise by default than GPT-5.5; brevity instructions can make answers too brief | Density fails in both directions. A short answer that dropped a required caveat or the next action is a defect (professional-pass check 2) |
-| The vendor's recommended trims name the expected residue: introductions, repetition, generic reassurance, optional background, generic praise, sign-offs | Already hunted by professional-pass checks 1, 2, and 7; treat those checks as high-prior when GPT wrote the text |
+| More concise by default than GPT-5.5; brevity instructions can make answers too brief | Density fails in both directions. In non-narrative text, a short answer that dropped a required caveat or the next action is a defect (professional-pass check 2) |
+| The vendor's recommended trims name the expected residue: introductions, repetition, generic reassurance, optional background, generic praise, sign-offs | Already hunted by professional-pass checks 1, 2, and 7; run them on non-narrative text at the role's operative or prior strength |
 | Editing tasks drift: the vendor's preservation snippet warns against "adding new claims, sections, or a more promotional tone" | Vendor-implied, not stated as a defect. Enforce the register-drift clause of the `SKILL.md` guardrail "Deletion beats addition" |
 
 ## Gemini
@@ -113,7 +113,7 @@ The vendor scopes its statements to the series (Gemini 3 Flash through Gemini 3.
 
 | Vendor-stated default | Handling |
 |---|---|
-| "By default, Gemini 3 is less verbose and prefers providing direct, efficient answers"; a conversational or "chatty" persona appears only when explicitly prompted | Terse and unadorned is this series' default, so brevity is not evidence of a human here. Check density in the other direction (professional-pass check 2): required caveats and next steps dropped for efficiency. In fiction, expect clipped exposition |
+| "By default, Gemini 3 is less verbose and prefers providing direct, efficient answers"; a conversational or "chatty" persona appears only when explicitly prompted | Terse and unadorned is this series' default, so brevity is not evidence of a human here. In non-narrative text, check density in the other direction (professional-pass check 2): required caveats and next steps dropped for efficiency |
 
 ## DeepSeek
 
