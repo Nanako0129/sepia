@@ -37,6 +37,44 @@ Mannered prose substitutes metaphor and flourish for direct statement. Instead o
 
 Scope: this block governs expository and professional prose. On the fiction route it is subordinate to `narrative-pass.md` §5 — §5's emotion-mode band and its one-or-two-embodied-peaks rule decide where metaphor stays, and the block applies only to narration outside those peaks. It is not a metaphor ban, and no figure from §5 is a metaphor budget.
 
+### Prose layer (V; Claude Fable 5 and Claude Mythos 5, `ANTHROPIC-FABLE-5-PROMPTING`)
+
+| Vendor-stated default | Handling |
+|---|---|
+| Un-steered, elaborates past the task: "surveying options it won't pursue, explaining root causes at length, producing heavily-structured PR descriptions, or writing comments that narrate what the next line does" | As the executor's layer, the vendor's brevity instruction below is operative. As the author's layer, hunt option surveys, root-cause essays, and structure that outweighs the content (professional-pass checks 2, 3, 6) |
+| In long agentic sessions, "dense arrow-chain shorthand, deep implementation detail, references to thinking the user never saw, or overly technical phrasing" | Hunt arrow chains, hyphen-stacked compounds, and labels the reader never saw defined; expand them into sentences (style-pass §6 read-aloud test) |
+
+The vendor's brevity instruction, verbatim (compared against the source page 2026-09-03, matched):
+
+```text
+Lead with the outcome. Your first sentence after finishing should answer "what happened" or "what did you find": the thing the user would ask for if they said "just give me the TLDR." Supporting detail and reasoning come after. Being readable and being concise are different things, and readability matters more.
+
+The way to keep output short is to be selective about what you include (drop details that don't change what the reader would do next), not to compress the writing into fragments, abbreviations, arrow chains like A → B → fails, or jargon.
+```
+
+### Prose layer (V; Claude Opus 5, `ANTHROPIC-OPUS-5-PROMPTING`)
+
+| Vendor-stated default | Handling |
+|---|---|
+| "Default user-facing responses run longer than prior Opus models'"; effort changes thinking volume, not visible length | Density (professional-pass check 2) is the high-prior check. As the executor's layer, the vendor's conciseness instruction below is operative |
+| Written files "are often longer than on prior models": filler sections, redundant summaries, boilerplate | Hunt the fractal-summary shape and sections that exist for completeness (professional-pass checks 6, 7). Vendor instruction: "Match the length of written documents to what the task needs: cover the substance, but do not pad with filler sections, redundant summaries, or boilerplate." |
+| "Narrates readily during agentic work": announces what it is about to do; narrates corrections to earlier statements more than prior models | In produced text, cut announcements of intent and corrections that change nothing for the reader |
+
+The vendor's conciseness instruction, verbatim (compared against the source page 2026-09-03, matched):
+
+```text
+Keep responses focused, brief, and concise. Keep disclaimers and caveats short, and spend most of the response on the main answer. When asked to explain something, give a high-level summary unless an in-depth explanation is specifically requested.
+```
+
+### Prose layer (V; Claude Opus 4.8, `ANTHROPIC-OPUS-4-8-PROMPTING`)
+
+| Vendor-stated default | Handling |
+|---|---|
+| "A direct, opinionated style with minimal validation-forward phrasing and sparing emoji use" | Absence of validation openers and emoji is this release's default, not evidence of a human. Stance (check 4) is usually present; look instead at density and specificity |
+| Response length "calibrated to how complex it judges the task to be" | Length varies with the task by default; uniform length across tasks would be the tell, not variation |
+
+Consulted with no prose-layer statement (2026-09-03): the Claude Sonnet 5 page says only that "prose style on long-form writing may shift"; Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 have no model-specific prompting page. Those releases load nothing for the prose layer.
+
 ## GPT
 
 ### Narrative layer (S; GPT-5.4) — the gossip and the long lens
@@ -69,7 +107,13 @@ Scope: this block governs expository and professional prose. On the fiction rout
 | Protagonist's social circle always expands | Allow shrinking or static trajectories |
 | Direct speech dominates exchanges | Mix in indirect and summarized speech |
 
-Prose layer: no vendor guidance ingested yet.
+### Prose layer (V; Gemini 3 series, `GOOGLE-GEMINI-3-DEV-GUIDE`)
+
+The vendor scopes its statements to the series (Gemini 3 Flash through Gemini 3.8 Flash), so any Gemini 3.x release matches this table.
+
+| Vendor-stated default | Handling |
+|---|---|
+| "By default, Gemini 3 is less verbose and prefers providing direct, efficient answers"; a conversational or "chatty" persona appears only when explicitly prompted | Terse and unadorned is this series' default, so brevity is not evidence of a human here. Check density in the other direction (professional-pass check 2): required caveats and next steps dropped for efficiency. In fiction, expect clipped exposition; apply the narrative layer at full strength |
 
 ## DeepSeek
 
@@ -83,7 +127,7 @@ Prose layer: no vendor guidance ingested yet.
 | Backstory evenly interleaved, metronomically | Cluster it irregularly |
 | Embedded storytelling scenes (tales within the tale) | Use at most one, if any |
 
-Prose layer: no vendor guidance ingested yet.
+Prose layer: none. Consulted 2026-09-03 with no statement about the model's own writing: the DeepSeek API documentation (no prompting guide at all) and the DeepSeek-V3.2 model card (sampling parameters only).
 
 ## Kimi
 
@@ -91,7 +135,7 @@ Prose layer: no vendor guidance ingested yet.
 
 Fewest fingerprints (3) — it sits at the centroid of AI narrative space, which *is* its tell: no distinctive choices at all. Corrections: it opens in medias res with in-action introductions by reflex (vary the entry), and never labels traits explicitly (allowed to). Mostly, apply the shared passes at full strength and make the rarity move count.
 
-Prose layer: no vendor guidance ingested yet.
+Prose layer: none. Consulted 2026-09-03 with no statement about the model's own writing: the Kimi platform's "Best Practices for Prompts" (generic prompt-engineering advice, no version named) and the Kimi-K2.5 model card (its default system prompt was removed in the 2026-01-29 changelog).
 
 ## Human fingerprints — the positive targets
 

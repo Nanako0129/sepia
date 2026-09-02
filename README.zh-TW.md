@@ -18,7 +18,7 @@ sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的十
 | 2 | 篇章推進 | 拆掉段落—問題序列的模板、修掉故事中段的鬆垮、變換節奏與位置 |
 | 3 | 字句風格 | 所有 humanizer 都在修的那層：陳腔濫調、句法模板、用詞、語域 |
 
-另附 30 項特徵的診斷 rubric，以及分成兩層的各模型指紋：StoryScope 量測到的敘事層特徵（Claude、GPT、Gemini、DeepSeek、Kimi），加上取自各廠商官方 prompting 指南的字句層特徵（Claude Fable 5.1、GPT-5.6），在知道是哪個模型在寫或在執行時套用。
+另附 30 項特徵的診斷 rubric，以及分成兩層的各模型指紋：StoryScope 量測到的敘事層特徵（Claude、GPT、Gemini、DeepSeek、Kimi），加上取自各廠商官方 prompting 指南的字句層特徵（Claude Fable 5.1、Fable 5、Opus 5、Opus 4.8；GPT-5.6；Gemini 3 系列），在知道是哪個模型在寫或在執行時套用。沒有發佈這類指南的廠商只記錄「已查閱」，不臆測。
 
 專業文字露餡的方式不同。研究指出，常見問題包括沒有資訊量的填充文字、該下判斷時還在閃躲、chatbot 殘留語氣、無視 venue 的語域，以及像同一個模子印出的排版。每種文件都共用一份檢查表，再各配一份精簡規則檔：
 

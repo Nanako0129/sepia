@@ -18,7 +18,7 @@ sepia turns those measured gaps, together with the eleven related studies digest
 | 2 | Discourse flow | de-template the paragraph-question sequence, fix the mid-story sag, vary rhythm and positions |
 | 3 | Surface style | the classic layer: clichés, syntax templates, vocabulary, register |
 
-Plus a 30-feature diagnosis rubric and per-model fingerprints in two layers: narrative tells measured by StoryScope (Claude, GPT, Gemini, DeepSeek, Kimi) and sentence-level tells taken from the vendors' own prompting guides (Claude Fable 5.1, GPT-5.6), applied when the writing or executing model is known.
+Plus a 30-feature diagnosis rubric and per-model fingerprints in two layers: narrative tells measured by StoryScope (Claude, GPT, Gemini, DeepSeek, Kimi) and sentence-level tells taken from the vendors' own prompting guides (Claude Fable 5.1, Fable 5, Opus 5, Opus 4.8; GPT-5.6; Gemini 3 series), applied when the writing or executing model is known. Vendors that publish no such guidance are recorded as consulted, not guessed.
 
 Professional prose fails differently. The studies point at filler that carries no information, hedging where a judgment was needed, chatbot leftovers, register that ignores the venue, and formatting that looks stamped out. Each document type gets a thin rule file on top of one shared checklist:
 
