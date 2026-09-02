@@ -27,6 +27,17 @@ This ledger pins the sources used by the research summaries and operational skil
 | `ASAVVIN-UNSLOP` | *unslop* — asavvin-pixel | [GitHub repository](https://github.com/asavvin-pixel/unslop) | 2026-08-29 | editorial heuristic | Community humanizer workflow covering typography, vocabulary, structure, outline testing, and voice calibration | [discourse-pass.md](../skills/sepia/references/discourse-pass.md) |
 | `FICTION-RP-COMMUNITY` | *The HawThorne Directives* and *Sukino's Banned Tokens* — Coneja-Chibi and Sukino | [HawThorne Directives](https://github.com/Coneja-Chibi/The-HawThorne-Directives); [Sukino settings](https://huggingface.co/Sukino/SillyTavern-Settings-and-Presets) | 2026-08-29 | community corpus | Fiction and roleplay community lists of banned patterns and phrases; useful as examples, not validated measurements | [style-pass.md](../skills/sepia/references/style-pass.md) |
 
+## Vendor guidance
+
+Prompting documentation published by a model's own vendor. It records what the vendor has observed and chosen to correct in its model's writing; it is not a measured study, and its version scope is exactly the model release the page names.
+
+| ID | Exact title and publisher | Authoritative location | Accessed | Evidence class | Scope | Main repo consumers |
+|---|---|---|---|---|---|---|
+| `ANTHROPIC-FABLE-5-1-PROMPTING` | *Prompting Claude Fable 5.1* — Anthropic | [Claude Platform Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1) | 2026-09-02 | vendor guidance (unmeasured) | Claude Fable 5.1 and Claude Mythos 5.1. Sections used: "Writing density" (the mannered-prose definition and the short counter-prompt; denser prose than Fable 5) and "Formatting in chat" (less bold, fewer headers and lists than earlier Claude) | [model-fingerprints.md](../skills/sepia/references/model-fingerprints.md), [style-pass.md](../skills/sepia/references/style-pass.md), [professional-pass.md](../skills/sepia/references/professional-pass.md) |
+| `OPENAI-GPT-5-6-PROMPTING` | *Prompting guidance for GPT-5.6 Sol* — OpenAI | [OpenAI developer docs](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) | 2026-09-02 | vendor guidance (unmeasured) | GPT-5.6. Section used: "Personality, collaboration, and response length" (more concise by default than GPT-5.5; brevity instructions can over-trim; recommended trims and the editing-preservation snippet) | [model-fingerprints.md](../skills/sepia/references/model-fingerprints.md), [professional-pass.md](../skills/sepia/references/professional-pass.md) |
+
+The verbatim mannered-prose block embedded in `model-fingerprints.md` was compared character-for-character against the Anthropic page fetched on 2026-09-02 and matched.
+
 ## Evidence boundary
 
 This file is repository research metadata; the standalone skill runtime does not require it. The studies report associations, classifier results, or reader outcomes within their stated samples. They do not validate Sepia's ordering, recipes, aggregate detector, or revision thresholds. Operational files mark those prescriptions as Sepia inferences unless the cited source explicitly tested the intervention.
