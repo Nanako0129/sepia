@@ -1,6 +1,6 @@
 # sepia
 
-[English](README.md) | **繁體中文**
+[English](README.md) | **繁體中文** | [简体中文](README.zh-CN.md)
 
 > 從真正會讓 AI 洩底的層次下手。小說先修敘事架構，再碰字句；專業文件（發版說明、PR 回覆、事故檢討、工單、技術文章）則按 venue 各用一套規則。
 
