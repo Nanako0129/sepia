@@ -1,6 +1,6 @@
 # Pass 3 — Surface style
 
-Run last, after structure is fixed. Evidence: LAMP/CHI 2025 (L), Reinhart et al. PNAS 2025 (P), Russell et al. ACL 2025 (R), Shaib et al. slop taxonomy (S), fiction/RP community ban lists (F), vendor prompting guidance (V — unmeasured, version-scoped; see `model-fingerprints.md`). Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local. Prescriptions are Sepia design inferences unless a cited source explicitly tested the intervention. Editing operations should skew **replace 74% / delete 18% / insert 8%** (L) — when in doubt, cut. The one exception that may grow text: adding concrete specificity.
+Run last, after structure is fixed. Evidence: LAMP/CHI 2025 (L), Reinhart et al. PNAS 2025 (P), Russell et al. ACL 2025 (R), Shaib et al. slop taxonomy (S), fiction/RP community ban lists (F). Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local. Prescriptions are Sepia design inferences unless a cited source explicitly tested the intervention. Editing operations should skew **replace 74% / delete 18% / insert 8%** (L) — when in doubt, cut. The one exception that may grow text: adding concrete specificity.
 
 ## 1 The seven artifacts (professional-editor taxonomy, L)
 
@@ -18,7 +18,7 @@ Ordered by how often professional writers actually fixed each, which is the prio
 
 ## 2 Syntax templates to hunt
 
-The (L, P) rows are part-of-speech shapes 2–5× overrepresented in LLM prose and heavily edited out by professionals. The (V) row is vendor guidance, not a measured template:
+These part-of-speech shapes are 2–5× overrepresented in LLM prose and heavily edited out by professionals (L, P):
 
 | Template | Examples | Fix |
 |---|---|---|
@@ -29,7 +29,6 @@ The (L, P) rows are part-of-speech shapes 2–5× overrepresented in LLM prose a
 | Paired abstractions "X and Y" | desperation and resolve · curiosity and caution | Keep one |
 | not only X but also Y · it's not X, it's Y | — | Say the one thing you mean |
 | Rule of three | three parallel adjectives/clauses/images, everywhere | Two or four; break the rhythm |
-| Metaphor or idiom standing in for an available literal phrase (V) | a dial worth turning · this point earns its keep | Say the literal thing. Fiction: metaphor stays where `narrative-pass.md` §5 places it; this row governs narration outside those peaks |
 
 ## 3 Vocabulary
 
