@@ -18,7 +18,7 @@ sepia 把这些研究测得的差距，连同 [`research/`](research/) 里整理
 | 2 | 篇章推进 | 去除段落—问题序列模板、改善故事中段节奏松散的问题、变换节奏与位置 |
 | 3 | 措辞风格 | 多数 humanizer 处理的层面：陈词滥调、句法模板、用词、语域 |
 
-另附 30 项特征的诊断 rubric，以及各模型的指纹修正（Claude、GPT、Gemini、DeepSeek、Kimi）。
+另附 30 项特征的诊断 rubric，以及分成两层的各模型指纹：StoryScope 测得的叙事层特征（Claude、GPT、Gemini、DeepSeek、Kimi），加上取自各厂商官方 prompting 指南的措辞层特征（Claude Fable 5.1、Fable 5、Opus 5、Opus 4.8；GPT-5.6；Gemini 3 系列），在已知是哪个模型在写或在执行时应用。没有发布这类指南的厂商只记录「已查阅」，不猜测。
 
 专业文档暴露 AI 痕迹的方式不同。研究指出，常见问题包括没有信息量的填充文字、需要作出判断时仍然回避、chatbot 残留语气、无视 venue 的语域，以及排版高度同质化。每种文档都共用一份检查表，再各配一份精简规则文件：
 
