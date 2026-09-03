@@ -2,6 +2,8 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md) | **简体中文**
 
+[![behavioral eval](https://github.com/Nanako0129/sepia/actions/workflows/behavioral-eval.yml/badge.svg)](https://github.com/Nanako0129/sepia/actions/workflows/behavioral-eval.yml) [![version consistency](https://github.com/Nanako0129/sepia/actions/workflows/version-consistency.yml/badge.svg)](https://github.com/Nanako0129/sepia/actions/workflows/version-consistency.yml) [![release](https://img.shields.io/github/v/release/Nanako0129/sepia)](https://github.com/Nanako0129/sepia/releases/latest) [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 > 从真正会暴露 AI 痕迹的层面入手。小说先修叙事架构，再处理措辞；专业文档（发版说明、PR 回复、事故复盘、工单、技术文章）则按 venue 各用一套规则。
 
 这是一套可移植的 [Agent Skill](https://agentskills.io/specification)：任何支持这个标准的 agent 都能加载；[Skills CLI](https://skills.sh)（支持 77+ 个 agent）一条命令即可安装。Claude Code、Codex、Grok Build 与 Antigravity 另有原生 plugin 打包，四个平台均已完成安装验证。全平台共用唯一一份标准 `SKILL.md`，不为不同平台维护独立分支。四种操作：**write**、**review**（只诊断）、**refactor**（最小修改）、**recreate**（整篇重写）。
