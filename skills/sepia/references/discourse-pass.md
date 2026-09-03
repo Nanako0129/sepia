@@ -44,7 +44,7 @@ Position patterns survive paraphrase better than word choice does — after full
 
 The machine opening: establish time + place + weather, introduce the character with description, then start the story (B: "Once upon a time"-style detachment; R: the "On a drab November morning" scene-setting lead; S: AI over-grounds the opening spatially, 2.33 vs 2.12).
 
-**Fix:** open inside the situation — mid-conflict, mid-conversation, mid-error ("Sam didn't know she wasn't human"). Ground space with one working detail, not a establishing shot. Delay the character's appearance-and-backstory paragraph indefinitely; most stories never need it.
+**Fix:** open inside the situation — mid-conflict, mid-conversation, mid-error ("Sam didn't know she wasn't human"). Ground space with one working detail, not an establishing shot. Delay the character's appearance-and-backstory paragraph indefinitely; most stories never need it.
 
 ## 5 Names
 
