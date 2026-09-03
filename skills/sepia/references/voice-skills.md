@@ -10,7 +10,7 @@ Built-in profile bodies: `voices/hemingway.md` (opt-in phrase: "apply the Heming
 
 sepia calibrates toward the human distribution and the venue. A voice skill aims at one specific aesthetic, and a strong aesthetic deliberately pushes some measured axes away from the human band. Stacked naively, the two fight: sepia's review flags the voice's signature restraint or ornament as drift, and the voice's uniform application manufactures exactly the fingerprints sepia hunts. The rules below are the interface.
 
-## Composition order (write and recreate only)
+## Composition order (write and recreate)
 
 For **recreate**, the canonical preflight still comes before everything: extract and verify the source's facts, claims, and intent first — the steps below begin only after that preservation set exists.
 
@@ -18,7 +18,9 @@ For **recreate**, the canonical preflight still comes before everything: extract
 2. The voice skill's moves next, applied selectively (see below).
 3. sepia review last, with the adjusted expectations in the table.
 
-For **review** and **refactor**, the canonical operation contracts are unchanged: review diagnoses without editing, and refactor produces the complete defect list before touching anything. Under a declared voice the adjustment is interpretive only — score with the expectation table below, and in refactor do not "fix" the voice's expected costs against the user's chosen aesthetic.
+For **review**, the canonical contract is unchanged: diagnose without editing. Under a declared voice the adjustment is interpretive only — score with the expectation table below.
+
+For **refactor**, stage 1 is unchanged: the complete defect list first, scored with the expectation table, and the voice's expected costs are not listed as defects. In stage 2 the declared voice supplies the fix vocabulary: a voice move may be applied only as the fix for an item on the stage-1 list, chosen from the 3–5 selected for the piece, and a passage with no listed defect is not touched. The voice does not license edits the defect list did not call for; that is what keeps refactor minimal under a voice.
 
 ## Selection applies to voice moves too
 
