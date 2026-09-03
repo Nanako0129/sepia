@@ -45,4 +45,4 @@ Professional anti-signal (recorded → `Voice fit: none`):
 
 | # | Recorded item |
 |---|---|
-| a | professional-pass check 9 (sameness of rhythm) failed with direction recorded as short |
+| a | professional-pass check 9 (sameness of rhythm) failed with direction recorded as short (long or paragraph do not block) |
