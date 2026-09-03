@@ -50,7 +50,7 @@ Prose layer: author=<operative | prior | none> executor=<operative | prior | non
 Voice fit: <profile> (<matched>/<signature size> recorded findings) — opt in with "<phrase>" | none (anti-signal: <item>) | none (<matched>/<size>) | <profile> — applied when the voice is declared   (review and refactor stage 1 only; omitted on write; a count of recorded findings, not a score; rule and data in references/voices/registry.md)
 Venue corpus: <artifacts sampled, or "none — using domain baseline">
 Style scan: <style-pass §2–3 hits with quoted evidence, or none>
-Failed: <#n check-name — quoted evidence>   (one line per failed check)
+Failed: <#n check-name — quoted evidence>   (one line per failed check; for #2 add the direction, padding or omission; for #9 add the direction, short or long)
 Passed: <check numbers only>
 Verdict: <clean / isolated hits / cluster> → <ship / refactor / recreate>
 ```

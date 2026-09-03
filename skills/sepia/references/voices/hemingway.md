@@ -47,11 +47,15 @@ The rule and the signature/anti-signal data for this profile live in `references
 
 ## Worked examples
 
+Both Afters were produced as write/recreate from the Before **plus the source facts listed under it**. Those facts came from the specimen's author; they are not in the Before, and a refactor that has not been given them may not add them (SKILL.md "Never invent specifics"). The examples show the voice's moves, not permission to invent.
+
 ### A — fiction (specimen written for this profile; not Hemingway's text)
 
 Before:
 
 > The letter sat on the kitchen table like an accusation. Mara's chest tightened as she read it a second time, the words blurring as grief and betrayal warred inside her. Outside, the rain had begun again, as if the sky itself understood what she had lost. She realized then that trust, once broken, could never truly be mended, and that the mother she had known had been a stranger all along.
+
+Source facts supplied by the author (not in the Before): the mother kept receipts on the kitchen table; the kitchen window over the sink was open; Mara made tea; Teo lives forty minutes away by highway.
 
 After (moves used: leave the meaning out; emotion as action and speech; weather is weather; one paratactic run; plain "Then"):
 
@@ -81,6 +85,8 @@ Before:
 
 > During the course of the incident, which unfortunately began at approximately 14:02 UTC, our team was not able to immediately identify the root cause, but eventually the issue was traced back to a misconfiguration in the retry queue, which caused a significant and highly impactful cascade of failures across multiple downstream services that were not expecting such a magnificent volume of traffic.
 
+Source facts supplied by the author from the incident record (not in the Before): 412 retries landed inside one 200 ms window; the cause was found at 14:41; `RETRY_JITTER=full` was set at 14:47.
+
 After:
 
 > At 14:02 UTC the retry queue began resending failed jobs without jitter. Downstream services received 412 retries inside one 200 ms window and rate-limited each other. We found the cause at 14:41 and set `RETRY_JITTER=full` at 14:47.
@@ -92,7 +98,7 @@ After:
 | "was not able to immediately identify" → the time the cause was found | "Be positive, not negative." | postmortems domain (timestamps, mechanism); the §4 negation conflict does not arise here because the positive form carries more information, not less — that is the test |
 | "During the course of", "approximately", "eventually" deleted | "Eliminate every superfluous word." | check 2 |
 | ", but eventually the issue was traced" | "common abuse of the conjunction" | QUD check |
-| 412, 200 ms, 14:41, 14:47 added | Precision | check 5; the numbers must come from the incident record, never be invented |
+| 412, 200 ms, 14:41, 14:47 added | Precision | check 5; taken from the source facts above, never invented — without them the After would stop at the cause and leave a TODO |
 
 ## Grounding
 
