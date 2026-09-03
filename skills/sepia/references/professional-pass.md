@@ -47,7 +47,9 @@ SEPIA REVIEW — <document type, venue>
 Loaded: <files used>
 Model: author=<value> executor=<value>   (value: unknown | <family> version=unknown | <family> <release>; a release is an exact tag like Fable 5.1 or GPT-5.6 — "GPT-5" alone is a family, write "GPT version=unknown")
 Prose layer: author=<operative | prior | none> executor=<operative | prior | none>   (operative = the release's own table is operative and the family's other tables are priors)
+Voice fit: <profile> (<matched>/<signature size> recorded findings) — opt in with "<phrase>" | none (anti-signal: <item>) | <profile> — applied   (review and refactor stage 1 only; omitted on write; a count of recorded findings, not a score; rule and data in references/voices/registry.md)
 Venue corpus: <artifacts sampled, or "none — using domain baseline">
+Style scan: <style-pass §2–3 hits with quoted evidence, or none>
 Failed: <#n check-name — quoted evidence>   (one line per failed check)
 Passed: <check numbers only>
 Verdict: <clean / isolated hits / cluster> → <ship / refactor / recreate>

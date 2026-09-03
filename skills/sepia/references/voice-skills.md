@@ -1,8 +1,10 @@
 # Composing with voice skills (experimental)
 
-Status: experimental and opt-in. Load this file only when the user says a voice or style skill is stacked with sepia — a minimalism method, a brand voice, a persona guide. Never assume one is in play, and never inject an aesthetic that sepia's own references don't prescribe: the voice is the user's choice, sepia's job is calibration around it.
+Status: experimental and opt-in. Load this file only when the user says a voice or style skill is stacked with sepia — a minimalism method, a brand voice, a persona guide. Never assume one is in play, and never inject an aesthetic that sepia's own references don't prescribe: the voice is the user's choice, sepia's job is calibration around it. This opt-in scope covers the composition rules below and the built-in profile bodies under `voices/`; the report's `Voice fit:` line is a different thing — it comes from `voices/registry.md`, which SKILL.md loads by default on review and refactor stage 1, and that file holds its own rule.
 
-Precedence on professional routes: the venue corpus still sets the register (`professional-pass.md`), and the voice operates inside it. Where a declared voice and the venue's register directly conflict, surface the conflict and let the user pick — never silently override either.
+Precedence on professional routes: the venue corpus still sets the register (`professional-pass.md`), and the voice operates inside it. Where a declared voice and the venue's register directly conflict, surface the conflict and let the user pick — never silently override either. The same applies on every route when a voice move directly contradicts a `style-pass.md` §4 restore item (a voice that forbids negation against §4's "restore negation", for instance): name both rules in the report and leave the choice to the user.
+
+Built-in profile bodies: `voices/hemingway.md` (opt-in phrase: "apply the Hemingway voice").
 
 ## Why the two need an interface
 
