@@ -40,6 +40,8 @@ Position patterns survive paraphrase better than word choice does — after full
 | Scene transitions | Same connective formula each time | Varied: hard cut, time skip, dialogue pickup |
 | Emphasis | Evenly distributed | Clustered where it matters, absent elsewhere |
 
+The paragraph-length row means uniformity *within the text*. Paragraph length and paragraph count on their own are not signals: measured directions contradict across corpora (LLM paragraphs longer in how-to text, shorter in generated papers, more numerous in Chinese answers) and follow prompt limits and venue conventions; see the syntax section of the repository research ledger.
+
 ## 4 Openings
 
 The machine opening: establish time + place + weather, introduce the character with description, then start the story (B: "Once upon a time"-style detachment; R: the "On a drab November morning" scene-setting lead; S: AI over-grounds the opening spatially, 2.33 vs 2.12).

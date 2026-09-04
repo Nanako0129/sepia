@@ -54,6 +54,10 @@ Since v0.4.0, sepia defines an interface for stacking a voice or style skill on 
 
 The contract in short: sepia's architecture decisions come first, and the voice's moves are applied selectively (3–5 signature moves per piece, formula endings deliberately broken sometimes). Review reports the voice's known costs instead of fixing them away, while uniformity findings keep full strength: a voice does not excuse a metronome. On professional routes the venue still sets the register, and direct conflicts come back to you. The interface is grounded in one blind review experiment on a strict-minimalism specimen — a worked example, not measured evidence. One built-in profile ships under `references/voices/` (Hemingway: iceberg omission for fiction, the Kansas City Star rules for professional prose, each move traced to its source). On fiction, a review reports when your text's recorded findings fit it, and asking for strong de-AI on a story counts as opting in: sepia says it is applying the profile and how to decline. `/sepia-hemingway` is the direct entry.
 
+## Sentence rhythm and Chinese calibration
+
+The style pass checks the *spread* of sentence lengths, the one syntactic measure on which every study that measured it agrees (human text varies more within a passage, in English and in Chinese); mean sentence length, punctuation counts, and paragraph length are listed as non-signals because the measured directions contradict each other. Chinese text loads `references/languages/zh.md`, a calibration built on the one measured Chinese corpus (HC3, 2023) with its limits stated in the file; evidence and numbers are in `research/rhythm-syntax.md`.
+
 ## Install
 
 Every command below is written for **user scope** — install once, use it in every project.
@@ -145,7 +149,7 @@ sepia/
 ├── skills/
 │   ├── sepia/                # canonical skill (Agent Skills standard)
 │   │   ├── SKILL.md          # routing, operations, calibration rules, guardrails
-│   │   └── references/       # passes, rubric, fingerprints, domain rules, voice-skills (experimental)
+│   │   └── references/       # passes, rubric, fingerprints, domain rules, languages/zh.md, voice-skills (experimental)
 │   ├── sepia-write/SKILL.md  # thin fixed-operation wrappers
 │   ├── sepia-review/SKILL.md
 │   ├── sepia-refactor/SKILL.md

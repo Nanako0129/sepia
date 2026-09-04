@@ -22,10 +22,10 @@ Run these one at a time (a combined pass goes blind — measured on this very ta
 | 6 | Formatting tells | Bold-mini-heading bullet lists where prose would do; emoji as decoration; Title Case headings; every section the same length; lists of exactly three, everywhere; a heading restated by its first sentence; fractal summaries (announce → say → recap at every level) (W). The absence of these is not evidence of a human: which formatting a model over- or under-uses changes with its release (see the prose layers in `model-fingerprints.md`). |
 | 7 | Conclusion residue | "In conclusion/summary" sections, restating what was said, generic future outlook ("we will continue to improve…"). End when the content ends. |
 | 8 | Templatedness | The same sentence frame recycled ("X, a Y at Z, said that…" three times); every item phrased identically. Vary or tabulate. |
-| 9 | Sameness of rhythm | Uniform paragraph and sentence lengths throughout. Human professional prose is uneven — depth where it matters, one-liners where it doesn't. |
+| 9 | Sameness of rhythm | Uniform paragraph and sentence lengths throughout. Human professional prose is uneven — depth where it matters, one-liners where it doesn't. Measure sentence rhythm with the check in `style-pass.md` §5. |
 | 10 | Fluency | Grammatically correct but unsayable ("the earthen area that formerly held the puddle"). Read it aloud; if no one would say or write it in an email, redo it in speech-shaped syntax. |
 
-Then finish with the vocabulary/syntax scan in `style-pass.md` §2–3 (the ban tables apply to professional prose too; the fiction-slop table does not).
+Then finish with the vocabulary/syntax scan in `style-pass.md` §2–3 and the sentence-rhythm check in §5 (the ban tables apply to professional prose too; the fiction-slop table does not; on text with no running prose the rhythm check reports `none`).
 
 ## Domain weighting
 
@@ -48,7 +48,7 @@ Loaded: <files used>
 Model: author=<value> executor=<value>   (value: unknown | <family> version=unknown | <family> <release>; a release is an exact tag like Fable 5.1 or GPT-5.6 — "GPT-5" alone is a family, write "GPT version=unknown")
 Prose layer: author=<operative | prior | none> executor=<operative | prior | none>   (operative = the release's own table is operative and the family's other tables are priors)
 Venue corpus: <artifacts sampled, or "none — using domain baseline">
-Style scan: <style-pass §2–3 hits with quoted evidence, or none>
+Style scan: <style-pass §2–3 and §5 rhythm hits with quoted evidence, or none>
 Failed: <#n check-name — quoted evidence>   (one line per failed check)
 Passed: <check numbers only>
 Verdict: <clean / isolated hits / cluster> → <ship / refactor / recreate>
