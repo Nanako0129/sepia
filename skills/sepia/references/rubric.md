@@ -92,7 +92,7 @@ Group C: observed signals …; n/a … (…)
 Group D: marker observations … (named intertextuality present — "…")
 Group E: observed signals … (…)
 Advisories: over-correction …; subplots …; single-location …
-Voice fit: <profile> (<matched>/<signature size> recorded findings) — opt in with "<phrase>" | none (anti-signal: <item>) | none (<matched>/<size>) | <profile> — applied when the voice is declared   (review and refactor stage 1 only; omitted on write; a count of recorded findings, not a score; printed after the findings it counts so the count cannot steer them; rule and data in references/voices/registry.md)
 Quoted evidence: <short phrase for each reported signal>
 Plan: <ordered fixes, deepest layer first, each tied to a quoted passage>
+Voice fit: <profile> (<matched>/<signature size> recorded findings) — opt in with "<phrase>" | none (anti-signal: <item>) | none (<matched>/<size>) | <profile> — applied when the voice is declared   (review and refactor stage 1 only; omitted on write; a count of recorded findings, not a score; always the last line, after the whole diagnosis and the plan are committed, so the count cannot steer any of them; rule and data in references/voices/registry.md)
 ```
