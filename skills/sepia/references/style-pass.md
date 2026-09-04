@@ -1,6 +1,6 @@
 # Pass 3 — Surface style
 
-Run last, after structure is fixed. Evidence: LAMP/CHI 2025 (L), Reinhart et al. PNAS 2025 (P), Russell et al. ACL 2025 (R), Shaib et al. slop taxonomy (S), fiction/RP community ban lists (F). Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local. Prescriptions are Sepia design inferences unless a cited source explicitly tested the intervention. Editing operations should skew **replace 74% / delete 18% / insert 8%** (L) — when in doubt, cut. The one exception that may grow text: adding concrete specificity.
+Run last, after structure is fixed. Evidence: LAMP/CHI 2025 (L), Reinhart et al. PNAS 2025 (P), Russell et al. ACL 2025 (R), Shaib et al. slop taxonomy (S), fiction/RP community ban lists (F), Desaire et al. 2023 (D), Gude et al. 2026 (G), Muñoz-Ortiz et al. 2024 (M), 朱君輝 et al. CCL 2023 on Chinese (Z), Freeburg 2026 (E). Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local. Prescriptions are Sepia design inferences unless a cited source explicitly tested the intervention. Editing operations should skew **replace 74% / delete 18% / insert 8%** (L) — when in doubt, cut. The one exception that may grow text: adding concrete specificity.
 
 ## 1 The seven artifacts (professional-editor taxonomy, L)
 
@@ -60,9 +60,15 @@ Instruct-tuned models systematically suppress these (P: usage 13–80% of human 
 | First/second person, direct questions | where POV permits |
 | Coarse or blunt language | where the register genuinely calls for it |
 
-## 5 Genre alignment
+## 5 Genre alignment and sentence rhythm
 
 Reinhart et al. report that instruction-tuned models favor an informationally dense, noun-heavy style and struggle to match genre-aligned variation (P). Before editing, state the target register (literary / pulp / YA / essayistic) and edit toward *that* — a de-AI'd thriller and a de-AI'd literary story should not end up in the same voice. Sentence length variance, contraction rate, and vocabulary plainness are genre parameters, not universal constants.
+
+**What is measured about sentence length.** The *spread* of sentence lengths is smaller in LLM text than in human text in every study found, in every model generation, in English and in Chinese: within-paragraph standard deviation and the length difference between consecutive sentences both run higher in human paragraphs (D, values not printed); sentences of 1–15 tokens make up 32–33% of human news sentences against 1–4% for 2025 instruction-tuned models (G); sentences of 41 tokens or more are 12.0% of human sentences against 5.5% for a 2023 base model (M); Chinese answers show a sentence-length SD of 9.248 vs 6.729 words (Z). The *mean* is not a signal: against 2023 base models human sentences were about 10–20% longer, while 2025 aligned models write sentences 15–30% longer than humans (G, the paper's own wording), and on one Chinese corpus the direction flips with the unit of count (Z). No study prints a within-text SD for humans versus LLMs, so no numeric threshold exists to quote, and none is set here.
+
+**Check (Sepia inference).** For English text, look for the two tails: sentences of 10 words or fewer and of 35 words or more (D's own cutoffs). In any language, look for runs of adjacent sentences of about the same length — "three or more" and "about the same" are reading conventions, not measured limits. Both tails missing, or such a run, is a *candidate* signal that counts only alongside other hits (slop is cumulative, §3). The check needs running prose of at least paragraph length, which is the unit D measured: a one-line reply, a bullet list, a table, or a commit-style release note has no rhythm to measure, and the scan reports `none`. For Chinese the tail cutoffs do not apply; `languages/zh.md` says why and what to look for instead.
+
+**Fix.** Split one long sentence, merge two short ones, or delete a clause — redistribute the words that are there, never add filler to lengthen a line (the 74/18/8 rule above). Do not shorten everything: a passage of uniformly short sentences is the same defect seen from the other side, and it reads as pastiche. When the executor is a 2025-or-later aligned release, the missing tail is almost always the short one (G).
 
 ## 6 The read-aloud test
 
@@ -80,5 +86,8 @@ Do **not** flag or "fix" these — over-correction is its own fingerprint:
 | A banned word inside quoted dialogue or an in-world document | Quoted material keeps its texture |
 | The author's own verified habits | If the user's samples use em-dashes or "moreover," those stay |
 | Moderate ordinary sentences | Slack is human; do not polish every line to distinctiveness |
+| Punctuation density, or a comma/period count | Measured directions contradict: on one Chinese Q&A corpus, punctuation density reads 0.135 human vs 0.136 ChatGPT (Z) while the punctuation share of tokens reads 16.0% vs 13.4% (Guo et al. 2023, same corpus); in English news the human share is 11.88% against 10.77–12.14% for four base models, one of them above human (M). No per-type human-vs-LLM count (comma, period, semicolon) exists for English or Chinese |
+| Em dash frequency as a model-agnostic tell | Measured per 1,000 words across 2025–26 releases: 10.62 (GPT-4.1), 9.09 (Claude Opus 4.6), 1.43 (GPT-5.4), 0.00 (Llama 3.x), against a human mean of 3.23 from eight essays (E). It is a release property, so the cluster rule above and the release-scoped prose layer in `model-fingerprints.md` apply — never a blanket rule |
+| Paragraph count or average paragraph length | Directions contradict across corpora: LLM paragraphs longer in how-to text (82.01 vs 68.83 words), shorter in generated papers (39.82 vs 51.12), and more numerous in Chinese answers (3.681 vs 1.442). Only uniformity of paragraph length *within* the text is a signal (`discourse-pass.md` §3) |
 
 > Informality is not a disguise. In Russell et al.'s tested humanization conditions, expert readers still detected other machine-patterned cues; adding casual language alone did not remove them. The claim does not establish that every informal model output is detectable.
