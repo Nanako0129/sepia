@@ -36,7 +36,7 @@ The governing principle throughout: **calibrate to the human distribution, don't
 
 ## Operation entries
 
-The complete plugin package gives Claude Code, Codex, Grok Build, and Antigravity a general router plus four direct operation entries:
+The complete plugin package gives Claude Code, Codex, Grok Build, and Antigravity a general router plus five direct entries:
 
 | Operation | Claude Code | Codex | Grok Build | Antigravity | Meaning |
 |---|---|---|---|---|---|
@@ -44,6 +44,7 @@ The complete plugin package gives Claude Code, Codex, Grok Build, and Antigravit
 | review | `/sepia-review` | `$sepia-review` | `/sepia-review` | `/sepia-review` | Diagnose without editing |
 | refactor | `/sepia-refactor` | `$sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | Make minimal in-place edits |
 | recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | Rewrite from the source facts and intent |
+| hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | Write or refactor fiction with the built-in Hemingway voice applied |
 
 The general `/sepia` (Claude Code, Grok Build, and Antigravity) or `$sepia` (Codex) router remains available. The operation wrappers depend on their sibling canonical skill, so standalone wrapper installation is unsupported; install the complete plugin package. This table documents package syntax; installed UI and runtime behavior were not exercised as part of this change.
 
@@ -51,7 +52,7 @@ The general `/sepia` (Claude Code, Grok Build, and Antigravity) or `$sepia` (Cod
 
 Since v0.4.0, sepia defines an interface for stacking a voice or style skill on top of it — a minimalism method, a brand voice, a persona guide. It is opt-in: tell sepia the voice skill is in play, and it loads `references/voice-skills.md` over the normal route. Nothing is loaded, and no aesthetic is ever injected, unless you say so.
 
-The contract in short: sepia's architecture decisions come first, and the voice's moves are applied selectively (3–5 signature moves per piece, formula endings deliberately broken sometimes). Review reports the voice's known costs instead of fixing them away, while uniformity findings keep full strength: a voice does not excuse a metronome. On professional routes the venue still sets the register, and direct conflicts come back to you. The interface is grounded in one blind review experiment on a strict-minimalism specimen — a worked example, not measured evidence. One built-in profile ships under `references/voices/` (Hemingway: iceberg omission for fiction, the Kansas City Star rules for professional prose, each move traced to its source); a review can report when your text's recorded findings fit a profile, and nothing loads until you say so.
+The contract in short: sepia's architecture decisions come first, and the voice's moves are applied selectively (3–5 signature moves per piece, formula endings deliberately broken sometimes). Review reports the voice's known costs instead of fixing them away, while uniformity findings keep full strength: a voice does not excuse a metronome. On professional routes the venue still sets the register, and direct conflicts come back to you. The interface is grounded in one blind review experiment on a strict-minimalism specimen — a worked example, not measured evidence. One built-in profile ships under `references/voices/` (Hemingway: iceberg omission for fiction, the Kansas City Star rules for professional prose, each move traced to its source). On fiction, a review reports when your text's recorded findings fit it, and asking for strong de-AI on a story counts as opting in: sepia says it is applying the profile and how to decline. `/sepia-hemingway` is the direct entry.
 
 ## Install
 
@@ -148,7 +149,8 @@ sepia/
 │   ├── sepia-write/SKILL.md  # thin fixed-operation wrappers
 │   ├── sepia-review/SKILL.md
 │   ├── sepia-refactor/SKILL.md
-│   └── sepia-recreate/SKILL.md
+│   ├── sepia-recreate/SKILL.md
+│   └── sepia-hemingway/SKILL.md  # fiction write/refactor with the built-in voice
 ├── .claude-plugin/          # Claude Code packaging (plugin.json, marketplace.json)
 ├── .codex-plugin/           # Codex packaging
 ├── .agents/                 # Codex/Antigravity workspace-mode discovery + Antigravity workflow

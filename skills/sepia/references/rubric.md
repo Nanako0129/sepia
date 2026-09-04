@@ -87,7 +87,7 @@ Model: author=<value> executor=<value>   (value: unknown | <family> version=unkn
 Narrative layer: author=<prior | none> executor=<prior | none>
 Prose layer: author=<operative | prior | none> executor=<operative | prior | none>   (operative = the release's own table is operative and the family's other tables are priors)
 Voice fit: <profile> (<matched>/<signature size> recorded findings) — opt in with "<phrase>" | none (anti-signal: <item>) | none (<matched>/<size>) | <profile> — applied when the voice is declared   (review and refactor stage 1 only; omitted on write; a count of recorded findings, not a score; rule and data in references/voices/registry.md)
-Group A: observed signals …; n/a … (narrator commentary — "It was then she learned…"; …)
+Group A: <row heading> — <quoted evidence>; …; n/a <row heading> …   (name every observed signal by its rubric row heading, verbatim)
 Group B: observed signals … (…)
 Group C: observed signals …; n/a … (…)
 Group D: marker observations … (named intertextuality present — "…")

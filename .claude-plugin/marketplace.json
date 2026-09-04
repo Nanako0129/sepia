@@ -3,12 +3,12 @@
   "owner": {
     "name": "Nanako Tsai"
   },
-  "description": "De-AI writing package with the general Sepia router plus four separate operation entries: write, review, refactor, and recreate.",
+  "description": "De-AI writing package with the general Sepia router plus five separate entries: write, review, refactor, and recreate.",
   "plugins": [
     {
       "name": "sepia",
       "source": "./",
-      "description": "Installs the general Sepia router plus four separate operation entries: sepia-write, sepia-review, sepia-refactor, and sepia-recreate."
+      "description": "Installs the general Sepia router plus five separate entries: sepia-write, sepia-review, sepia-refactor, and sepia-recreate."
     }
   ]
 }
