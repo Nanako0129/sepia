@@ -23,10 +23,10 @@ Evidence: one measured corpus, HC3-Chinese — 6,586 human and 6,586 ChatGPT ans
 
 | Shape | Chinese form | Fix |
 |---|---|---|
-| Connective stacking (連詞 at 2.8× human) | 「和／以及／並且／同時／此外／因此／然而」 chained across clauses; 「和」 joining whole clauses rather than nouns | Delete the connective and let juxtaposition carry the link; Chinese parataxis is the human default |
+| Connective stacking (連詞 density 0.036 vs 0.013) | 「和／以及／並且／同時／此外／因此／然而」 chained across clauses; 「和」 joining whole clauses rather than nouns | Delete the connective and let juxtaposition carry the link; Chinese parataxis is the human default |
 | Second-person address outside dialogue or instructions | 「你會發現」「您可以」 in expository prose | Delete or recast as a statement |
 | Disyllabic padding where a monosyllable is idiomatic | 「進行討論」「加以說明」「予以處理」「做出決定」 | 「討論」「說明」「處理」「決定」 — the verb alone |
-| Flat sentence length (SD 27% lower) | Runs of adjacent sentences of about the same length | Apply the §5 near-equal-run branch only: split one long sentence, merge two short ones, delete a clause. The English 10-word / 35-word tail cutoffs are **not** applied — no Chinese tail share is measured, and no Chinese cutoff is invented here; count in whichever unit you use consistently |
+| Flat sentence length (SD 6.729 vs 9.248 words) | Runs of adjacent sentences of about the same length | Apply the §5 near-equal-run branch only: split one long sentence, merge two short ones, delete a clause. The English 10-word / 35-word tail cutoffs are **not** applied — no Chinese tail share is measured, and no Chinese cutoff is invented here; count in whichever unit you use consistently |
 
 ## 3 What to restore (Sepia inferences; shape of `style-pass.md` §4)
 
