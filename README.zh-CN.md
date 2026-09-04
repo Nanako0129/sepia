@@ -36,7 +36,7 @@ sepia 把这些研究测得的差距，连同 [`research/`](research/) 里整理
 
 ## 操作入口
 
-完整 plugin package 会在 Claude Code、Codex、Grok Build 与 Antigravity 提供一个通用 router，以及四个可直接调用的操作入口：
+完整 plugin package 会在 Claude Code、Codex、Grok Build 与 Antigravity 提供一个通用 router，以及五个可直接调用的入口：
 
 | 操作 | Claude Code | Codex | Grok Build | Antigravity | 用途 |
 |---|---|---|---|---|---|
@@ -44,6 +44,7 @@ sepia 把这些研究测得的差距，连同 [`research/`](research/) 里整理
 | review | `/sepia-review` | `$sepia-review` | `/sepia-review` | `/sepia-review` | 只诊断，不修改 |
 | refactor | `/sepia-refactor` | `$sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | 在原文上做最小修改 |
 | recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | 根据原始事实与意图重新撰写 |
+| hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | 应用内置海明威语气写作或改写小说 |
 
 通用 router 仍可通过 `/sepia`（Claude Code、Grok Build、Antigravity）或 `$sepia`（Codex）使用。操作 wrapper 依赖同一套 package 里的标准 skill，不支持单独安装；请安装完整 plugin package。这张表仅记录 package 的调用语法；本次变更尚未实际测试安装后的 UI 与 runtime 行为。
 
@@ -51,7 +52,7 @@ sepia 把这些研究测得的差距，连同 [`research/`](research/) 里整理
 
 v0.4.0 起，sepia 定义了与语气／风格类 skill（极简主义方法、品牌语调、persona 指南）叠加使用的接口。采用 opt-in：你明确说明已启用语气／风格 skill，sepia 才会在原路由之上加载 `references/voice-skills.md`；未明确说明则不加载，sepia 也永远不会自己注入美学。
 
-接口约定摘要：sepia 的架构决策先行，语气技法选择性应用（每篇选择 3–5 种代表性技法，代表性结尾公式偶尔故意打破）。review 只报告语气／风格的已知代价、不直接修改，但一致性问题不因此减弱：语气风格不能免除节奏检查。在专业文档路由中，venue 仍决定语域，发生直接冲突时交由你决定。这个接口的依据是一次极简主义样本的盲审实验，属单一案例，不是量化证据。
+接口约定摘要：sepia 的架构决策先行，语气技法选择性应用（每篇选择 3–5 种代表性技法，代表性结尾公式偶尔故意打破）。review 只报告语气／风格的已知代价、不直接修改，但一致性问题不因此减弱：语气风格不能免除节奏检查。在专业文档路由中，venue 仍决定语域，发生直接冲突时交由你决定。这个接口的依据是一次极简主义样本的盲审实验，属单一案例，不是量化证据。`references/voices/` 下附带一个内置 profile（海明威：小说用冰山式省略、专业文体用堪萨斯城星报规则，每一招都标注出处）。小说路线上，review 会在你的文本记录到的 findings 符合它时给出提示；你要求「强力去 AI 味」也视为 opt-in，sepia 会说明正在应用这个 profile 以及如何取消。`/sepia-hemingway` 是直接入口。
 
 ## 安装
 
@@ -148,7 +149,8 @@ sepia/
 │   ├── sepia-write/SKILL.md  # 固定单一操作的薄 wrapper
 │   ├── sepia-review/SKILL.md
 │   ├── sepia-refactor/SKILL.md
-│   └── sepia-recreate/SKILL.md
+│   ├── sepia-recreate/SKILL.md
+│   └── sepia-hemingway/SKILL.md  # fiction write/refactor with the built-in voice
 ├── .claude-plugin/          # Claude Code packaging (plugin.json, marketplace.json)
 ├── .codex-plugin/           # Codex packaging
 ├── .agents/                 # Codex/Antigravity workspace-mode discovery + Antigravity workflow
