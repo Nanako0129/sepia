@@ -1,6 +1,6 @@
 # Voice registry — the voice-fit line and opt-in triggers
 
-Loaded on the fiction route, on review and on refactor stage 1; never on write, and not on professional routes in this version (the professional-route suggestion is tracked in issue #227). This file is the single home of the voice-fit mechanism and of the per-profile data it reads, and it lists each profile's opt-in triggers. It contains no voice moves and no style rules; a profile body loads only when the user opts in.
+Loaded on the fiction route: on review and on refactor stage 1 for the `Voice fit:` line, and on write for the Opt-in section only (no `Voice fit:` line on write). Not loaded on professional routes in this version (the professional-route suggestion is tracked in issue #227). This file is the single home of the voice-fit mechanism and of the per-profile data it reads, and it lists each profile's opt-in triggers. It contains no voice moves and no style rules; a profile body loads only when the user opts in.
 
 ## The rule
 
