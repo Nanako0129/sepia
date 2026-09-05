@@ -177,7 +177,7 @@ sepia/
 
 ## 赞助
 
-sepia 免费、无需账号，每条规则背后的研究都一并公开。花钱的是把它做得可信这件事：每次发版都在多个平台上用真实模型跑验证，行为测试每次推送到 main 都会消耗模型 token，证据清单只靠阅读论文原文增长，不靠摘要。赞助用于支付这些模型与 CI 费用，以及维护时间。如果 sepia 让你写的东西读起来更好，欢迎在 Patreon 上支持。
+sepia 免费、无需账号，每条规则背后的研究都一并公开。花钱的是证据本身：文献调查委派给研究 agent，它们阅读论文原文会消耗模型额度；每条规则改动上线前，都用真实模型实测（A/B 对照小说、跨平台的端到端审查）。赞助用于支付这些模型额度，以及维护时间。如果 sepia 让你写的东西读起来更好，欢迎在 Patreon 上支持。
 
 [![Support sepia on Patreon](https://img.shields.io/badge/Support_on_Patreon-FF424D?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/cw/Nanako0129/membership)
 
