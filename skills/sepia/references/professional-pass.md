@@ -25,7 +25,7 @@ Run these one at a time (a combined pass goes blind — measured on this very ta
 | 9 | Sameness of rhythm | Uniform paragraph and sentence lengths throughout. Human professional prose is uneven — depth where it matters, one-liners where it doesn't. Measure sentence rhythm with the check in `style-pass.md` §5. |
 | 10 | Fluency | Grammatically correct but unsayable ("the earthen area that formerly held the puddle"). Read it aloud; if no one would say or write it in an email, redo it in speech-shaped syntax. |
 
-Then finish with the vocabulary/syntax scan in `style-pass.md` §2–3 and the sentence-rhythm check in §5 (the ban tables apply to professional prose too; the fiction-slop table does not; on text with no running prose the rhythm check reports `none`).
+Then finish with the vocabulary/syntax scan in `style-pass.md` §2–3 and the sentence-rhythm check in §5, and on refactor the closing paragraph of §4 (the ban tables apply to professional prose too; the fiction-slop table does not; on text with no running prose the rhythm check reports `none`).
 
 ## Domain weighting
 
