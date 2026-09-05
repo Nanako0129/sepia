@@ -4,15 +4,15 @@
 
 [![behavioral eval](https://github.com/Nanako0129/sepia/actions/workflows/behavioral-eval.yml/badge.svg)](https://github.com/Nanako0129/sepia/actions/workflows/behavioral-eval.yml) [![version consistency](https://github.com/Nanako0129/sepia/actions/workflows/version-consistency.yml/badge.svg)](https://github.com/Nanako0129/sepia/actions/workflows/version-consistency.yml) [![release](https://img.shields.io/github/v/release/Nanako0129/sepia)](https://github.com/Nanako0129/sepia/releases/latest) [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> De-AI writing at the structural level. Fiction gets its narrative architecture repaired before anyone touches word choice. Professional documents (release notes, PR replies, postmortems, tickets, technical articles) each get rules matched to their venue.
+> De-AI writing at the layer that actually gives AI away. Fiction gets its narrative architecture repaired before anyone touches word choice; professional documents (release notes, PR replies, postmortems, tickets, technical articles) each get rules matched to their venue.
 
-This is an [Agent Skill](https://agentskills.io/specification). Any agent that speaks the standard can load it, and the [Skills CLI](https://skills.sh) supports 77+ agents and installs it with one command. Claude Code, Codex, Grok Build, and Antigravity additionally get native plugin packaging, install-verified on all four. There is one canonical `SKILL.md` without per-platform forks. The four operations are **write**, **review** (diagnose only), **refactor** (minimal edits), and **recreate** (full rewrite).
+A portable [Agent Skill](https://agentskills.io/specification): any agent that speaks the standard can load it, and the [Skills CLI](https://skills.sh), which supports 77+ agents, installs it with one command. Claude Code, Codex, Grok Build, and Antigravity additionally get native plugin packaging, install-verified on all four. One canonical `SKILL.md`, no per-platform forks. Four operations: **write**, **review** (diagnose only), **refactor** (minimal edits), **recreate** (full rewrite).
 
 ## Why another humanizer
 
-Standard humanizers edit word choice and syntax. [StoryScope](https://arxiv.org/abs/2604.03136) (Russell et al., 2026: 61,608 stories, human + 5 frontier LLMs) showed that a classifier using **narrative-structure features alone** detects AI fiction at 93.2% macro-F1, and that editing the surface style away barely moves it (95.5% → 93.9%). The surviving tells are architectural. They include themes explained by the narrator, single-track causally-tidy plots, emotions rendered only as bodily sensation, no real-world references, no reader, linear time, and endings resolved by protagonist growth and acceptance.
+Every popular humanizer edits word choice and syntax. [StoryScope](https://arxiv.org/abs/2604.03136) (Russell et al., 2026: 61,608 stories, human + 5 frontier LLMs) showed that a classifier using **narrative-structure features alone** detects AI fiction at 93.2% macro-F1, and that editing the surface style away barely moves it (95.5% → 93.9%). The tells that survive are architectural: themes explained by the narrator, single-track causally-tidy plots, emotions rendered only as bodily sensation, no real-world references, no reader, linear time, endings resolved by protagonist growth and acceptance.
 
-sepia turns those measured gaps, along with the eleven related studies digested in [`research/`](research/), into a three-pass writing and revision protocol for fiction.
+sepia turns those measured gaps, together with the related studies digested in [`research/`](research/), into a three-pass writing and revision protocol for fiction:
 
 | Pass | Layer | Examples |
 |---|---|---|
@@ -20,9 +20,9 @@ sepia turns those measured gaps, along with the eleven related studies digested 
 | 2 | Discourse flow | de-template the paragraph-question sequence, fix the mid-story sag, vary rhythm and positions |
 | 3 | Surface style | the classic layer: clichés, syntax templates, vocabulary, register |
 
-There is also a 30-feature diagnosis rubric and per-model fingerprints across two layers. Narrative tells are measured by StoryScope (Claude, GPT, Gemini, DeepSeek, Kimi), and sentence-level tells come from the vendors' own prompting guides (Claude Fable 5.1, Fable 5, Opus 5, Opus 4.8; GPT-5.6; Gemini 3 series), applied when the writing or executing model is known. Vendors that publish no such guidance are recorded as consulted without guessing.
+Plus a 30-feature diagnosis rubric and per-model fingerprints in two layers: narrative tells measured by StoryScope (Claude, GPT, Gemini, DeepSeek, Kimi) and sentence-level tells taken from the vendors' own prompting guides (Claude Fable 5.1, Fable 5, Opus 5, Opus 4.8; GPT-5.6; Gemini 3 series), applied when the writing or executing model is known. Vendors that publish no such guidance are recorded as consulted, not guessed.
 
-Professional prose fails differently. The studies point to filler that carries no information, hedging where a judgment was needed, chatbot leftovers, register that ignores the venue, and formatting that looks stamped out. Each document type gets a thin rule file on top of one shared checklist.
+Professional prose fails differently. The studies point at filler that carries no information, hedging where a judgment was needed, chatbot leftovers, register that ignores the venue, and formatting that looks stamped out. Each document type gets a thin rule file on top of one shared checklist:
 
 | Domain | The gist |
 |---|---|
@@ -32,11 +32,11 @@ Professional prose fails differently. The studies point to filler that carries n
 | Tickets / work orders | title = outcome, testable acceptance criteria, link don't repeat |
 | Technical articles | open at the problem, one real dead end, one committed opinion, numbers with conditions |
 
-The core rule is to **calibrate to the human distribution, don't invert the AI one.** Humans sit at moderate values; a story with every rule applied is a new fingerprint. The skill selects 3–5 moves per story and leaves slack.
+The governing principle throughout: **calibrate to the human distribution, don't invert the AI one.** Humans sit at moderate values; a story with every rule applied is a new fingerprint. The skill selects 3–5 moves per story and leaves slack.
 
 ## Operation entries
 
-The complete plugin package gives Claude Code, Codex, Grok Build, and Antigravity a general router along with five direct entries.
+The complete plugin package gives Claude Code, Codex, Grok Build, and Antigravity a general router plus five direct entries:
 
 | Operation | Claude Code | Codex | Grok Build | Antigravity | Meaning |
 |---|---|---|---|---|---|
@@ -46,21 +46,21 @@ The complete plugin package gives Claude Code, Codex, Grok Build, and Antigravit
 | recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | Rewrite from the source facts and intent |
 | hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | Write or refactor fiction with the built-in Hemingway voice applied |
 
-The general `/sepia` (Claude Code, Grok Build, and Antigravity) or `$sepia` (Codex) router remains available. The operation wrappers depend on their sibling canonical skill, so standalone wrapper installation is unsupported; install the complete plugin package. This table documents package syntax. Installed UI and runtime behavior were not exercised as part of this change.
+The general `/sepia` (Claude Code, Grok Build, and Antigravity) or `$sepia` (Codex) router remains available. The operation wrappers depend on their sibling canonical skill, so standalone wrapper installation is unsupported; install the complete plugin package. This table documents package syntax. Installing was verified on each platform; running the entries afterwards was not.
 
 ## Experimental: composing with voice skills
 
-Since v0.4.0, sepia defines an interface for stacking a voice or style skill on top of it (a minimalism method, a brand voice, a persona guide). It is opt-in. Tell sepia the voice skill is in play, and it loads `references/voice-skills.md` over the normal route. Nothing is loaded, and no aesthetic is ever injected, unless you say so.
+Since v0.4.0, sepia defines an interface for stacking a voice or style skill on top of it — a minimalism method, a brand voice, a persona guide. It is opt-in: tell sepia the voice skill is in play, and it loads `references/voice-skills.md` over the normal route. Nothing is loaded, and no aesthetic is ever injected, unless you say so.
 
-In short, sepia's architecture decisions come first, and the voice's moves are applied selectively (3–5 signature moves per piece, formula endings deliberately broken sometimes). Review reports the voice's known costs instead of fixing them away, while uniformity findings keep full strength; a voice does not excuse a metronome. On professional routes the venue still sets the register, and direct conflicts come back to you. The interface is grounded in one blind review experiment on a strict-minimalism specimen (a worked example, not measured evidence). One built-in profile ships under `references/voices/` (Hemingway, covering iceberg omission for fiction, the Kansas City Star rules for professional prose, and each move traced to its source). On fiction, a review reports when your text's recorded findings fit it, and asking for strong de-AI on a story counts as opting in; sepia says it is applying the profile and explains how to decline. `/sepia-hemingway` is the direct entry.
+The contract in short: sepia's architecture decisions come first, and the voice's moves are applied selectively (3–5 signature moves per piece, formula endings deliberately broken sometimes). Review reports the voice's known costs instead of fixing them away, while uniformity findings keep full strength: a voice does not excuse a metronome. On professional routes the venue still sets the register, and direct conflicts come back to you. The interface is grounded in one blind review experiment on a strict-minimalism specimen — a worked example, not measured evidence. One built-in profile ships under `references/voices/` (Hemingway: iceberg omission for fiction, the Kansas City Star rules for professional prose, each move traced to its source). On fiction, a review reports when your text's recorded findings fit the Hemingway profile. Asking for strong de-AI on a story counts as opting in, and sepia then says which profile it is applying and how to decline. `/sepia-hemingway` is the direct entry.
 
 ## Sentence rhythm and Chinese calibration
 
-The style pass checks the *spread* of sentence lengths. This is the one syntactic measure on which every study that measured it agrees (human text varies more within a passage, in English and in Chinese). Mean sentence length, punctuation counts, and paragraph length are listed as non-signals because the measured directions contradict each other. Chinese text loads `references/languages/zh.md`, a calibration built on the one measured Chinese corpus (HC3, 2023) with its limits stated in the file. Evidence and numbers are in `research/rhythm-syntax.md`.
+The style pass checks the *spread* of sentence lengths, the one syntactic measure on which every study that measured it agrees (human text varies more within a passage, in English and in Chinese); mean sentence length, punctuation counts, and paragraph length are listed as non-signals because the measured directions contradict each other. Chinese text loads `references/languages/zh.md`, a calibration built on the one measured Chinese corpus (HC3, 2023) with its limits stated in the file; evidence and numbers are in `research/rhythm-syntax.md`.
 
 ## Install
 
-The commands below are written for **user scope** (install once, use it in every project).
+Every command below is written for **user scope** — install once, use it in every project.
 
 ### Any agent (Skills CLI, 77+ agents)
 
@@ -70,9 +70,9 @@ npx skills update sepia -g             # update
 npx skills remove sepia -g             # uninstall
 ```
 
-Installs on every agent the [Skills CLI](https://skills.sh) supports (Cursor, Cline, Windsurf, Copilot, OpenCode, goose, and more). Pick your agents when prompted. Runtime behavior outside the four platforms below has not been exercised by us. The skill is plain markdown under the Agent Skills standard, so file an issue if your agent trips on it.
+Installs on every agent the [Skills CLI](https://skills.sh) supports — Cursor, Cline, Windsurf, Copilot, OpenCode, goose, and more. Pick your agents when prompted. Runtime behavior outside the four platforms below has not been exercised by us; the skill is plain markdown under the Agent Skills standard, so file an issue if your agent trips on it.
 
-The four platforms below have native plugin installers, each exercised with a live install. Verified means the install completes and the sepia entries appear. Runtime behavior is as noted above.
+The four platforms below have native plugin installers, each exercised with a live install. Verified means the install completes and the sepia entries appear. Whether the entries then behave as documented has not been checked platform by platform.
 
 ### Claude Code
 
@@ -86,7 +86,7 @@ claude plugin marketplace update sepia
 claude plugin update sepia
 ```
 
-The in-session `/plugin install` dialog asks you to pick a scope. Choose **User** there.
+The in-session `/plugin install` dialog asks you to pick a scope — choose **User** there.
 
 ### Codex
 
@@ -110,7 +110,7 @@ grok plugin install Nanako0129/sepia --trust
 grok plugin update
 ```
 
-Grok also auto-discovers a Claude Code install of sepia if you have one. Either route works.
+Grok also auto-discovers a Claude Code install of sepia if you have one; either route works.
 
 ### Antigravity
 
@@ -121,11 +121,11 @@ agy plugin install https://github.com/Nanako0129/sepia
 
 ### Project scope (alternative)
 
-When a repo needs to pin its own copy, commit `skills/sepia/` into that repo as `.agents/skills/sepia` (Codex + Antigravity) or `.claude/skills/sepia` (Claude Code).
+When one repo should pin its own copy, commit `skills/sepia/` into that repo as `.agents/skills/sepia` (Codex + Antigravity) or `.claude/skills/sepia` (Claude Code).
 
 ## Uninstall
 
-Each tool uses its native command.
+Each tool uses its native command:
 
 ```bash
 # Claude Code
