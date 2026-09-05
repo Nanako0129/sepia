@@ -6,11 +6,11 @@
 
 > 從真正會讓 AI 洩底的層次下手。小說先修敘事架構，再碰字句；專業文件（發版說明、PR 回覆、事故檢討、工單、技術文章）按 venue 各配規則。
 
-這是 [Agent Skill](https://agentskills.io/specification)：任何支援這個標準的 agent 都能載入；[Skills CLI](https://skills.sh)（支援 77+ 家 agent）一行指令就能裝。Claude Code、Codex、Grok Build 與 Antigravity 另有原生 plugin 打包，四家都實機裝過。全平台共用唯一正典 `SKILL.md`，不另開平台分支。四種操作：**write**、**review**（只診斷）、**refactor**（最小修改）、**recreate**（整篇重寫）。
+這是 [Agent Skill](https://agentskills.io/specification)：任何支援這個標準的 agent 都能載入；[Skills CLI](https://skills.sh)（支援 77+ 家 agent）一行指令就能裝。Claude Code、Codex、Grok Build 與 Antigravity 另有原生 plugin 打包。全平台共用唯一正典 `SKILL.md`，不另開平台分支。四種操作：**write**、**review**（只診斷）、**refactor**（最小修改）、**recreate**（整篇重寫）。
 
 ## 為什麼還需要另一個 humanizer
 
-常見的 humanizer 都在改用詞與句法。[StoryScope](https://arxiv.org/abs/2604.03136)（Russell et al., 2026：61,608 篇故事，涵蓋人類與 5 個頂尖 LLM）顯示，只靠**敘事結構特徵**的分類器就能以 93.2% macro-F1 偵測 AI 小說；把字句風格修掉，分類表現也只從 95.5% 降到 93.9%。留下的破綻都在架構層：敘事者講明主題、單線且因果收得過於工整的情節、情緒只靠身體感受呈現、沒有真實世界的參照、讀者缺席、時間全程線性，以及靠主角成長與接納收束的結局。
+常見的 humanizer 都在改用詞與句法。[StoryScope](https://arxiv.org/abs/2604.03136)（Russell et al., 2026：61,608 篇故事，涵蓋人類與 5 個頂尖 LLM）顯示，只靠**敘事結構特徵**的分類器就能以 93.2% macro-F1 偵測 AI 小說。同一份研究裡，人類編輯改寫過字句風格的故事，完整分類器的偵測率也只從 95.5% 降到 93.9%。留下的破綻都在架構層：敘事者講明主題、單線且因果收得過於工整的情節、情緒只靠身體感受呈現、沒有真實世界的參照、讀者缺席、時間全程線性，以及靠主角成長與接納收束的結局。
 
 sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的相關研究，轉成小說寫作與修訂的三個 pass 流程：
 
@@ -22,7 +22,7 @@ sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的相
 
 另附 30 項特徵的診斷 rubric，以及分成兩層的各模型指紋：StoryScope 量測到的敘事層特徵（Claude、GPT、Gemini、DeepSeek、Kimi），加上取自各廠商官方 prompting 指南的字句層特徵（Claude Fable 5.1、Fable 5、Opus 5、Opus 4.8；GPT-5.6；Gemini 3 系列），在知道是哪個模型在寫或在執行時套用。沒有發佈這類指南的廠商只記錄「已查閱」，不臆測。
 
-專業文字露餡的方式不同。研究指出，常見問題包括沒有資訊量的填充文字、該下判斷時還在閃躲、chatbot 殘留語氣、無視 venue 的語域，以及像同一個模子印出的排版。每種文件都共用檢查表，再各配精簡規則檔：
+專業文字露餡的方式不同。Shaib 等人的 slop 分類與 Reinhart 等人的文體研究（都在 [`research/`](research/)）指出的問題是：沒有資訊量的填充文字、該下判斷時還在閃躲、chatbot 殘留語氣、無視 venue 的語域、像同一個模子印出的排版。每種文件都共用檢查表，再各配精簡規則檔：
 
 | 領域 | 要點 |
 |---|---|
@@ -46,17 +46,17 @@ sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的相
 | recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | 依原始事實與意圖重新撰寫 |
 | hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | 套用內建海明威聲音寫或改小說 |
 
-通用 router 仍可透過 `/sepia`（Claude Code、Grok Build、Antigravity）或 `$sepia`（Codex）使用。操作 wrapper 依賴同 package 裡的正典 skill，不支援單獨安裝；請安裝完整 plugin package。這張表只記錄 package 語法。各平台都驗過裝得上；裝好之後入口跑起來的行為沒有逐平台測。
+通用 router 仍可透過 `/sepia`（Claude Code、Grok Build、Antigravity）或 `$sepia`（Codex）使用。操作 wrapper 依賴同 package 裡的正典 skill，不支援單獨安裝；請安裝完整 plugin package。各平台驗證了什麼，寫在〈安裝〉一節。
 
 ## 實驗性功能：疊加聲音 skill
 
-v0.4.0 起，sepia 定義了跟聲音／風格類 skill（極簡主義方法、品牌語調、persona 指南）疊加使用的介面。採 opt-in：你明講聲音 skill 在場，sepia 才會在原路由之上載入 `references/voice-skills.md`；不講就不載入，sepia 也不會自己注入美學。
+v0.4.0 起，sepia 定義了跟聲音／風格類 skill（極簡主義方法、品牌語調、persona 指南）疊加使用的介面。採 opt-in：你明講聲音 skill 在場，sepia 才會在原路由之上載入 `references/voice-skills.md`；不講就不載入外部聲音。
 
-條約摘要：sepia 的架構決策先行，聲音技法選擇性套用（每篇挑 3–5 招招牌技法，招牌結尾公式偶爾故意打破）。review 只回報聲音的已知代價、不代修，但均勻性 finding 不打折：聲音不能豁免節拍器。專業路由上 venue 仍定語域，衝突交回給你決定。這個介面依據極簡規格樣本的盲審實驗，屬單一案例，非量測證據。`references/voices/` 下附內建 profile（海明威：小說用冰山省略、專業文體用堪薩斯市星報規則，每招都標出處）。小說路線上，review 會在你的文本記錄到的 findings 符合它時提示；你說要「強力去 AI 味」也算 opt-in，sepia 會講明正在套用這個 profile、以及怎麼取消。`/sepia-hemingway` 是直接入口。
+條約摘要：sepia 的架構決策先行，聲音技法選擇性套用（每篇挑 3–5 招招牌技法，招牌結尾公式偶爾故意打破）。review 只回報聲音的已知代價、不代修，但均勻性 finding 不打折：聲音不能豁免節拍器。專業路由上 venue 仍定語域，衝突交回給你決定。這個介面依據極簡規格樣本的盲審實驗，屬單一案例，非量測證據。`references/voices/` 下附內建 profile（海明威：小說用冰山省略、專業文體用堪薩斯市星報規則，每招都標出處）。內建 profile 是「你不講就不載入」的唯一例外：小說路線上，review 發現你的文本記錄到的 findings 符合海明威 profile 時會提示，你說要「強力去 AI 味」也算 opt-in。sepia 會講明正在套用哪個 profile、怎麼取消。`/sepia-hemingway` 是直接入口。
 
 ## 句長節奏與中文校準
 
-style pass 會檢查句長的變化幅度，四篇有量到它的研究方向一致（人類文本在同一段內變化較大，英文與中文皆然）；句長平均值、標點計數、段落長度明列為非訊號，因為量測方向互相矛盾。中文文本會載入 `references/languages/zh.md`，校準建立在唯一有量測的中文語料（HC3，2023）上，限制寫在檔案裡；證據與數字見 `research/rhythm-syntax.md`。
+style pass 會檢查句長的變化幅度，這是各研究方向一致的唯一句法量測。句長本身、標點計數、段落長度單獨都不當訊號。中文文本會載入 `references/languages/zh.md`，校準建立在唯一有量測的中文語料（HC3，2023）上，限制寫在檔案裡；證據與數字見 `research/rhythm-syntax.md`。
 
 ## 安裝
 
@@ -177,7 +177,7 @@ sepia/
 
 ## 贊助
 
-sepia 免費，不需要帳號。每條規則背後的研究也都是公開的。專案的實際開銷只有維護時間與兩種模型額度：委派研究 agent 讀論文原文做文獻調查，以及規則改動發布前用真實模型實測 A/B 對照小說與跨平台端到端審查。歡迎前往 Patreon 贊助支持。
+sepia 免費，不需要帳號。每條規則背後的研究也都是公開的。專案的實際開銷只有維護時間和模型額度。額度花在兩處：委派研究 agent 讀論文原文做文獻調查；規則改動發布前用真實模型跑 A/B 對照小說和跨平台端到端審查。歡迎前往 Patreon 贊助支持。
 
 [![Support sepia on Patreon](https://img.shields.io/badge/Support_on_Patreon-FF424D?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/cw/Nanako0129/membership)
 
