@@ -4,7 +4,7 @@
 
 ## 一句話結論
 
-**sepia 不以任何自動偵測器為目標，偵測器研究在這裡只有一個用途：確認 sepia 抓的訊號是結構性的，不是表面字形。** 最強的商業偵測器（Pangram）在 2025 年公開的管線裡，輸入端就把大小寫和 Unicode 標點抹平了；它學的是「這聽起來像誰寫的」的分佈，不是破折號。這條事實支撐 `style-pass.md` §7「標點不是訊號」的立場。另一個直接可用的發現不是偵測器研究，而是 Shan、Lee、Hao 2026：AI **改稿**的痕跡和 AI **生成**的痕跡不同，改稿的主訊號是內容詞比例下降。這條進了 refactor 的護欄。
+**sepia 不以任何自動偵測器為目標，偵測器研究在這裡只有一個用途：確認 sepia 抓的訊號是結構性的，不是表面字形。** 最強的商業偵測器（Pangram）在 2025 年公開的管線裡，輸入端先小寫化、再用 unidecode 把 Unicode 標點壓成 ASCII 近似（破折號變成兩個連字號、彎引號變直引號），字形變體被壓平但不是抹除；廠商並明說「extracted tells 不是模型輸入」。它學的是「這聽起來像誰寫的」的分佈，字形頂多是弱訊號。這條事實支撐 `style-pass.md` §7「標點不是訊號」的立場。另一個直接可用的發現不是偵測器研究，而是 Shan、Lee、Hao 2026：AI **改稿**的痕跡和 AI **生成**的痕跡不同，改稿的主訊號是內容詞比例下降。這條進了 refactor 的護欄。
 
 ## 證據等級
 
@@ -20,7 +20,7 @@
 |---|---|---|
 | 訓練法 | 監督式分類：2021 年以前的人類文本（約 2,800 萬篇）配對同題同長同風格的合成「鏡像」AI 文本；反覆找人類池裡的假陽性、生成鏡像、回訓（hard negative mining）。只用 instruction-tuned 模型，不含 base model | `PANGRAM-TECH-2024`、`PANGRAM-4-2026` |
 | 2025 年公開的架構 | Mistral NeMo 約 12B 加 LoRA，context 截 512 token | `PANGRAM-COLING-2025` |
-| 2025 年公開的前處理 | 小寫化、合併空白、unidecode 正規化（英文）；訓練時隨機遮 15–75% token 防止記住「giveaway phrases」。破折號等 Unicode 標點在輸入端已不存在 | `PANGRAM-COLING-2025` |
+| 2025 年公開的前處理 | 小寫化、合併空白、unidecode 正規化（英文）；訓練時隨機遮 15–75% token 防止記住「giveaway phrases」。unidecode 是音譯：破折號變成 `--`、彎引號變直引號、非 ASCII 字元換成 ASCII 近似，所以標點的**字形**差異被壓平，但轉寫後的痕跡仍可能被模型看到 | `PANGRAM-COLING-2025` |
 | 2026 年架構 | 未具名的 open-weight MoE；每個 token 輸出 human／AI-assisted／AI-generated，512-token 滑窗、stride 256、CRF 解碼。前處理未描述 | `PANGRAM-4-2026` |
 | 分數語意 | 不是機率：百分比是文件中被判 AI 的片段比例。獨立研究發現最佳門檻落在 0.002–0.24 或接近 1.0，分佈極端雙峰，這解釋了「不是 100% human 就是 100% AI」的觀感 | `PANGRAM-4-2026`、`JABARIAN-IMAS-2025` |
 | 官方對表面特徵的說法 | 「Extracted tells of AI writing are not inputs to our model」；發佈的「9 signs」頻率表（如破折號每萬字人類 2 vs AI 17）是給人看的，不是模型特徵 | pangram.com supporting-evidence 頁（官方，非論文） |
@@ -61,7 +61,7 @@
 
 ## 對 skill 的結構性啟示（Sepia 設計推論）
 
-1. **表面字形不是訊號。** 最強偵測器在輸入端就看不到它們；sepia 對標點、破折號、段落數的 whitelist 立場有了旁證。
+1. **表面字形頂多是弱訊號。** 最強偵測器在輸入端先把字形變體壓平，廠商也說 tells 不是模型輸入；這是 sepia 對標點、破折號、段落數 whitelist 立場的旁證，不是證明。whitelist 的依據仍是那些互相矛盾的量測。
 2. **編輯的護欄和生成的獵取要分開。** §2–3、§5 抓生成痕跡；refactor 的內容詞比例護欄抓編輯痕跡。
 3. **不追偵測器。** 偵測器版本漂移大、分數雙峰、上下文不穩定，追它會把 sepia 綁到一個黑盒的當前版本上。專家讀者才是標準。
 
