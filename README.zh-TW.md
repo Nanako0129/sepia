@@ -4,15 +4,15 @@
 
 [![behavioral eval](https://github.com/Nanako0129/sepia/actions/workflows/behavioral-eval.yml/badge.svg)](https://github.com/Nanako0129/sepia/actions/workflows/behavioral-eval.yml) [![version consistency](https://github.com/Nanako0129/sepia/actions/workflows/version-consistency.yml/badge.svg)](https://github.com/Nanako0129/sepia/actions/workflows/version-consistency.yml) [![release](https://img.shields.io/github/v/release/Nanako0129/sepia)](https://github.com/Nanako0129/sepia/releases/latest) [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> 從真正會讓 AI 洩底的層次下手。小說先修敘事架構，再碰字句；專業文件（發版說明、PR 回覆、事故檢討、工單、技術文章）則按 venue 各用一套規則。
+> 從結構層次去除文字的 AI 痕跡。小說在動到任何字詞選擇之前，先修復敘事架構；專業文件（發佈說明、PR 回覆、事後檢討、工單、技術文章）則各自搭配符合其發表場合的規則。
 
-這是一套可攜的 [Agent Skill](https://agentskills.io/specification)：任何支援這個標準的 agent 都能載入；[Skills CLI](https://skills.sh)（支援 77+ 家 agent）一行指令就能裝。Claude Code、Codex、Grok Build 與 Antigravity 另有原生 plugin 打包，四家都實機裝過。全平台共用唯一一份正典 `SKILL.md`，不另開平台分支。四種操作：**write**、**review**（只診斷）、**refactor**（最小修改）、**recreate**（整篇重寫）。
+這是一套 [Agent Skill](https://agentskills.io/specification)。只要遵循這項標準的 agent 都能載入，且 [Skills CLI](https://skills.sh) 支援 77+ 款 agent，一行指令就能裝好。Claude Code、Codex、Grok Build 與 Antigravity 額外提供原生外掛打包，四者都通過安裝驗證。專案維持單一正典 `SKILL.md`，不針對個別平台開 fork 分支。四種操作分別為 **write**、**review**（僅診斷）、**refactor**（最少修改）與 **recreate**（整篇重寫）。
 
 ## 為什麼還需要另一個 humanizer
 
-常見的 humanizer 都在改用詞與句法。[StoryScope](https://arxiv.org/abs/2604.03136)（Russell et al., 2026：61,608 篇故事，涵蓋人類與 5 個頂尖 LLM）顯示，只靠**敘事結構特徵**的分類器就能以 93.2% macro-F1 偵測 AI 小說；把字句風格修掉，分類表現也只從 95.5% 降到 93.9%。留下的破綻都在架構層：敘事者直接講明主題、單線且因果收得過於工整的情節、情緒只靠身體感受呈現、沒有真實世界的參照、讀者缺席、時間全程線性，以及靠主角成長與接納收束的結局。
+一般的 humanizer 多半只修飾字詞選擇與句法。[StoryScope](https://arxiv.org/abs/2604.03136)（Russell et al., 2026: 61,608 篇故事，包含人類與 5 款尖端 LLM）指出，光靠**敘事結構特徵**的分類器就能以 93.2% 的 macro-F1 抓出 AI 小說，把表面風格修飾掉也幾乎動搖不了結果（95.5% → 93.9%）。沒被抹掉的破綻本質上都是架構問題。這些特徵包括敘事者自己跳出來解釋主題、因果收得過於工整的單線情節、情緒全寫成生理反應、完全沒有現實世界的參照、缺少讀者意識、線性的時間軸，以及靠主角心理成長與接納來收束的結局。
 
-sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的十一篇相關研究，轉成小說寫作與修訂的三個 pass 流程：
+sepia 把這些量測出來的落差，連同在 [`research/`](research/) 裡梳理的十一篇相關研究，轉化為一套針對小說的三道 pass 寫作與修訂流程。
 
 | Pass | 層次 | 例子 |
 |---|---|---|
@@ -20,9 +20,9 @@ sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的十
 | 2 | 篇章推進 | 拆掉段落—問題序列的模板、修掉故事中段的鬆垮、變換節奏與位置 |
 | 3 | 字句風格 | 所有 humanizer 都在修的那層：陳腔濫調、句法模板、用詞、語域 |
 
-另附 30 項特徵的診斷 rubric，以及分成兩層的各模型指紋：StoryScope 量測到的敘事層特徵（Claude、GPT、Gemini、DeepSeek、Kimi），加上取自各廠商官方 prompting 指南的字句層特徵（Claude Fable 5.1、Fable 5、Opus 5、Opus 4.8；GPT-5.6；Gemini 3 系列），在知道是哪個模型在寫或在執行時套用。沒有發佈這類指南的廠商只記錄「已查閱」，不臆測。
+此外還有一套涵蓋兩個層次、共 30 項特徵的診斷標準與各模型指紋。敘事層面的破綻透過 StoryScope 量測（Claude、GPT、Gemini、DeepSeek、Kimi），句子層級的特徵則整理自各廠商自家的 prompt 指南（Claude Fable 5.1、Fable 5、Opus 5、Opus 4.8；GPT-5.6；Gemini 3 系列），在已知執筆或執行的模型時套用。至於未發佈這類指引的廠商，一律記錄為已查閱，絕不妄加揣測。
 
-專業文字露餡的方式不同。研究指出，常見問題包括沒有資訊量的填充文字、該下判斷時還在閃躲、chatbot 殘留語氣、無視 venue 的語域，以及像同一個模子印出的排版。每種文件都共用一份檢查表，再各配一份精簡規則檔：
+專業文字露餡的方式則不同。各項研究直指那些缺乏資訊量的填充廢話、該下判斷時卻閃爍其詞的保留說法、殘留的 chatbot 語氣、忽視場合的語域，以及看起來千篇一律的刻板排版。每種文件類型都會在一份共用的檢查清單之上，各自搭配一份精簡的規則檔案。
 
 | 領域 | 要點 |
 |---|---|
@@ -32,11 +32,11 @@ sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的十
 | 工單 | 標題寫結果、驗收條件能測、能連結就別重複 |
 | 技術文章 | 從問題切入、保留一條真實走過的死路、提出一個明確判斷、數字附上適用條件 |
 
-貫穿全篇的原則：**以整個人類分布為校準目標，別把 AI 分布直接倒過來套**。人類的數值多落在中間。每條規則都用上的故事會形成另一種指紋；sepia 每篇只選 3–5 個手法，其餘留白。
+最核心的原則是：**向人類常態分佈對齊，切忌直接反轉 AI 的分佈**。人類的特徵值多半落在中間區間；每條規則都照單全收的故事，只會產生另一種新的指紋。這套 skill 在每篇故事中只會挑選 3–5 個手法，適度留白。
 
 ## 操作入口
 
-完整 plugin package 會在 Claude Code、Codex、Grok Build 與 Antigravity 提供一個通用 router，以及五個可直接呼叫的入口：
+完整的外掛套件為 Claude Code、Codex、Grok Build 與 Antigravity 提供了一個通用 router 以及五個直接入口。
 
 | 操作 | Claude Code | Codex | Grok Build | Antigravity | 用途 |
 |---|---|---|---|---|---|
@@ -46,21 +46,21 @@ sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的十
 | recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | 依原始事實與意圖重新撰寫 |
 | hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | 套用內建海明威聲音寫或改小說 |
 
-通用 router 仍可透過 `/sepia`（Claude Code、Grok Build、Antigravity）或 `$sepia`（Codex）使用。操作 wrapper 依賴同一套 package 裡的正典 skill，不支援單獨安裝；請安裝完整 plugin package。這張表只記錄 package 語法；本次變更尚未實測安裝後的 UI 與 runtime 行為。
+通用的 `/sepia`（Claude Code、Grok Build 與 Antigravity）或 `$sepia`（Codex）router 依然可用。各操作的 wrapper 仰賴同套件內的正典 skill，因此不支援單獨安裝 wrapper，請安裝完整的外掛套件。這張表格僅記錄套件語法，安裝後的 UI 與 runtime 行為並未包含在此次變更的測試範圍中。
 
 ## 實驗性功能：疊加聲音 skill
 
-v0.4.0 起，sepia 定義了跟聲音／風格類 skill（極簡主義方法、品牌語調、persona 指南）疊加使用的介面。採 opt-in：你明講聲音 skill 在場，sepia 才會在原路由之上載入 `references/voice-skills.md`；不講就不載入，sepia 也永遠不會自己注入美學。
+從 v0.4.0 開始，sepia 定義了一套介面，用來疊加特定的聲音或風格 skill（例如極簡主義寫作法、品牌語調或角色設定指南）。這項功能採取主動啟用（opt-in）。只要向 sepia 表明聲音 skill 正在使用中，它就會在一般流程上載入 `references/voice-skills.md`。除非你明確指定，否則它什麼都不會載入，更絕不會擅自注入任何特定美學。
 
-條約摘要：sepia 的架構決策先行，聲音技法選擇性套用（每篇挑 3–5 招招牌技法，招牌結尾公式偶爾故意打破）。review 只回報聲音的已知代價、不代修，但均勻性 finding 不打折：聲音不能豁免節拍器。專業路由上 venue 仍定語域，直接衝突交回給你決定。這個介面的依據是一次極簡規格樣本的盲審實驗，屬單一案例，不是量測證據。`references/voices/` 下附一個內建 profile（海明威：小說用冰山省略、專業文體用堪薩斯市星報規則，每一招都標出處）。小說路線上，review 會在你的文本記錄到的 findings 符合它時提示；你說要「強力去 AI 味」也算 opt-in，sepia 會講明正在套用這個 profile、以及怎麼取消。`/sepia-hemingway` 是直接入口。
+簡單來說，sepia 的架構決策永遠在先，風格手法則採選擇性套用（每篇文章選用 3–5 個招牌手法，偶爾故意打破公式化結尾）。Review 會指出該風格已知的負面代價而不會擅自修掉，對均勻度的診斷結果也維持完整強度；擁有風格不能當作文字像節拍器般死板的藉口。在專業文字的流程中，場合依然決定語域高低，一旦出現直接衝突會交還給你定奪。這套介面源自一次針對嚴格極簡主義樣本的盲審實驗（這是一組範例示範，並非量測證據）。`references/voices/` 底下內建了一份 profile（海明威風格，小說部分涵蓋冰山省略法，專業文字採用堪薩斯市星報守則，每個手法都清楚標記出處）。在小說處理上，review 若比對出文字記錄符合該特徵便會提出回報，直接要求對故事強力去 AI 也算作同意啟用；sepia 會明示正在套用該 profile 並說明停用方式。`/sepia-hemingway` 則是直接入口。
 
 ## 句長節奏與中文校準
 
-style pass 會檢查句長的**變化幅度**，這是有量測到它的研究唯一方向一致的句法量測（人類文本在同一段內變化較大，英文與中文皆然）；句長平均值、標點計數、段落長度則明列為非訊號，因為量測方向互相矛盾。中文文本會載入 `references/languages/zh.md`，這份校準建立在唯一一個有量測的中文語料（HC3，2023）上，限制寫在檔案裡；證據與數字見 `research/rhythm-syntax.md`。
+風格 pass 會檢查句子長度的 *spread*（離散分佈）。在所有測量過句法的研究裡，這是唯一結論完全一致的指標（無論英文或中文，人類文字在同一個段落內的句長變化幅度都更大）。平均句長、標點符號數量與段落長度則列為非訊號，因為各項測量的走向彼此矛盾。中文文字會載入 `references/languages/zh.md`，這份校準資料建立在唯一一份經過測量的中文語料庫（HC3, 2023）上，其限制已於檔案內敘明。相關證據與數據都記錄在 `research/rhythm-syntax.md`。
 
 ## 安裝
 
-下列指令一律寫成 **user scope**：安裝一次，每個專案都能用。
+下列指令均以 **user scope** 撰寫（安裝一次，即可在每個專案中使用）。
 
 ### 任何 agent（Skills CLI，77+ 家）
 
@@ -70,9 +70,9 @@ npx skills update sepia -g             # 更新
 npx skills remove sepia -g             # 解除安裝
 ```
 
-[Skills CLI](https://skills.sh) 支援的 agent 都能裝：Cursor、Cline、Windsurf、Copilot、OpenCode、goose 等；安裝時會問你要裝到哪幾家。四大平台以外的執行行為我們沒有實測過；skill 本體是 Agent Skills 標準下的純 markdown，你的 agent 若吃不動歡迎開 issue。
+凡是 [Skills CLI](https://skills.sh) 支援的 agent 都能安裝（包含 Cursor、Cline、Windsurf、Copilot、OpenCode、goose 等）。出現提示時直接勾選你的 agent 即可。下列四個平台以外的 runtime 行為我們尚未實際測試過；這套 skill 是 Agent Skills 標準下的純 markdown 檔案，要是你的 agent 讀取卡住，歡迎開 issue 回報。
 
-下面四個平台另有原生 plugin installer，各自實機裝過。驗證範圍是裝得完、sepia 入口出現；runtime 行為如上所述未逐一實測。
+下方四個平台具備原生外掛安裝程式，各自都經過實際安裝測試。所謂驗證是指安裝順利完成且 sepia 入口正常出現，runtime 行為則如前文所述。
 
 ### Claude Code
 
@@ -86,7 +86,7 @@ claude plugin marketplace update sepia
 claude plugin update sepia
 ```
 
-在 session 裡開啟 `/plugin install` 對話框時，系統會要求選 scope；請選 **User**。
+在 session 裡的 `/plugin install` 對話視窗會要求你挑選 scope，請在該處選擇 **User**。
 
 ### Codex
 
@@ -110,7 +110,7 @@ grok plugin install Nanako0129/sepia --trust
 grok plugin update
 ```
 
-Grok 也會自動找到既有的 Claude Code sepia 安裝；兩種方式都能用。
+如果你原本就有在 Claude Code 安裝過 sepia，Grok 也會自動偵測到該安裝，兩種路徑都行得通。
 
 ### Antigravity
 
@@ -121,11 +121,11 @@ agy plugin install https://github.com/Nanako0129/sepia
 
 ### Project scope（替代方案）
 
-某個 repo 要固定自己的版本時，把 `skills/sepia/` commit 到該 repo，放在 `.agents/skills/sepia`（Codex＋Antigravity）或 `.claude/skills/sepia`（Claude Code）。
+當 repo 需要鎖定自己的版本時，將 `skills/sepia/` commit 到該 repo 內，存放為 `.agents/skills/sepia`（Codex + Antigravity）或 `.claude/skills/sepia`（Claude Code）。
 
 ## 解除安裝
 
-各套工具都使用原生指令：
+各工具均使用自家的原生指令。
 
 ```bash
 # Claude Code
