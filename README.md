@@ -10,7 +10,7 @@ A portable [Agent Skill](https://agentskills.io/specification): any agent that s
 
 ## Why another humanizer
 
-Every popular humanizer edits word choice and syntax. [StoryScope](https://arxiv.org/abs/2604.03136) (Russell et al., 2026: 61,608 stories, human + 5 frontier LLMs) showed that a classifier using **narrative-structure features alone** detects AI fiction at 93.2% macro-F1. In the same study, on stories whose surface style human editors had rewritten, the full classifier barely moved (95.5% → 93.9%). The tells that survive are architectural: themes explained by the narrator, single-track causally-tidy plots, emotions rendered only as bodily sensation, no real-world references, no reader, linear time, endings resolved by protagonist growth and acceptance.
+Every popular humanizer edits word choice and syntax. [StoryScope](https://arxiv.org/abs/2604.03136) (Russell et al., 2026: 61,608 stories, human + 5 frontier LLMs) showed that a classifier using **narrative-structure features alone** detects AI fiction at 93.2% macro-F1. In the same study's LAMP-edited condition, where human editors had rewritten the surface style, detection dropped only from 95.5% to 93.9%. The tells that survive are architectural: themes explained by the narrator, single-track causally-tidy plots, emotions rendered only as bodily sensation, no real-world references, no reader, linear time, endings resolved by protagonist growth and acceptance.
 
 sepia turns those measured gaps, together with the related studies digested in [`research/`](research/), into a three-pass writing and revision protocol for fiction:
 
@@ -20,9 +20,9 @@ sepia turns those measured gaps, together with the related studies digested in [
 | 2 | Discourse flow | de-template the paragraph-question sequence, fix the mid-story sag, vary rhythm and positions |
 | 3 | Surface style | the classic layer: clichés, syntax templates, vocabulary, register |
 
-Plus a 30-feature diagnosis rubric and per-model fingerprints in two layers: narrative tells measured by StoryScope (Claude, GPT, Gemini, DeepSeek, Kimi) and sentence-level tells taken from the vendors' own prompting guides (Claude Fable 5.1, Fable 5, Opus 5, Opus 4.8; GPT-5.6; Gemini 3 series), applied when the writing or executing model is known. Vendors that publish no such guidance are recorded as consulted, not guessed.
+Plus a 30-feature diagnosis rubric and per-model fingerprints in two layers: narrative tells measured by StoryScope (Claude, GPT, Gemini, DeepSeek, Kimi) and sentence-level tells taken from the vendors' own prompting guides (Claude Fable 5.1 and Mythos 5.1, Fable 5 and Mythos 5, Opus 5, Opus 4.8; GPT-5.6; Gemini 3 series), applied when the writing or executing model is known. Vendors that publish no such guidance are recorded as consulted, not guessed.
 
-Professional prose fails differently. The slop taxonomy of Shaib et al. and the style study of Reinhart et al. (both in [`research/`](research/)) point at filler that carries no information, hedging where a judgment was needed, chatbot leftovers, register that ignores the venue, and formatting that looks stamped out. Each document type gets a thin rule file on top of one shared checklist:
+Professional prose fails differently. The studies digested in [`research/`](research/) point at filler that carries no information, hedging where a judgment was needed, chatbot leftovers, register that ignores the venue, and formatting that looks stamped out. Each document type gets a thin rule file on top of one shared checklist:
 
 | Domain | The gist |
 |---|---|
@@ -56,7 +56,7 @@ The contract in short: sepia's architecture decisions come first. The voice's mo
 
 ## Sentence rhythm and Chinese calibration
 
-The style pass checks the *spread* of sentence lengths, the one syntactic measure the studies agree on. Sentence length, punctuation counts, and paragraph length on their own are not treated as signals. Chinese text loads `references/languages/zh.md`, a calibration built on the one measured Chinese corpus (HC3, 2023) with its limits stated in the file; evidence and numbers are in `research/rhythm-syntax.md`.
+The style pass checks the *spread* of sentence lengths, the one syntactic measure on which every study that measured it agrees (human text varies more within a passage, in English and in Chinese); mean sentence length, punctuation counts, and paragraph length are not treated as signals because the measured directions contradict each other. Chinese text loads `references/languages/zh.md`, a calibration built on the one measured Chinese corpus (HC3, 2023) with its limits stated in the file; evidence and numbers are in `research/rhythm-syntax.md`.
 
 ## Install
 
