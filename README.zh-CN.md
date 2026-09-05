@@ -177,7 +177,7 @@ sepia/
 
 ## 赞助
 
-sepia 免费、无需账号，每条规则背后的研究都一并公开。花钱的是证据本身：文献调查委派给研究 agent，它们阅读论文原文会消耗模型额度；每条规则改动上线前，都用真实模型实测（A/B 对照小说、跨平台的端到端审查）。赞助用于支付这些模型额度，以及维护时间。如果 sepia 让你写的东西读起来更好，欢迎在 Patreon 上支持。
+sepia 任何人都能免费用，也不需要注册账号。每条规则背后的研究全部公开。项目的实际开销只有维护时间与两种模型额度：委派研究 agent 读论文原文做文献调查，以及规则改动上线前用真实模型实测 A/B 对照小说和跨平台端到端审查。欢迎在 Patreon 上支持这个项目。
 
 [![Support sepia on Patreon](https://img.shields.io/badge/Support_on_Patreon-FF424D?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/cw/Nanako0129/membership)
 

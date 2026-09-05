@@ -177,7 +177,7 @@ Full digests with links in [`research/`](research/). Primary: StoryScope ([arXiv
 
 ## Support
 
-sepia is free, needs no account, and ships the research behind every rule. What costs money is the evidence: the literature surveys are delegated to research agents that spend model quota reading papers in primary form, and every rule change is tested with live model runs (A/B stories, end-to-end reviews across platforms) before it ships. Sponsorship covers that model quota and the maintainer time. If sepia has made something you wrote read better, you can support it on Patreon.
+You can use sepia for free without an account. The research behind every rule is open. Ongoing costs are just maintainer time and two kinds of model quota: delegating literature surveys to research agents that read primary papers, and running live models to test rule changes on A/B stories and cross-platform end-to-end reviews before shipping. You can support the project on Patreon.
 
 [![Support sepia on Patreon](https://img.shields.io/badge/Support_on_Patreon-FF424D?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/cw/Nanako0129/membership)
 
