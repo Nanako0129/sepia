@@ -52,7 +52,7 @@ sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的相
 
 v0.4.0 起，sepia 定義了跟聲音／風格類 skill（極簡主義方法、品牌語調、persona 指南）疊加使用的介面。採 opt-in：你明講聲音 skill 在場，sepia 才會在原路由之上載入 `references/voice-skills.md`；不講就不載入外部聲音。
 
-約定摘要：sepia 的架構決策先行，聲音技法選擇性套用（每篇挑 3–5 招招牌技法，招牌結尾公式偶爾故意打破）。review 只回報聲音的已知代價、不代修，但均勻性 finding 不打折：聲音不能豁免節拍器。專業路由上 venue 仍定語域，衝突交回給你決定。這個介面依據極簡規格樣本的盲審實驗，屬單一案例，非量測證據。`references/voices/` 下附內建 profile（海明威：小說用冰山省略、專業文體用堪薩斯市星報規則，每招都標出處）。內建 profile 是「你不講就不載入」的唯一例外：小說路線上，review 發現你的文本記錄到的 findings 符合海明威 profile 時會提示，你說要「強力去 AI 味」也算 opt-in。sepia 會講明正在套用哪個 profile、怎麼取消。`/sepia-hemingway` 是直接入口。
+約定摘要：sepia 的架構決策先行，聲音技法選擇性套用（每篇挑 3–5 招招牌技法，招牌結尾公式偶爾故意打破）。review 只回報聲音的已知代價、不代修，但均勻性 finding 不打折：聲音不能豁免節拍器。專業路由上 venue 仍定語域，衝突交回給你決定。這個介面依據極簡規格樣本的盲審實驗，屬單一案例，非量測證據。`references/voices/` 下附內建 profile（海明威：小說用冰山省略、專業文體用堪薩斯市星報規則，每招都標出處）。內建 profile 也照同一條規則。小說路線上，review 發現你的文本記錄到的 findings 符合海明威 profile 時只會提示，不載入任何東西；你說要「強力去 AI 味」才算 opt-in，sepia 會講明正在套用哪個 profile、怎麼取消。`/sepia-hemingway` 是直接入口。
 
 ## 句長節奏與中文校準
 
