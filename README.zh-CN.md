@@ -20,7 +20,7 @@ sepia 将这些实测差距，连同 [`research/`](research/) 里梳理的相关
 | 2 | 篇章推进 | 去除段落—问题序列模板、改善故事中段节奏松散的问题、变换节奏与位置 |
 | 3 | 措辞风格 | 多数 humanizer 处理的层面：陈词滥调、句法模板、用词、语域 |
 
-另附一套 30 项特征的诊断标准，以及分成两层的各模型指纹：叙事层特征由 StoryScope 测得（Claude、GPT、Gemini、DeepSeek、Kimi），句子层特征提取自厂商自家的 prompting 指南（Claude Fable 5.1 与 Mythos 5.1、Fable 5 与 Mythos 5、Opus 5、Opus 4.8；GPT-5.6；Gemini 3 系列），在已知起草或执行模型时套用。未公开此类指南的厂商记录为已查阅，不猜测。
+另附一套 30 项特征的诊断标准，以及分成两层的各模型指纹：叙事层特征由 StoryScope 测得（Claude、GPT、Gemini、DeepSeek、Kimi），句子层特征提取自厂商自家的 prompting 指南（Claude Fable 5.1 与 Mythos 5.1、Fable 5 与 Mythos 5、Opus 5、Opus 4.8；GPT-5.6、GPT-6 Astra；Gemini 3 系列），在已知起草或执行模型时套用。未公开此类指南的厂商记录为已查阅，不猜测。
 
 专业文档暴露破绽的方式不同。[`research/`](research/) 里梳理的研究指出的问题是：没有信息量的填充文字、需要判断时闪烁其词、聊天机器人的残留语气、无视具体场合的语域、像一个模子印出来的排版。每类文档都在一份共用检查清单之上，各配一份精简的规则文件。
 
