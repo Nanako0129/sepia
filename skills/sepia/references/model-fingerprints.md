@@ -95,6 +95,21 @@ Consulted with no prose-layer statement (2026-09-03): the Claude Sonnet 5 page s
 | The vendor's recommended trims name the expected residue: introductions, repetition, generic reassurance, optional background, generic praise, sign-offs | Already hunted by professional-pass checks 1, 2, and 7; run them on non-narrative text at the role's operative or prior strength |
 | Editing tasks drift: the vendor's preservation snippet warns against "adding new claims, sections, or a more promotional tone" | Vendor-implied, not stated as a defect. Enforce the register-drift clause of the `SKILL.md` guardrail "Deletion beats addition" |
 
+### Prose layer (V; GPT-6 Astra, `OPENAI-GPT-6-ASTRA-PROMPTING`)
+
+| Vendor-stated default | Handling |
+|---|---|
+| "Tends to use lists, tables and Markdown to make responses scannable" | Heavy formatting is this release's default. Run professional-pass check 6 on non-narrative text at the role's operative or prior strength; the fix is the vendor's own: paragraphs that each develop one idea, a list only where the items are parallel or sequential |
+| "May use recurring phrases across sessions"; the vendor's slop prompt (below) names the set | Two of its words already sit in the shared tables (delve, foster: style-pass §3 Performance verbs) and one frame does ("it's not X, it's Y": style-pass §2); count those at operative or prior strength as usual. The rest stays in this table as a release habit and is hunted in non-narrative text, operative or prior per the model-identity rule in `SKILL.md`: the self-answered question ("Question? Answer."); a contrast the reader did not ask for, in any form ("X, not Y", "X—not Y", "This isn't about X. It's about Y."), which is wider than the §2 frame; closing-summary labels ("Bottom Line:", "In short:", "The simplest mental model is:"); hyphenated compound descriptors and invented compound labels ("exact-head checks"), the same shape Fable 5's table sends to the style-pass §6 read-aloud test; negative scoping, a sentence that says what will not be done, what stays unchanged, or how results will be categorized; and the words leverage, importantly, it's worth noting, genuinely. Sepia inference: no measurement backs any of these as a model-agnostic tell, so they do not move into the shared tables |
+
+The vendor's slop instruction, verbatim (compared against the source page 2026-09-08, matched):
+
+```text
+Avoid using slop words or phrases like "Bottom Line:" in conclusions, "delve," "foster," "leverage," "it's worth noting," "importantly," "Question? Answer." or "This isn't about X. It's about Y.", "genuinely" or hyphenated compound descriptions and adjectives. Do not use concluding summary statements such as "In short:..", "The simplest mental model is:...".
+
+State the intended action directly. Avoid adding what you won't do, what will remain unchanged, or how you'll separate or categorize results. Do not use contrastive framing such as "X, not Y" or "X—not Y" that introduces an unprompted alternative that the user didn't ask about. Avoid invented compound labels like "exact-head checks" and "editorial-row layouts", vague qualifiers, and canned transitions; use plain verbs and prepositions to state the actual relationship directly.
+```
+
 ## Gemini
 
 ### Narrative layer (S; Gemini 3 Flash) — the tidy pessimist
