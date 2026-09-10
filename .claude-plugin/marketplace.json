@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "sepia",
-      "source": { "source": "local", "path": "./" },
+      "source": "./",
       "description": "Installs the general Sepia router plus five separate entries: sepia-write, sepia-review, sepia-refactor, sepia-recreate, and sepia-hemingway."
     }
   ]
