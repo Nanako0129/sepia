@@ -119,34 +119,6 @@ Grok also auto-discovers a Claude Code install of sepia if you have one; either 
 agy plugin install https://github.com/Nanako0129/sepia
 ```
 
-### WorkBuddy
-
-[WorkBuddy](https://www.workbuddy.ai) is an AI assistant that runs agent skills
-straight from a local skills folder — `~/.workbuddy/skills/<name>/SKILL.md`
-(user scope) or `.workbuddy/skills/<name>/SKILL.md` (project scope). There is
-no plugin manifest and no marketplace-registration step: placing a skill folder
-into the skills directory *is* the install.
-
-The canonical sepia package targets Claude Code / Codex and dispatches its four
-operations through `/sepia-*` slash-command wrappers. WorkBuddy has no
-slash-command model, so `workbuddy/` here is a **standalone adaptation** of the
-skill rather than a plugin entry: every file under `workbuddy/references/` is
-identical to the source, and only `workbuddy/SKILL.md` differs — its router
-takes plain-language requests ("humanize this", "review for AI tells",
-"refactor this", "rewrite this") instead of slash commands.
-
-```bash
-# user scope
-cp -r workbuddy ~/.workbuddy/skills/sepia
-
-# project scope (pins the adaptation to one repo)
-mkdir -p .workbuddy/skills && cp -r workbuddy .workbuddy/skills/sepia
-```
-
-No manifest change is required or possible — WorkBuddy discovers skills by
-directory, which is why `workbuddy/` is intentionally not referenced by any
-`plugin.json` / `marketplace.json`.
-
 ### Project scope (alternative)
 
 When one repo should pin its own copy, commit `skills/sepia/` into that repo as `.agents/skills/sepia` (Codex + Antigravity) or `.claude/skills/sepia` (Claude Code).
