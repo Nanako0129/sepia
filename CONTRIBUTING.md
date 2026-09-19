@@ -70,7 +70,7 @@ Issues missing required information may be closed. Never include secrets, raw cr
 
 A persona profile describes one writer's style as prescriptive moves plus a table of the sepia rules it overrides (`skills/sepia/references/voice-skills.md`, persona section). Rules for contributing one:
 
-- A living person's persona only with that person's consent, or as your own style; public-domain authors, fictional and brand personas are welcome. State `Provenance:` (what was read) and `Consent:` in the Status block.
+- A living person's persona only with that person's consent, or as your own style; public-domain authors, fictional and brand personas are welcome. State `Provenance:` (what was read) and `Consent:` in the Status block. The validator also accepts `private study, not for distribution`, which exists so a locally held profile need not misstate its consent; a profile carrying that value is not contributable and a PR with one is closed.
 - No quoted example longer than 20 characters; examples are shapes, not text to reuse.
 - The override table and the Prohibitions section are mandatory. The two fixed Prohibitions lines are: `Do not reuse this file's example phrases verbatim; they are shapes, not a word list.` and `Never invent facts, gestures, adverbs, or emotions; a missing fact is a TODO.`
 - `Tested:` is `tested` only with a blind-test record in the body; otherwise `untested`.

@@ -8,7 +8,7 @@ Name: <name, spaces allowed>
 Routes: <professional | fiction | any>
 Opt-in phrase: apply persona <name, spaces allowed> / 「套用 persona <name, spaces allowed>」
 Provenance: <what was read: how many pieces, which years or kinds, full readings or not>
-Consent: <own style | public-domain author | fictional persona | brand persona | consent from the person, YYYY-MM-DD>
+Consent: <own style | public-domain author | fictional persona | brand persona | consent from the person, YYYY-MM-DD | private study, not for distribution>
 Tested: <tested | untested>
 
 ## One sentence
@@ -45,7 +45,7 @@ Moves that appear only when the material supplies the fact they need; a missing 
 
 ## Sentence shape
 
-Targets for the narration as a distribution (a mean and a spread, a share of long and short sentences), never a fixed length; both ends of the distribution must appear.
+Targets for the narration as a distribution (a mean and a spread, a share of long and short sentences), never a fixed length; both ends of the distribution must appear. Write what was measured, not what would be nice: nothing in the report enforces this section, and after a write or a recreate the executor compares the piece against it by hand (`voice-skills.md`, persona section).
 
 ## Rules this persona overrides
 
@@ -53,7 +53,7 @@ Targets for the narration as a distribution (a mean and a spread, a share of lon
 |---|---|---|
 | <rule token, for example `style-pass.md §3`> | <what the persona does instead> | <what review will report as `Persona cost:`> |
 
-Rule tokens: `style-pass.md §<n>`, `discourse-pass.md §<n>`, `narrative-pass.md §<n>`, `languages/zh.md §<s>` (§2 only as `languages/zh.md §2 <row>` for one of connective-stacking, second-person, disyllabic-padding, manner-adverb; the whole section cannot be named), `professional-pass.md check <n>`, `domains/<name>.md rule <n>`. The validator refuses `style-pass.md §5`, `professional-pass.md check 9`, `languages/zh.md §2 flat-sentence-length`, `discourse-pass.md §3` (uniformity) and `professional-pass.md check 5`, `domains/journalism.md rule 1`, `domains/tech-articles.md rule 1`, `domains/postmortems.md rule 2` (never invent) and `domains/journalism.md rule 3` (quoted material). Fenced code blocks do not count as structure.
+Rule tokens: `style-pass.md §<n>`, `discourse-pass.md §<n>`, `narrative-pass.md §<n>`, `languages/zh.md §<s>` (§2 only as `languages/zh.md §2 <row>` for one of connective-stacking, second-person, disyllabic-padding, manner-adverb; the whole section cannot be named). A section token exempts the whole section, so where that is wider than the signature, say in the Expected cost cell what else it exempts, `professional-pass.md check <n>`, `domains/<name>.md rule <n>`. The validator refuses `style-pass.md §5`, `professional-pass.md check 9`, `languages/zh.md §2 flat-sentence-length`, `discourse-pass.md §3` (uniformity) and `professional-pass.md check 5`, `domains/journalism.md rule 1`, `domains/tech-articles.md rule 1`, `domains/postmortems.md rule 2` (never invent) and `domains/journalism.md rule 3` (quoted material). Fenced code blocks do not count as structure.
 
 ## Prohibitions
 
@@ -64,7 +64,7 @@ Both fixed lines verbatim, each as its own list item (a paragraph does not count
 
 ## Boundary
 
-Three to five lines: what reads like the writer versus what reads like a model imitating the writer.
+Three to five lines: what reads like the writer versus what reads like a model imitating the writer. If a signature is a rhythm, say here that it draws a uniformity finding on every piece, because the override table cannot waive that one.
 
 ## Blind-test record
 

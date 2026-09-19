@@ -30,6 +30,10 @@ section):
 - Fenced code blocks are ignored when reading sections, so sample text in
   ``` cannot stand in for the override table, the Every piece list or the
   Prohibitions list items.
+- Consent: one of five contributable forms, or `private study, not for
+  distribution` for a profile held locally. `CONTRIBUTING.md` forbids that
+  last value in a contributed profile; the value exists so a private profile
+  does not have to misstate its consent to pass this check.
 - Fixed prohibition lines: defined once here (ASCII apostrophes) and quoted
   into the template and CONTRIBUTING; the comparison normalises curly quotes.
 - Quoted examples: no span inside 「」, 『』 or a paired double quote may exceed
@@ -74,11 +78,15 @@ TESTED = {"tested", "untested"}
 # Consent takes one of these forms; the dated form needs an ISO date.
 CONSENT_RE = re.compile(
     r"(own style|public-domain author|fictional persona|brand persona|"
+    r"private study, not for distribution|"
     r"consent from the person, \d{4}-\d{2}-\d{2})"
 )
 # The whole Opt-in phrase field: the English form, optionally followed by the
-# Chinese form for the same name. Nothing else is an affirmative opt-in.
-OPTIN_RE = re.compile(r"apply persona ([^/「」]+?)(?: / 「套用 persona \1」)?")
+# Chinese form for the same name. Nothing else is an affirmative opt-in. The
+# two names are captured separately rather than matched with a backreference,
+# because a backreference is case-sensitive and the phrase is not: the halves
+# are compared below with the same caseless test the Name check uses.
+OPTIN_RE = re.compile(r"apply persona ([^/「」]+?)(?: / 「套用 persona ([^「」]+)」)?")
 # One blind-test entry per line: date — judge — compared — outcome.
 RECORD_RE = re.compile(r"^\s*(?:[-*]\s+)?(\d{4}-\d{2}-\d{2}) — judge: \S.* — compared: \S.* — outcome: \S.*$", re.M)
 MOVE_RE = re.compile(r"^\s*\d+\.\s+(\S.*?)\s*\(overrides: ([^)]+)\)\s*$")
@@ -344,7 +352,8 @@ def check_file(path: Path, root: Path) -> list[str]:
         cm = CONSENT_RE.fullmatch(normalise(values["Consent"]))
         if not cm:
             err("Consent must be one of: own style | public-domain author | fictional persona | "
-                "brand persona | consent from the person, YYYY-MM-DD")
+                "brand persona | private study, not for distribution | "
+                "consent from the person, YYYY-MM-DD")
         elif cm.group(1).startswith("consent from the person"):
             try:
                 datetime.date.fromisoformat(cm.group(1)[-10:])
@@ -354,7 +363,9 @@ def check_file(path: Path, root: Path) -> list[str]:
         m = OPTIN_RE.fullmatch(values["Opt-in phrase"])
         if not m:
             err("Opt-in phrase must be exactly 'apply persona <name>' optionally followed by ' / 「套用 persona <name>」'")
-        elif "Name" in values and m.group(1) != values["Name"]:
+        elif m.group(2) is not None and m.group(2).casefold() != m.group(1).casefold():
+            err(f"Opt-in phrase names '{m.group(1)}' in the English form but '{m.group(2)}' in the Chinese form")
+        elif "Name" in values and m.group(1).casefold() != values["Name"].casefold():
             err(f"Opt-in phrase names '{m.group(1)}' but Name is '{values['Name']}'")
     if values.get("Tested") == "tested":
         lines = [l for l in bodies.get("Blind-test record", "").splitlines() if l.strip()]
