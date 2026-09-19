@@ -58,4 +58,4 @@ Dialogue share is not an anti-signal here; the profile's own dialogue row carrie
 - Entry: none.
 - Routes: professional only, as the body declares.
 - Fiction signature / anti-signal: none; a persona has no signature rows and no `Voice fit:` count is computed for it.
-- Overrides declared in the body: `professional-pass.md check 1`, `check 6`, `check 7`. Uniformity and never-invent are not overridable; the body states that its fixed per-paragraph rhythm stays a uniformity finding and that review will report it.
+- Overrides declared in the body: `professional-pass.md check 1`, `check 6`, `check 7`, and `languages/zh.md §2 second-person`. Uniformity and never-invent are not overridable; the body's Boundary section says no uniformity finding is expected from the voice itself, and names the two positional habits that would earn one anyway.
