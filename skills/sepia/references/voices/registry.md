@@ -53,8 +53,8 @@ Dialogue share is not an anti-signal here; the profile's own dialogue row carrie
 
 - Body: `references/voices/personas/nyaneko.md`
 - Kind: persona (`voice-skills.md`, persona section), the first one built in.
-- Opt-in phrase: `apply persona Nyaneko` / 「套用 persona Nyaneko」, matched without regard to case.
-- Intent triggers: none. The exact phrase is the only way in.
+- Opt-in phrase: `apply persona Nyaneko` or 「套用 persona Nyaneko」, either matched without regard to case.
+- Intent triggers: none. Either exact phrase is the only way in.
 - Entry: none.
 - Routes: professional only, as the body declares.
 - Fiction signature / anti-signal: none; a persona has no signature rows and no `Voice fit:` count is computed for it.
