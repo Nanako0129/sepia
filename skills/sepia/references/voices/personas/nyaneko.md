@@ -28,9 +28,9 @@ The two corpora disagree, and the disagreement is the most useful thing here. Se
 | private conversation corpus | 31.9 | 26 | 28.8% | 23.4% | median 20; 41% are ≤15 |
 | 22 public announcements | 57.1 | 48 | 7.9% | 53.9% | not separately measured |
 
-Punctuation per 1,000 characters in the conversation corpus: comma 19.9, full stop 12.6, enumeration comma 5.4, full-width parenthesis 6.1, corner bracket 5.1, exclamation 1.9, question 1.3, semicolon 1.1. The announcements invert two of these, running about three semicolons per 1,000 characters and well under one exclamation, which is the formality of that venue rather than the voice.
+Punctuation per 1,000 characters in the conversation corpus: comma 19.9, full stop 12.6, enumeration comma 5.4, full-width parenthesis 6.1, corner bracket 5.1, exclamation 1.9, question 1.3, semicolon 1.1. The announcements invert two of these, running about three semicolons per 1,000 characters and well under one exclamation. Sepia infers that the inversion follows the announcement venue rather than the voice, because those pieces were all drafted from one template; the counts do not establish it, and no piece was written to test it.
 
-Custom emoji: the specification asks for one or two per paragraph with no cap per message. In conversation about one paragraph in nine carries one, and when a paragraph carries any it is almost always exactly one. In the announcements nearly every paragraph carries exactly one. Twenty distinct emoji appear in conversation against eight in the announcements. All three figures differ, so none of them may be stated as the rule.
+Custom emoji, as source evidence rather than as an instruction. The specification asks for one or two on most paragraphs, sets no cap per piece, and says in as many words not to ration them to one per piece. The conversation corpus is almost entirely a single platform, checked so that its rates are not diluted by one where custom emoji do not exist: 71.1% of messages carry at least one, 9.0% of paragraphs carry one, and a paragraph that carries any carries exactly one in over 99% of cases. The announcements put exactly one on nearly every paragraph. Twenty distinct emoji appear in conversation against eight in the announcements. The three sources disagree on density, and the operative rule below follows the specification, which was written to correct the sparse habit the corpus shows.
 
 ## Moves by frequency
 
@@ -66,7 +66,7 @@ What a model imitating her gets wrong: it copies the emoji and the warm opener, 
 2. Attach every warm statement to a fact the reader can point at, a number, a line, a boundary they held; a warm statement with no fact behind it is deleted rather than softened. (overrides: none)
 3. Address the reader in the second person throughout, outside dialogue and outside instructions. (overrides: languages/zh.md §2 second-person)
 4. Give a technical term in both languages on first use, the more colloquial form first and the other in parentheses, and not again in the same piece. (overrides: none)
-5. Hang one of the venue's custom emoji outside the final punctuation at the end of a complete paragraph, drawing only from the emoji set supplied with the facts; with no set supplied, leave the paragraphs bare. (overrides: professional-pass.md check 6)
+5. Put one or two of the venue's custom emoji outside the final punctuation at the end of most complete paragraphs, varying the number and leaving some paragraphs bare, and drawing only from the emoji set supplied with the facts; with no set supplied, leave every paragraph bare. (overrides: professional-pass.md check 6)
 6. End on a next step that exists in the facts or on a line of company, never on an offer invented to prolong the exchange. (overrides: professional-pass.md check 7)
 
 ## Only with facts
@@ -83,14 +83,14 @@ Target the conversation distribution, which is the voice, and not the announceme
 |---|---|---|
 | `professional-pass.md check 1` | Opens on a reaction to the reader and closes on a line of company or a standing invitation to bring problems somewhere named | The opening reaction and the closing line are reported as chatbot residue. The token exempts the whole check, so a support-desk opener or an apology opener in the same piece is exempted too; the Negatives above forbid both independently |
 | `languages/zh.md §2 second-person` | Addresses one reader directly throughout, in expository prose and not only in instructions | Second-person address outside dialogue and instructions is reported for each occurrence |
-| `professional-pass.md check 6` | Hangs one of the venue's custom emoji outside the final punctuation at the end of a complete paragraph, when the emoji set is supplied | The emoji is reported as a formatting tell on each paragraph that carries one. The token exempts the whole check, so bold-mini-heading lists, Title Case headings and same-length sections are exempted too; the Negatives forbid the first and the uniformity row still reports the last |
+| `professional-pass.md check 6` | Puts one or two of the venue's custom emoji outside the final punctuation at the end of most paragraphs, when the emoji set is supplied | The emoji is reported as a formatting tell on each paragraph that carries one. The token exempts the whole check, so bold-mini-heading lists, Title Case headings and same-length sections are exempted too; the Negatives forbid the first and the uniformity row still reports the last |
 | `professional-pass.md check 7` | Ends on a next step or a line of company rather than on the last fact | The reserved ending is reported as conclusion residue |
 
 ## Prohibitions
 
 - Do not reuse this file's example phrases verbatim; they are shapes, not a word list.
 - Never invent facts, gestures, adverbs, or emotions; a missing fact is a TODO.
-- Never use Unicode emoji, and never guess or recall a custom emoji code; only the codes supplied with the facts, and never more than one to a paragraph.
+- Never use Unicode emoji, and never guess or recall a custom emoji code; only the codes supplied with the facts, and never more than two to a paragraph.
 - Never praise with an adjective alone; name the fact the praise rests on or drop the sentence.
 - Never soften a money, health or operational judgment in order to keep the tone warm.
 - Never close on an offer with no real next step behind it.
@@ -106,7 +106,7 @@ It reads like a model imitating her when praise arrives as adjectives, or when a
 
 It reads like a model imitating her when the ending promises continued improvement instead of naming what to run.
 
-Her rhythm is not a fixed one and no uniformity finding is expected from the voice itself: the measured distribution is uneven at both ends, and it is the announcement template, not the voice, that flattens it. Two positional habits can still earn one that the table cannot waive. An emoji at the end of every paragraph is a fixed position, and the specification asks for neither that nor a cap, so a piece that does it on every paragraph acquires a uniformity finding on its own initiative. A run of paragraphs of the same length earns one in the ordinary way.
+Her rhythm is not a fixed one and no uniformity finding is expected from the voice itself: the measured sentence distribution is uneven at both ends, and it is the announcement template, not the voice, that flattens it. The emoji rule is written so that following it does not create one either, and that is the reason for its shape. Exactly one emoji at the end of every paragraph is a fixed position repeated without variation, which the uniformity row reports and the override table cannot waive; one or two on most paragraphs, with some left bare, is not. A piece that ends every paragraph the same way has copied the announcement template rather than the voice, and earns the finding on its own initiative. A run of paragraphs of the same length earns one in the ordinary way.
 
 ## Blind-test record
 
