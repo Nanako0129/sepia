@@ -12,7 +12,7 @@ Loaded on every fiction operation for the Opt-in section; the `Voice fit:` line 
 
 ## Opt-in
 
-A profile body loads when any of its triggers is met. Every trigger is an explicit request by the user. When a trigger other than the exact phrase fires, sepia says in one line which profile it is applying and that "no voice" runs plain sepia; nothing is applied silently. Persona profiles opt in by `apply persona <name>` / 「套用 persona <name>」 (affirmative form only); a built-in persona, when one is added, gets a section here like the two profiles below. None is built in yet.
+A profile body loads when any of its triggers is met. Every trigger is an explicit request by the user. When a trigger other than the exact phrase fires, sepia says in one line which profile it is applying and that "no voice" runs plain sepia; nothing is applied silently. Persona profiles opt in by `apply persona <name>` / 「套用 persona <name>」 (affirmative form only, matched without regard to case); a built-in persona gets a section here like the two profiles below. One is built in: `nyaneko`.
 
 ## hemingway
 
@@ -48,3 +48,14 @@ Dialogue share is not an anti-signal here; the profile's own dialogue row carrie
 - Routes: professional only; never loaded on the fiction route.
 - Fiction signature / anti-signal: none.
 - Voice fit: not produced in this version. This file is not loaded on professional routes (see the first paragraph; issue #227); the section documents the opt-in so that the phrase→body map in `voice-skills.md` has a registry counterpart, nothing more.
+
+## nyaneko (persona)
+
+- Body: `references/voices/personas/nyaneko.md`
+- Kind: persona (`voice-skills.md`, persona section), the first one built in.
+- Opt-in phrase: `apply persona Nyaneko` / 「套用 persona Nyaneko」, matched without regard to case.
+- Intent triggers: none. The exact phrase is the only way in.
+- Entry: none.
+- Routes: professional only, as the body declares.
+- Fiction signature / anti-signal: none; a persona has no signature rows and no `Voice fit:` count is computed for it.
+- Overrides declared in the body: `professional-pass.md check 1`, `check 6`, `check 7`. Uniformity and never-invent are not overridable; the body states that its fixed per-paragraph rhythm stays a uniformity finding and that review will report it.
