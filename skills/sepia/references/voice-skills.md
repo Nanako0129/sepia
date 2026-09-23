@@ -28,7 +28,7 @@ A voice skill applied wholesale produces a house style, and a house style is a f
 
 ## Persona profiles and declared override rights
 
-A persona is one writer's fingerprint, the third profile kind beside an author-level voice (Hemingway) and a venue-level voice (tw-journalism). The pilot behind issue #257 wrote nineteen personas from full close readings and found that every one needed at least one sepia rule to yield, and that a descriptive persona without declared overrides was eaten by the rules in a blind write. The interface therefore makes the yielding explicit.
+A persona is one writer's fingerprint, the third profile kind beside an author-level voice (Hemingway) and a venue-level voice (tw-journalism). A pilot that wrote nineteen personas from full close readings found that every one needed at least one sepia rule to yield, and that a descriptive persona without declared overrides was eaten by the rules in a blind write. The interface therefore makes the yielding explicit.
 
 **Contract.** A persona body (`voices/PERSONA-TEMPLATE.md`, checked by `scripts/check_persona.py`) describes the voice in prose, stance and situation before surface, and carries a table `Rules this persona overrides` with three columns: rule | how the persona departs | expected cost. On write and recreate a listed rule yields to the persona's move. On review a finding that a listed rule produces is reported as `Persona cost: <rule token> — <quoted evidence>`, not as a defect. On refactor stage 1 the same; stage 2 does not fix it. Rules not listed keep full force. Venue precedence is unchanged: a direct conflict between a persona move and the venue register is surfaced, never silently resolved either way.
 
