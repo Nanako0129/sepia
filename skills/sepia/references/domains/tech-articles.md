@@ -1,6 +1,6 @@
 # Domain — technical articles & blog posts
 
-Covers engineering blog posts, tutorials, architecture write-ups, experience reports. The richest domain: run `professional-pass.md` (article-like weighting), the outline/QUD checks in `discourse-pass.md` §1–3, and `style-pass.md` (skip its fiction-slop table).
+Covers engineering blog posts, tutorials, architecture write-ups, experience reports. A true story told to explain or argue for general readers, popular science included, is a narrative non-fiction essay and routes there (`SKILL.md`, Routing). The richest domain: run `professional-pass.md` (article-like weighting), the outline/QUD checks in `discourse-pass.md` §1–3, and `style-pass.md` (skip its fiction-slop table).
 
 ## Human baseline
 
