@@ -1,6 +1,6 @@
 # Voice registry — the voice-fit line and opt-in triggers
 
-Loaded on every fiction operation for the Opt-in section; the `Voice fit:` line is produced only on review and on refactor stage 1 (never on write or recreate). Not loaded on professional routes in this version (the professional-route suggestion is tracked in issue #227). This file is the single home of the voice-fit mechanism and of the per-profile data it reads, and it lists each profile's opt-in triggers. It contains no voice moves and no style rules; a profile body loads only when the user opts in.
+Loaded on every fiction operation for the Opt-in section; the `Voice fit:` line is produced only on review and on refactor stage 1 (never on write or recreate). Not loaded on professional routes. This file is the single home of the voice-fit mechanism and of the per-profile data it reads, and it lists each profile's opt-in triggers. It contains no voice moves and no style rules; a profile body loads only when the user opts in.
 
 ## The rule
 
@@ -47,7 +47,7 @@ Dialogue share is not an anti-signal here; the profile's own dialogue row carrie
 - Entry: none.
 - Routes: professional only; never loaded on the fiction route.
 - Fiction signature / anti-signal: none.
-- Voice fit: not produced in this version. This file is not loaded on professional routes (see the first paragraph; issue #227); the section documents the opt-in so that the phrase→body map in `voice-skills.md` has a registry counterpart, nothing more.
+- Voice fit: not produced. This file is not loaded on professional routes (see the first paragraph); the section documents the opt-in so that the phrase→body map in `voice-skills.md` has a registry counterpart, nothing more.
 
 ## nyaneko (persona)
 

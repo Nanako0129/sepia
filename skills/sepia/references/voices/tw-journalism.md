@@ -124,7 +124,7 @@ Sentence length, punctuation, quotation marks and connective rates for this regi
 
 ## Voice fit
 
-None on professional routes in this version (#227). The registry entry in `references/voices/registry.md` documents the opt-in only.
+None on professional routes. The registry entry in `references/voices/registry.md` documents the opt-in only.
 
 ## Worked example
 

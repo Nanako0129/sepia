@@ -6,7 +6,7 @@ Use the Human and AI columns as corpus calibration references, not targets for a
 
 ## Protocol
 
-1. Read **one group at a time**, in five separate passes. Never assess the whole rubric in one read: models self-evaluating text collapse onto one or two salient dimensions and go blind to the rest (measured on the slop taxonomy — span precision 0.13–0.16 across tested prompting conditions).
+1. Read **one group at a time**, in five separate passes. Never assess the whole rubric in one read: models self-evaluating text collapse onto one or two salient dimensions and go blind to the rest (measured on the slop taxonomy with GPT-5, DeepSeek-V3 and o3-mini — span precision 0.13–0.16 across tested prompting conditions; not measured on a Claude model).
 2. For each observed signal, quote the short passage that justifies it. No quote, no signal.
 3. Record numeric, ordinal, and categorical observations beside the corpus references; do not convert them into authorship probabilities or a combined score.
 4. Mark a feature **n/a** when the text offers no occasion to assess it, and record over-correction separately.
