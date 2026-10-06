@@ -1,6 +1,6 @@
 {
   "name": "sepia",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "description": "De-AI writing package with the general Sepia router plus five separate operation entries: write, review, refactor, recreate, and hemingway.",
   "author": {
     "name": "Nanako Tsai"
