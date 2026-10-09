@@ -3,11 +3,11 @@
   "name": "sepia",
   "version": "0.12.3",
   "type": "general",
-  "description": "De-AI writing package: the general Sepia router plus five operation skills (write, review, refactor, recreate, hemingway) and a /sepia slash command.",
+  "description": "De-AI writing package: the general Sepia router plus five operation skills (write, review, refactor, recreate, hemingway), each typed as /<skill-name> through QwenPaw's skill dispatch.",
   "description_i18n": {
-    "zh-TW": "去 AI 味寫作 package：Sepia 通用 router 加 write/review/refactor/recreate/hemingway 五個操作 skill，附 /sepia 斜線指令。",
-    "zh-CN": "去 AI 味写作技能包：Sepia 总路由 + write/review/refactor/recreate/hemingway 五个操作技能，附 /sepia 斜杠命令。",
-    "en-US": "De-AI writing package: the general Sepia router plus five operation skills (write, review, refactor, recreate, hemingway) and a /sepia slash command."
+    "zh-TW": "去 AI 味寫作 package：Sepia 通用 router 加 write/review/refactor/recreate/hemingway 五個操作 skill，透過 QwenPaw 的 skill 分派以 /<skill 名稱> 呼叫。",
+    "zh-CN": "去 AI 味写作技能包：Sepia 总路由 + write/review/refactor/recreate/hemingway 五个操作技能，通过 QwenPaw 的 skill 分派以 /<skill 名称> 调用。",
+    "en-US": "De-AI writing package: the general Sepia router plus five operation skills (write, review, refactor, recreate, hemingway), each typed as /<skill-name> through QwenPaw's skill dispatch."
   },
   "author": "Nanako Tsai",
   "entry": {

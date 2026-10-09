@@ -63,17 +63,17 @@ Professional prose fails differently, and the structure-level finding holds ther
 
 ## Operation entries
 
-The complete plugin package gives Claude Code, Codex, Grok Build, and Antigravity a general router plus five direct entries. QwenPaw gets the `/sepia` router only, so the table below does not apply there:
+The complete plugin package gives Claude Code, Codex, Grok Build, Antigravity, and QwenPaw a general router plus five direct entries. On QwenPaw the package registers no commands of its own; the host's `/<skill-name>` dispatch serves each installed skill:
 
-| Operation | Claude Code | Codex | Grok Build | Antigravity | Meaning |
-|---|---|---|---|---|---|
-| write | `/sepia-write` | `$sepia-write` | `/sepia-write` | `/sepia-write` | Create new prose |
-| review | `/sepia-review` | `$sepia-review` | `/sepia-review` | `/sepia-review` | Diagnose without editing |
-| refactor | `/sepia-refactor` | `$sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | Make minimal in-place edits |
-| recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | Rewrite from the source facts and intent |
-| hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | Write or refactor fiction with the built-in Hemingway voice applied |
+| Operation | Claude Code | Codex | Grok Build | Antigravity | QwenPaw | Meaning |
+|---|---|---|---|---|---|---|
+| write | `/sepia-write` | `$sepia-write` | `/sepia-write` | `/sepia-write` | `/sepia-write` | Create new prose |
+| review | `/sepia-review` | `$sepia-review` | `/sepia-review` | `/sepia-review` | `/sepia-review` | Diagnose without editing |
+| refactor | `/sepia-refactor` | `$sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | Make minimal in-place edits |
+| recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | Rewrite from the source facts and intent |
+| hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | Write or refactor fiction with the built-in Hemingway voice applied |
 
-The general `/sepia` (Claude Code, Grok Build, Antigravity, and QwenPaw) or `$sepia` (Codex) router remains available; on QwenPaw the package installs the six skills into each workspace and registers no per-operation slash commands. What was verified on each platform is stated under [Install](#install).
+The general `/sepia` (Claude Code, Grok Build, Antigravity, and QwenPaw) or `$sepia` (Codex) router remains available. What was verified on each platform is stated under [Install](#install).
 
 > **Notice:** Standalone wrapper installation is unsupported. The operation wrappers depend on their sibling canonical skill; install the complete plugin package.
 
@@ -226,7 +226,7 @@ qwenpaw plugin install ./sepia/.qwenpaw-plugin
 qwenpaw plugin uninstall sepia
 ```
 
-> **Notice:** Contributor-verified on QwenPaw 2.2.1 (#250, not reproduced by the maintainer): the install completes and `/sepia` is routed, with the packaged `skills` symlink followed into a real tree by `shutil.copytree`.
+> **Notice:** Contributor-verified on QwenPaw 2.2.1 (#250, #289; not reproduced by the maintainer): the install completes, the packaged `skills` symlink is followed into a real tree by `shutil.copytree`, and `/sepia <text>` and `/sepia-write <text>` each start an agent turn through the host's skill dispatch. The other four entries use the same dispatch and were not run one by one. If the package cannot read its skills (a zip install, or a checkout without symlink support), it logs one error and registers nothing; install from a git clone instead.
 
 ### Project scope (alternative)
 

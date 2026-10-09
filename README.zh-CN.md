@@ -63,17 +63,17 @@ sepia 将这些实测差距，连同 [`research/`](research/) 里梳理的相关
 
 ## 操作入口
 
-完整的插件包为 Claude Code、Codex、Grok Build 和 Antigravity 带来了一个通用路由以及五个直达入口；QwenPaw 只有 `/sepia` 这一个路由，下表不适用：
+完整的插件包为 Claude Code、Codex、Grok Build、Antigravity 和 QwenPaw 带来了一个通用路由以及五个直达入口。QwenPaw 的插件包不自行注册命令，由 QwenPaw 原生的 `/<skill 名称>` 分派调用已安装的 skill：
 
-| 操作 | Claude Code | Codex | Grok Build | Antigravity | 用途 |
-|---|---|---|---|---|---|
-| write | `/sepia-write` | `$sepia-write` | `/sepia-write` | `/sepia-write` | 撰写新内容 |
-| review | `/sepia-review` | `$sepia-review` | `/sepia-review` | `/sepia-review` | 只诊断，不修改 |
-| refactor | `/sepia-refactor` | `$sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | 在原文上做最小修改 |
-| recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | 根据原始事实与意图重新撰写 |
-| hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | 应用内置海明威语气写作或改写小说 |
+| 操作 | Claude Code | Codex | Grok Build | Antigravity | QwenPaw | 用途 |
+|---|---|---|---|---|---|---|
+| write | `/sepia-write` | `$sepia-write` | `/sepia-write` | `/sepia-write` | `/sepia-write` | 撰写新内容 |
+| review | `/sepia-review` | `$sepia-review` | `/sepia-review` | `/sepia-review` | `/sepia-review` | 只诊断，不修改 |
+| refactor | `/sepia-refactor` | `$sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | `/sepia-refactor` | 在原文上做最小修改 |
+| recreate | `/sepia-recreate` | `$sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | `/sepia-recreate` | 根据原始事实与意图重新撰写 |
+| hemingway | `/sepia-hemingway` | `$sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | `/sepia-hemingway` | 应用内置海明威语气写作或改写小说 |
 
-通用的 `/sepia`（Claude Code、Grok Build、Antigravity 与 QwenPaw）或 `$sepia`（Codex）路由依旧可用；QwenPaw 的插件包会把六个 skill 装进每个 workspace，不另设各操作的斜杠命令。各平台具体验证了哪些内容，参见[安装](#安装)一节。
+通用的 `/sepia`（Claude Code、Grok Build、Antigravity 与 QwenPaw）或 `$sepia`（Codex）路由依旧可用。各平台具体验证了哪些内容，参见[安装](#安装)一节。
 
 > **注意：** 各操作 wrapper 均依赖同级的规范 skill，不支持单独安装，请直接安装完整的插件包。
 
@@ -226,7 +226,7 @@ qwenpaw plugin install ./sepia/.qwenpaw-plugin
 qwenpaw plugin uninstall sepia
 ```
 
-> **注意：** 由贡献者在 QwenPaw 2.2.1 上实机验证（#250，维护者未自行复现）：安装流程能顺利走完且 `/sepia` 拥有路由，插件包中打包的 `skills` 符号链接会被 `shutil.copytree` 展开为真实目录。
+> **注意：** 由贡献者在 QwenPaw 2.2.1 上实机验证（#250、#289，维护者未自行复现）：安装流程能顺利走完，插件包中打包的 `skills` 符号链接会被 `shutil.copytree` 展开为真实目录，`/sepia <文本>` 与 `/sepia-write <文本>` 都会通过 QwenPaw 的 skill 分派启动 agent。另外四个入口走同一分派，没有逐个实测。若插件包读不到 skill（zip 安装，或不支持符号链接的 checkout），会记录一条错误并且不注册任何内容，请改用 git clone 安装。
 
 ### Project scope（替代方案）
 
