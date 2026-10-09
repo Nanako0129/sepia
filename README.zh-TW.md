@@ -63,7 +63,7 @@ sepia 把這些實測差距，連同 [`research/`](research/) 裡整理過的相
 
 ## 操作入口
 
-完整 plugin package 會在 Claude Code、Codex、Grok Build、Antigravity 與 QwenPaw 提供通用 router 與五個直接入口。QwenPaw 的 package 不自己註冊指令，由 QwenPaw 原生的 `/<skill 名稱>` 分派呼叫已安裝的 skill：
+完整 plugin package 會在 Claude Code、Codex、Grok Build、Antigravity 與 QwenPaw 提供通用 router 與五個直接入口。QwenPaw 的 package 不自己註冊指令，由 QwenPaw 原生的 `/<skill-name>` 分派呼叫已安裝的 skill：
 
 | 操作 | Claude Code | Codex | Grok Build | Antigravity | QwenPaw | 用途 |
 |---|---|---|---|---|---|---|
@@ -226,7 +226,7 @@ qwenpaw plugin install ./sepia/.qwenpaw-plugin
 qwenpaw plugin uninstall sepia
 ```
 
-> **注意：** 由貢獻者在 QwenPaw 2.2.1 上實機驗證（#250、#289，維護者未自行重跑）：安裝能完成，package 裡的 `skills` 符號連結會被 `shutil.copytree` 展開成實體目錄，`/sepia <文字>` 與 `/sepia-write <文字>` 都會透過 QwenPaw 的 skill 分派啟動 agent。另外四個入口走同一個分派，沒有逐一實測。若 package 讀不到 skill（zip 安裝，或不支援符號連結的 checkout），會記一條錯誤且不註冊任何東西，請改用 git clone 安裝。
+> **注意：** 由貢獻者在 QwenPaw 2.2.1 上實機驗證（#250、#289，維護者未自行重跑）：安裝能完成，package 裡的 `skills` 符號連結會被 `shutil.copytree` 展開成實體目錄，`/sepia <text>` 與 `/sepia-write <text>` 都會透過 QwenPaw 的 skill 分派啟動 agent。另外四個入口走同一個分派，沒有逐一實測。若 package 讀不到 skill（zip 安裝，或不支援符號連結的 checkout），會記一條錯誤且不註冊任何東西，請改用 git clone 安裝。
 
 ### Project scope（替代方案）
 
