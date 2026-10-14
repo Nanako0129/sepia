@@ -22,6 +22,7 @@
 | `GUO-HC3-2023` | HC3 中英問答語料原始論文 | 同上 | 全文 |
 | `JIANG-CCL-2025` | 200 則「弱智吧」笑話；GPT-4o、DeepSeek-R1、Qwen2.5-7B、Qwen3-235B | 貼吧使用者 | 全文 |
 | `FREEBURG-2026` | 12 個模型的英文論說文約 24 萬字；破折號每千字計數 | **僅 8 篇**已出版論說文 | 全文（arXiv HTML，未經同儕審查） |
+| `GRAPHITE-OPUS-5-5-2026` | Common Crawl 上 2022-11-30 之前的網路文章，9,974 個同題主題，語言未註明（範例為英文）；AI 側先由 GPT-4.1 摘要，再由各模型以同一組公開 prompt（「expert content writer」、純文字不用 Markdown、字數 ±10%）生成；破折號每千字計數 | 網路文章作者（清洗後可能殘留 CTA 與樣板文字，作者自述） | 研究頁全文（更新頁與原研究 Methodology；行銷公司，未經同儕審查；sampling 參數與存取方式未說明） |
 | `GODGHASE-2024` | WikiHow 段落 78 萬 vs ChatGPT 92 萬段 | WikiHow 作者 | 全文（PDF，未經同儕審查） |
 | `LLM-REVAL-2025` | 人類 vs LLM 撰寫的論文，段落平均長度 | 論文作者 | 搜尋摘要核對數字 |
 | `PUDASAINI-2026` | PAN CLEF 2025、COLING 2025 偵測基準；SHAP 特徵重要度 | 基準資料集 | 全文（HTML） |
@@ -86,7 +87,7 @@
 | 項目 | 證據 | 處置 |
 |---|---|---|
 | 標點總密度、逗號句號計數 | 同一 HC3-zh 語料兩種量法方向相反：標點密度 0.135 vs 0.136（`ZHU-CCL-2023`）、PUNCT 詞性占比 16.0% vs 13.4%（`GUO-HC3-2023`）。英文新聞 PUNCT 占比人類 11.88% vs LLaMA 10.77–11.43%、Mistral 10.92%、Falcon 12.14%（`MUNOZ-ORTIZ-2024`，一個模型高於人類）。逗號、句號、分號、冒號、驚嘆號、引號的人機分項計數，英文與中文皆無；韓文逗號（`KATFISH-2025`：連接語尾接逗號 4.10% vs 19.83%）與日文逗號位置（Zaitsu 2023）不能外推 | 寫進 `style-pass.md` §7 whitelist |
-| 破折號 | `FREEBURG-2026`：每千字 GPT-4.1 10.62、Claude Opus 4.6 9.09、DeepSeek V3 6.95、GPT-4o 4.12、GPT-5.4 1.43、Llama 3.x 0.00；人類 3.23（n = 8，範圍 0.33–17.12）。OpenAI 2025-11 宣布可關閉。是 release 屬性，不是模型通用 tell；第三方量測不屬於 `model-fingerprints.md` 的 vendor guidance 契約 | whitelist 一列；不進 fingerprints |
+| 破折號 | `FREEBURG-2026`：每千字 GPT-4.1 10.62、Claude Opus 4.6 9.09、DeepSeek V3 6.95、GPT-4o 4.12、GPT-5.4 1.43、Llama 3.x 0.00；人類 3.23（n = 8，範圍 0.33–17.12）。`GRAPHITE-OPUS-5-5-2026`（行銷公司報告；ChatGPT 之前的網路文章 9,974 個同題主題，模型依摘要以同一組公開、禁用 Markdown 的內容寫手 prompt 生成）：Claude Opus 5 2.92，與該語料的人類頻率相近；Opus 5.5 0.015。同一張圖的 Opus 4.6 約 0.2（人類平均的 0.065 倍），`FREEBURG-2026` 的論說文卻是 9.09，所以頻率同時隨 release 與寫作條件變動。OpenAI 2025-11 宣布可關閉。是 release 屬性，不是模型通用 tell；第三方量測不屬於 `model-fingerprints.md` 的 vendor guidance 契約 | whitelist 一列；不進 fingerprints |
 | 段落長度、段落數 | WikiHow：ChatGPT 段落較長（82.01 vs 68.83 詞，`GODGHASE-2024`）；LLM 寫的論文：段落較短（39.82 vs 51.12 詞，`LLM-REVAL-2025`）；HC3-zh：ChatGPT 段落較多（3.681 vs 1.442）。`PUDASAINI-2026` 指出偵測基準裡「段落數」是格式產物（AI 中位數 1 段 vs 人類 17 段） | 只保留「同一篇內段落長度一致」（`discourse-pass.md` §3 既有）；whitelist 一列 |
 | 段落位置規律（主題句在首、總結句在尾） | 只有質性描述（`HERBOLD-2023`：所有 ChatGPT 結論以 "In conclusion" 開頭），無量化 | 不新增 |
 | burstiness 公式 | GPTZero 的定義是散文描述，無公式，2023 秋停用；學術上對擴散模型與改寫都失效 | 不新增 |
