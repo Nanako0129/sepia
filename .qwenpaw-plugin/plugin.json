@@ -1,7 +1,7 @@
 {
   "id": "sepia",
   "name": "sepia",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "type": "general",
   "description": "De-AI writing package: the general Sepia router plus five operation skills (write, review, refactor, recreate, hemingway), each typed as /<skill-name> through QwenPaw's skill dispatch.",
   "description_i18n": {
