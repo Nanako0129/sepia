@@ -1,6 +1,6 @@
 # Pass 2 — Discourse flow
 
-The layer between plot and sentences: how paragraphs advance, where the energy sags, and where things sit on the page. Evidence: QUDsim/COLM 2025 (Q), Tripto et al. EMNLP 2025 (T), Russell et al. ACL 2025 (R), Beguš 2024 (B), asavvin's outline test (A). Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local. Prescriptions are Sepia design inferences unless a cited source explicitly tested the intervention.
+The layer between plot and sentences: how paragraphs advance, where the energy sags, and where things sit on the page. Evidence: QUDsim/COLM 2025 (Q), Tripto et al. EMNLP 2025 (T), Russell et al. ACL 2025 (R), Beguš 2024 (B), asavvin's outline test (A), StoryScope (S), Xu et al. PNAS 2025 (X). Stable source identities live in the repository research ledger; single-letter aliases in this file are file-local. Prescriptions are Sepia design inferences unless a cited source explicitly tested the intervention.
 
 ## 1 The QUD check — what question does each paragraph answer?
 

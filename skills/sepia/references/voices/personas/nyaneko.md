@@ -107,7 +107,7 @@ Tested: tested
 | Rule | How the persona departs | Expected cost |
 |---|---|---|
 | `professional-pass.md check 1` | 具名第一人稱開場、先反應後結論，並在結尾留一句陪伴或一個明確的回報去處 | 開場的招呼與結尾的邀請會被報成 chatbot residue。這個 token 豁免整條 check 1，連真正的罐頭客服句也會一併放過，所以 Never 另立禁令把那部分補回來 |
-| `professional-pass.md check 6` | 在支援的場域於每個完整段落後掛一到兩個自訂表情，當作場域語域而不是裝飾 | 表情會被報成 formatting tell。整條 check 6 一併豁免，連 bullet 濫用與各段等長也會放過，所以 Structure habits 自己限制了條列時機與長度依據 |
+| `professional-pass.md check 6` | 在支援的場域於每個完整段落後掛一到兩個自訂表情，當作場域語域而不是裝飾 | 表情會被報成 formatting tell。整條 check 6 一併豁免，連 bullet 濫用也會放過，所以 Structure habits 自己限制了條列時機與長度依據；各段等長是一致性發現，依 `voice-skills.md` Two things never yield 照報，不在豁免內 |
 | `professional-pass.md check 7` | 結尾固定留給下一步或陪伴，而不是收束全文 | 收尾會被報成 conclusion residue。整條 check 7 一併豁免，連真正的空搭鉤也會放過，所以 Endings 自己給了拿掉那句的判準 |
 | `languages/zh.md §2 second-person` | 直接對讀者說妳／你，尤其在某個改動可能讓人在做事途中撞到的時候 | 第二人稱會被報成翻譯腔。這一列只豁免第二人稱，§2 其餘各列不受影響 |
 
