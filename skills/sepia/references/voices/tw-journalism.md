@@ -152,7 +152,7 @@ After A — 場景導入 (moves: open on a person; hold the first number until t
 |---|---|---|
 | 「本文將探討…」 | A date, a place, a person and a recorded action open the piece; open on a person | `journalism.md` tells row 1 |
 | Cause and consequence stated before any scene, with the date as the only concrete detail | The count of slips and every figure wait for paragraph three; the opening keeps only the date and time of day, which the move treats as scene facts; hold the first number | `journalism.md` rule 1 |
-| 「無奈地表示：“…”」 | The recorded action, then the approved quotation in 「」, no attribution verb, no adverb (a write from the fact list; on refactor the Before's quotation would stay as written) | zh.md §2 manner adverb; `journalism.md` rule 3 (attribution by context or a post-posed 說) |
+| 「無奈地表示：“…”」 | The recorded action, then the approved quotation in 「」, no attribution verb, no adverb (a write from the fact list; on refactor the Before's quotation would stay as written) | zh.md §2 manner adverb; `journalism.md` rule 3 (attribution by context or a plain 說) |
 | 「——…——」 insertion with single-glyph dashes presenting the cause without a quantified baseline | One plain sentence carries 412, 200 ms and the 3-per-minute baseline, in paragraph three; the two-cell paired 「──…──」 would itself be register-normal (zh.md §1b), the single-glyph 「—」 is the glyph slip | check 5; zh.md §1b single-glyph 「—」 row |
 | 「迅速地」「成功地」 | Absent (manner adverbs; register default) | zh.md §2 manner-adverb row |
 | 「非常」 | Absent because no approved fact supports an intensifier, not because one 「非常」 departs from the register (§1b: stacking against 「很」 is the departure) | check 5 |
