@@ -94,7 +94,7 @@ Group E: observed signals … (…)
 Advisories: over-correction …; subplots …; single-location …
 Quoted evidence: <short phrase for each reported signal>
 Deferred: <row heading, or the `SKILL.md` guardrail that held it back — quoted evidence — needs human | none>   (unattended runs only; omitted otherwise)
-Protected: <row heading — quoted evidence | none>   (only when ranges were declared, omitted otherwise; quoted words, no number)
+Protected: <row heading — quoted evidence | none>   (when ranges were declared or protected quoted material holds a defect, omitted otherwise; quoted words, no number)
 Plan: <ordered fixes, deepest layer first, each tied to a quoted passage>
 Voice fit: <profile> (<matched>/<signature size> recorded findings) — opt in with "<phrase>" | none (anti-signal: <item>) | none (<matched>/<size>) | <profile> — applied when the voice is declared   (review and refactor stage 1 only; omitted on write; a count of recorded findings, not a score; always the last line, after the whole diagnosis and the plan are committed, so the count cannot steer any of them; rule and data in references/voices/registry.md)
 ```
