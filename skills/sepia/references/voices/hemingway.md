@@ -43,7 +43,7 @@ Select 3–5 of these per piece. The paratactic run is one move, used once or tw
 
 ## Voice fit
 
-The rule and the signature/anti-signal data for this profile live in `references/voices/registry.md`, which sepia loads on review and refactor stage 1. This body loads only after the opt-in phrase `apply the Hemingway voice`; composition, precedence, and uniformity rules stay in `voice-skills.md`.
+The rule and the signature/anti-signal data for this profile live in `references/voices/registry.md`. This body loads only after the opt-in phrase `apply the Hemingway voice`; composition, precedence, and uniformity rules stay in `voice-skills.md`.
 
 ## Worked examples
 
