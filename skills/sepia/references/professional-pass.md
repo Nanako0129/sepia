@@ -6,7 +6,7 @@ Applies to every non-fiction domain (release notes, PR/issue replies, postmortem
 
 ## Read the venue first
 
-Before writing or editing, sample 2–3 recent human-written artifacts from the same venue — the repo's past release notes, the maintainer's recent replies, the team's last postmortem — and match their register, length norms, and formatting habits. Reinhart et al. report that instruction-tuned models favor an informationally dense, noun-heavy style and struggle to match genre-aligned variation (P). The venue corpus, not this skill, defines the target voice. When no corpus exists, the domain file's baseline applies. Under a call-time file scope (`SKILL.md` *Call-time scope and unattended mode*), sample only what the caller supplied; with nothing supplied, the baseline applies.
+Before writing or editing, sample 2–3 recent human-written artifacts from the same venue — the repo's past release notes, the maintainer's recent replies, the team's last postmortem — and match their register, length norms, and formatting habits. Reinhart et al. report that instruction-tuned models favor an informationally dense, noun-heavy style and struggle to match genre-aligned variation (P). The venue corpus, not this skill, defines the target voice. When no corpus exists, the domain file's baseline applies.
 
 ## The checklist
 
@@ -17,7 +17,7 @@ Run these one at a time (a combined pass goes blind — measured on this very ta
 | 1 | Chatbot residue | "Great question", "Thanks for raising this!", "I hope this helps", "Certainly!", "You're absolutely right", offers of further help, apology openers, "Let's dive in". Delete — a colleague doesn't talk like a support desk. |
 | 2 | Density | Could this say the same at half the length? Generic statements true in any context ("in today's fast-paced world", "it's important to note") carry zero information — cut. Length must be proportional to stakes, in both directions: a trimmed answer that lost a required caveat or the next step fails too. |
 | 3 | Relevance | Does every paragraph serve *the reader's task* — the thing they came to find out? Background the reader already has, restated questions, and scope tours are filler. |
-| 4 | Stance | Where a judgment is required, commit to one. Absent subjectivity is a measured slop dimension (S): a review without a verdict, a comparison without a recommendation, a postmortem without an admitted mistake. Hedge once per genuinely fragile claim, not per sentence. On refactor and recreate, a stance the source lacks is not added (`SKILL.md` Operations, recreate, and *Deletion beats addition*). |
+| 4 | Stance | Where a judgment is required, commit to one. Absent subjectivity is a measured slop dimension (S): a review without a verdict, a comparison without a recommendation, a postmortem without an admitted mistake. Hedge once per genuinely fragile claim, not per sentence. On refactor and recreate, a stance the source lacks is not added: refactor keeps only the additions `SKILL.md` *Deletion beats addition* lists, and recreate follows Operations, recreate. |
 | 5 | Specificity | Versions, numbers, file:line, commands, error text verbatim, names — present and **real**. Never pad with invented specifics; a wrong fact stated confidently is itself a top-tier tell (R). Missing info → ask or leave an explicit TODO. |
 | 6 | Formatting tells | Bold-mini-heading bullet lists where prose would do; emoji as decoration; Title Case headings; every section the same length; lists of exactly three, everywhere; a heading restated by its first sentence; fractal summaries (announce → say → recap at every level) (W). The absence of these is not evidence of a human: which formatting a model over- or under-uses changes with its release (see the prose layers in `model-fingerprints.md`). |
 | 7 | Conclusion residue | "In conclusion/summary" sections, restating what was said, generic future outlook ("we will continue to improve…"). End when the content ends. |
@@ -40,7 +40,7 @@ Weighting sets the order and depth of attention, not an exemption: a short reply
 
 For long-form (articles, postmortems), also run the outline test and QUD check in `discourse-pass.md` §1–3: extract first sentences per paragraph; a clean-summary outline and a briefing→justification→consequences→reflection question-sequence are both machine shapes.
 
-## Report format (review; refactor and recreate print the same report as stage 1, before editing)
+## Report format (review; refactor and recreate stage 1, per `SKILL.md`)
 
 ```text
 SEPIA REVIEW — <document type, venue>

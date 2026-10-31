@@ -42,7 +42,7 @@ Scope note: this block is the one instruction in this section that does reach na
 | Vendor-stated default | Handling |
 |---|---|
 | Un-steered, elaborates past the task: "surveying options it won't pursue, explaining root causes at length, producing heavily-structured PR descriptions, or writing comments that narrate what the next line does" | The brevity instruction below, operative or prior per the model-identity rule in `SKILL.md`: operative for a role whose release is Claude Fable 5 or Claude Mythos 5, a prior for any other Claude release. As the author's layer: hunt option surveys, root-cause essays, and structure that outweighs the content (professional-pass checks 2, 3, 6). As the executor's layer: apply the instruction to the non-narrative text you write, per the route scope in this file's header |
-| In long agentic sessions, "dense arrow-chain shorthand, deep implementation detail, references to thinking the user never saw, or overly technical phrasing" | Hunt arrow chains, hyphen-stacked compounds, and labels the reader never saw defined; expand them into sentences (style-pass §6 read-aloud test); on refactor, the closing tests of style-pass §4 decide which added words stay |
+| In long agentic sessions, "dense arrow-chain shorthand, deep implementation detail, references to thinking the user never saw, or overly technical phrasing" | Hunt arrow chains, hyphen-stacked compounds, and labels the reader never saw defined; expand them into sentences (style-pass §6 read-aloud test); on refactor, the expansion counts as repair under the closing tests of style-pass §4, and any word beyond what the sentence needs goes through the deletion test |
 
 The vendor's brevity instruction, verbatim (compared against the source page 2026-09-03, matched):
 
