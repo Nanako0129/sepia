@@ -55,7 +55,7 @@ Columns: Move / Source / Sepia check it maps to (I unless marked) / Known cost.
 |---|---|---|---|
 | Build character from several concrete episodes; no character adjectives | C: 9 pure, 14 component | `professional-pass.md` check 5 specificity; `style-pass.md` §3 inflation adjectives (the §2–3 scan runs on every non-fiction route, SKILL.md) | None |
 | After a quotation, one gesture or expression, not an emotion adverb | C: about half of the 169 articles; T: manner adverb near zero (zh.md §1b) | `journalism.md` tells row 5 (manner adverb on speech verbs); on Chinese targets also the zh.md §2 manner-adverb row | A gesture after every quotation is a metronome; three or four per piece |
-| At the emotional peak let the quotation stand whole; do not cut it into fragments | C | SKILL.md quoted-material guardrail; `journalism.md` rule 3 | Long quotations raise the quotation share; keep the count low elsewhere. On write from a supplied transcript only: an existing quotation that is already split is never recombined on refactor or recreate (SKILL.md quoted-material guardrail) |
+| At the emotional peak let the quotation stand whole; do not cut it into fragments | C | SKILL.md quoted-material guardrail; `journalism.md` rule 3 | Long quotations raise the quotation share; keep the count low elsewhere. On write from a supplied transcript only: an existing quotation that is already split is never recombined on refactor or recreate except from a transcript the user supplies (SKILL.md quoted-material guardrail; `journalism.md` quotation rows) |
 | End on the person's own words or an everyday action, without comment | C: endings quotation 47 / return to person 20 of 169 | check 7 | Same as the scene-lead ending cost |
 
 ### 論證式 (argument)

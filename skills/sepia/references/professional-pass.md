@@ -51,7 +51,7 @@ Venue corpus: <artifacts sampled, or "none — using domain baseline">
 Style scan: <style-pass §2–3 and §5 rhythm hits with quoted evidence, or none>
 Failed: <#n check-name — quoted evidence>   (one line per failed check)
 Deferred: <#n check-name, or the `SKILL.md` guardrail that held it back — quoted evidence — needs human | none>   (unattended runs only; omitted otherwise)
-Protected: <#n check-name — quoted evidence | none>   (when ranges were declared or protected quoted material holds a defect, omitted otherwise; the passage is identified by its quoted words, never by a number the model derives — the caller already holds its own ranges)
+Protected: <#n check-name — quoted evidence | none>   (when ranges were declared or protected quoted material holds a defect, omitted otherwise; the passage is identified by its quoted words, never by a number the model derives)
 Passed: <check numbers only>
 Verdict: <clean / isolated hits / cluster> → <ship / refactor / recreate>
 ```
