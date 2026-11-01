@@ -27,7 +27,7 @@ These part-of-speech shapes are 2–5× overrepresented in LLM prose and heavily
 | Trailing/leading participial clause | "…, evading Show's heavy blows" · "Stuffing his mouth, Joe ran" | Break into its own short sentence with a finite verb (LLM usage: up to 5× human) |
 | Nominalization | realization, determination, transformation as sentence subjects | Turn back into verbs (2× human rate) |
 | Paired abstractions "X and Y" | desperation and resolve · curiosity and caution | Keep one |
-| not only X but also Y · it's not X, it's Y | — | Say the one thing you mean |
+| not only X but also Y · it's not X, it's Y | — | Say the one thing you mean. An "it's not X, it's Y" frame may stay when it passes four checks taken from Peng et al. 2026's classification (ledger `PENG-NOTX-2026`): nothing in it is false, misattributed or pragmatically broken; X and its replacement are both recoverable; a concrete cue in the context, independent of the contrast itself, motivates excluding X; the contrast advances an open distinction or supplies a missing replacement for the question the passage is on. Using the checks as a keep test is a Sepia inference in every language (the paper tested no rewrite and no readers). A frame that stays still counts as one hit (§3). Where an operative release table in `model-fingerprints.md` lists the frame (GPT-6 Astra: "This isn't about X. It's about Y."), that table governs |
 | Rule of three | three parallel adjectives/clauses/images, everywhere | Two or four; break the rhythm |
 
 ## 3 Vocabulary
