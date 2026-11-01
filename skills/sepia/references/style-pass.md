@@ -27,7 +27,7 @@ These part-of-speech shapes are 2–5× overrepresented in LLM prose and heavily
 | Trailing/leading participial clause | "…, evading Show's heavy blows" · "Stuffing his mouth, Joe ran" | Break into its own short sentence with a finite verb (LLM usage: up to 5× human) |
 | Nominalization | realization, determination, transformation as sentence subjects | Turn back into verbs (2× human rate) |
 | Paired abstractions "X and Y" | desperation and resolve · curiosity and caution | Keep one |
-| not only X but also Y · it's not X, it's Y | — | Say the one thing you mean |
+| not only X but also Y · it's not X, it's Y | — | Say the one thing you mean. Each frame is one hit toward a §3 cluster, never a verdict alone. When a §3 cluster fires, an "it's not X, it's Y" frame stays if it passes all three of these checks and is reduced to Y otherwise: both the rejected X and its replacement are recoverable; something in the context other than the contrast itself motivates excluding X; the contrast advances the question the passage is on (Peng et al. 2026, ledger `PENG-NOTX-2026`: 52.8% of model uses and 33.3% of human uses fail at least one; Chinese, LLM-labelled, no reader test; applied to English as a Sepia inference) |
 | Rule of three | three parallel adjectives/clauses/images, everywhere | Two or four; break the rhythm |
 
 ## 3 Vocabulary
