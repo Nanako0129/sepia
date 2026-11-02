@@ -8,7 +8,7 @@ Evidence tiers, kept apart: (T) one private human-side measurement of Traditiona
 
 ## The precondition is reporting
 
-Every shape below needs facts the writer actually has. A scene needs scene facts (who, where, what they were doing, when); a number needs its comparison basis; a two-sided layout needs two sides on the record; a timeline needs timestamps. Under this voice the specificity rules stay at full strength (SKILL.md "Never invent specifics"; `professional-pass.md` check 5): a missing fact is a TODO or a question to the user, never a sentence. A shape whose precondition is not met is not chosen.
+Every shape below needs facts the writer actually has. A scene needs scene facts (who, where, what they were doing, when); a figure the reader cannot size needs its comparison basis (`journalism.md` rule 4); a two-sided layout needs two sides on the record; a timeline needs timestamps. Under this voice the specificity rules stay at full strength (SKILL.md "Never invent specifics"; `professional-pass.md` check 5): a missing fact is a TODO or a question to the user, never a sentence. A shape whose precondition is not met is not chosen.
 
 ## Choosing a shape
 
@@ -64,7 +64,7 @@ Columns: Move / Source / Sepia check it maps to (I unless marked) / Known cost.
 |---|---|---|---|
 | End a paragraph on a question; the next paragraph answers it with a source's data or words, never the reporter's | C: paragraph-end questions are the norm | `discourse-pass.md` §1 QUD; `journalism.md` tells (self-answered question) | One question per section; more reads as rhetoric |
 | Put two or more experts in one section and let one disagree on the record | C: 9 of 11 pure argument pieces | check 4 stance as `journalism.md` rule 7 reads it | Needs two parties on the record; otherwise not available |
-| Every number carries a comparison or a conversion; no figure stands alone | C; `journalism.md` rule 4 | check 5; `journalism.md` rule 4 | None |
+| Every figure the reader cannot size carries a comparison or a conversion (`journalism.md` rule 4) | C; `journalism.md` rule 4 | check 5; `journalism.md` rule 4 | None |
 | One collecting sentence per section at most, and it names the disagreement rather than settling it | C | check 7 | Two per section is a template |
 
 ### 數據驅動 (data-led)
@@ -142,7 +142,7 @@ After A — 場景導入 (moves: open on a person; hold the first number until t
 >
 > 電腦轉圈的原因：重試佇列沒有設 jitter，失敗的請求在同一個時間窗裡反覆重送，下游服務於是互相限流。
 >
-> 夾上白板的紙本檢傷單有三張；夾上去的時候，重送已經進行了三分鐘：200 毫秒內 412 次，而平時每分鐘大約只有 3 次。2 點 41 分找到原因；值班平台工程師說，這個佇列的預設值從來沒有人檢視過。2 點 47 分，`RETRY_JITTER=full` 設上。
+> 夾上白板的紙本檢傷單有三張；夾上去的時候，重送已經進行了三分鐘：200 毫秒內 412 次，相當於平時兩個多小時的量（平時每分鐘大約 3 次）。2 點 41 分找到原因；值班平台工程師說，這個佇列的預設值從來沒有人檢視過。2 點 47 分，`RETRY_JITTER=full` 設上。
 >
 > 更新（3 月 6 日）：所有佇列的預設值已改。
 >
@@ -153,12 +153,12 @@ After A — 場景導入 (moves: open on a person; hold the first number until t
 | 「本文將探討…」 | A date, a place, a person and a recorded action open the piece; open on a person | `journalism.md` tells row 1 |
 | Cause and consequence stated before any scene, with the date as the only concrete detail | The count of slips and every figure wait for paragraph three; the opening keeps only the date and time of day, which the move treats as scene facts; hold the first number | `journalism.md` rule 1 |
 | 「無奈地表示：“…”」 | The recorded action, then the approved quotation in 「」, no attribution verb, no adverb (a write from the fact list; on refactor the Before's quotation would stay as written) | zh.md §2 manner adverb; `journalism.md` rule 3 (attribution by context or a plain 說) |
-| 「——…——」 insertion with single-glyph dashes presenting the cause without a quantified baseline | One plain sentence carries 412, 200 ms and the 3-per-minute baseline, in paragraph three; the two-cell paired 「──…──」 would itself be register-normal (zh.md §1b), the single-glyph 「—」 is the glyph slip | check 5; zh.md §1b single-glyph 「—」 row |
+| 「——…——」 insertion with single-glyph dashes presenting the cause without a quantified baseline | One plain sentence carries 412 in 200 ms and its comparison written out as about two hours of normal traffic (the 3-per-minute baseline in brackets), in paragraph three; the two-cell paired 「──…──」 would itself be register-normal (zh.md §1b), the single-glyph 「—」 is the glyph slip | check 5; zh.md §1b single-glyph 「—」 row |
 | 「迅速地」「成功地」 | Absent (manner adverbs; register default) | zh.md §2 manner-adverb row |
 | 「非常」 | Absent because no approved fact supports an intensifier, not because one 「非常」 departs from the register (§1b: stacking against 「很」 is the departure) | check 5 |
 | 「總而言之…重要性…謹慎」 | The piece stops on the dated update; no summary ending. The update block is the cross-shape move and is counted, as in After B and After C; the frame that makes it post-publication is a stated assumption of the exercise | check 7 |
 
-Known cost and what the blind review taught: the shape's "return to the opening person or object at a later moment" move is not used, because the approved fact list has no later whiteboard fact; an earlier draft returned to the same 2 點 05 分 moment and the declared-voice review correctly reported it as density, not as the move. Four drafts before that added a gesture, a closing count, a pronoun and an attribution of the discovery that were in no fact list, and reviews caught each under check 5; one more claimed "scene in, institution out" for a piece with no sections. The precondition section and the audited closing line exist for exactly these. 「三分鐘」 is arithmetic on two approved times (14:02, 14:05).
+Known cost and what the blind review taught: the shape's "return to the opening person or object at a later moment" move is not used, because the approved fact list has no later whiteboard fact; an earlier draft returned to the same 2 點 05 分 moment and the declared-voice review correctly reported it as density, not as the move. Four drafts before that added a gesture, a closing count, a pronoun and an attribution of the discovery that were in no fact list, and reviews caught each under check 5; one more claimed "scene in, institution out" for a piece with no sections. The precondition section and the audited closing line exist for exactly these. 「三分鐘」 is arithmetic on two approved times (14:02, 14:05), and 「兩個多小時」 on two approved facts (412 ÷ 3 ≈ 137 minutes). Under `journalism.md` rule 4, 412 in 200 ms carries its comparison (兩個多小時 and the 3-per-minute baseline are that comparison, not separate figures); 3 月 4 日, 2 點 05 分, 三張, 三分鐘, 200 毫秒, 2 點 41 分, 2 點 47 分 and 3 月 6 日 are figures the reader can size. The baseline is unsourced: the fact list gives none, so the reviews' check 5 finding on it stands, and a real piece needs the source.
 
 After B — 倒金字塔 (moves: the first sentence holds who, when, what, how many; updates in a dated block; no summary ending). "Write each provision in full" is not claimed: the facts hold incident measurements and a setting, not provisions. A data-led After was drafted first and withdrawn: the fact list has a baseline but no source or method for the count, the decision table says a shape whose precondition is not met is not chosen, and a worked example that chooses it anyway would teach the opposite. The facts do hold the inverted pyramid's precondition (date, actor, outcome, count), and the stated publication frame (2026-03-05) puts the events inside the shape's "this week" window and the 03-06 change after publication.
 
@@ -177,11 +177,11 @@ After B — 倒金字塔 (moves: the first sentence holds who, when, what, how m
 | Departure in the Before | What the After (a write) does instead; move | Check |
 |---|---|---|
 | 「本文將探討…」 → one sentence with date, actor, count and the setting time; recovery is a TODO because the facts stop at the setting | First sentence holds who, when, what, how many | `journalism.md` rule 1 (standfirst register); check 5 |
-| 412, 200 ms, the 3-per-minute baseline and the derived "two hours" (412 ÷ 3 ≈ 137 minutes) each written out | (register default under `journalism.md` rule 4; not the provisions move) | check 5 |
+| 412 in 200 ms with its comparison written out as "two hours" of normal traffic (412 ÷ 3 ≈ 137 minutes); the 3-per-minute baseline is unsourced in the fact list, so check 5 still reports it and a real piece needs the source | (register default under `journalism.md` rule 4 for the comparison; not the provisions move) | check 5 |
 | The nurse's action and words, then the engineer's statement, each in its own paragraph without a verdict | (register default) | check 7 |
 | 「總而言之…」 → a dated update line, and the piece stops there | Update block; no summary ending | check 7; `journalism.md` rule 6 |
 
-Known cost of After B: the first sentence runs long with several commas, which is this shape's norm and will read as a rhythm candidate if the rest of the piece is uniform; here the following sentences are short. The derived figure is accepted under check 5 because both inputs are in the approved list.
+Known cost of After B: the first sentence runs long with several commas, which is this shape's norm and will read as a rhythm candidate if the rest of the piece is uniform; here the following sentences are short. The derived figure is arithmetic on two approved facts; the baseline it rests on is unsourced, so check 5 reports that one.
 
 After C — 論證式 spine (moves: question answered by the next speaker; update block; no summary ending). The clock times are used as facts, not as the 時間軸 shape: that shape's precondition is timestamps from documents, the fact list gives no document provenance, and a shape whose precondition is unmet is not chosen, so no timeline move is claimed. Two parties appear, but they do not disagree on the record, so the argument shape's "two experts, one disagreeing" move is not claimed.
 
@@ -189,7 +189,7 @@ After C — 論證式 spine (moves: question answered by the next speaker; updat
 >
 > 值班護理師 14:05 就把三張紙本檢傷單夾上白板。「電腦轉圈，我就先用紙。」
 >
-> 系統這邊的狀況是：重試佇列沒有設 jitter，200 毫秒內重送 412 次，而平時每分鐘大約 3 次；下游服務對彼此限流。
+> 系統這邊的狀況是：重試佇列沒有設 jitter，200 毫秒內重送 412 次，相當於平時兩個多小時的量（平時每分鐘大約 3 次）；下游服務對彼此限流。
 >
 > 值班平台工程師說，這個佇列的預設值從來沒有人檢視過。14:47，`RETRY_JITTER=full` 設上。
 >
@@ -200,7 +200,7 @@ After C — 論證式 spine (moves: question answered by the next speaker; updat
 | Departure in the Before | What the After (a write) does instead; move | Check |
 |---|---|---|
 | 「本文將探討」 → two timestamps and a question that the nurse, not the reporter, answers in the next paragraph | Question answered by the next speaker | `discourse-pass.md` §1; `journalism.md` tells (self-answered question) |
-| 412 in 200 ms set against the 3-per-minute baseline; 三張 and the clock times stand alone, so the "every number carries a comparison" move is not claimed | (register default; `journalism.md` rule 4 satisfied where a comparison exists) | check 5 |
+| 412 in 200 ms carries its comparison, written as about two hours of normal traffic (兩個多小時 and the 3-per-minute baseline are that comparison); 3 月 4 日, 14:02, 14:05, 14:41, 14:47, 39 分鐘 (arithmetic on two of those times), 三張, 200 毫秒 and 3 月 6 日 are figures the reader can size; the baseline is unsourced in the fact list, so check 5 still reports it. The cross-shape comparison move is not claimed | (register default under `journalism.md` rule 4) | check 5 |
 | 「總而言之…」 → a dated update line | Update block (cross-shape) | check 7; `journalism.md` rule 6 |
 | The piece stops on the update, no verdict | No summary ending (cross-shape) | check 7 |
 
@@ -208,7 +208,7 @@ Known cost of After C: the nurse and the engineer describe different sides of th
 
 ## Grounding
 
-Blind review of After A by a fresh executor (Claude Opus 5) on the professional route, 2026-09-16, once with the voice declared by the exact phrase and once without. The reviewed text is the After printed above except for one clause: the review read 「白板上那三張紙本檢傷單夾上去的時候」, the undeclared run reported 「那三張」 as a definite reference to a count never introduced (check 5), and the printed After now reads 「夾上白板的紙本檢傷單有三張；夾上去的時候」. Both runs loaded `domains/journalism.md`; only the declared run loaded `voice-skills.md` and this body. Neither run printed a `Voice fit:` line (professional route, #227).
+Blind review of After A by a fresh executor (Claude Opus 5) on the professional route, 2026-09-16, once with the voice declared by the exact phrase and once without. The reviewed text is the After printed above except for one clause: the review read 「白板上那三張紙本檢傷單夾上去的時候」, the undeclared run reported 「那三張」 as a definite reference to a count never introduced (check 5), and the printed After now reads 「夾上白板的紙本檢傷單有三張；夾上去的時候」. Paragraph three has changed once more since: both runs failed check 5 on the two rates in different units, and the printed After now writes the comparison out (「相當於平時兩個多小時的量」), so the reviewed text and the printed After also differ in that clause. Both runs loaded `domains/journalism.md`; only the declared run loaded `voice-skills.md` and this body. Neither run printed a `Voice fit:` line (professional route, #227).
 
 - Declared: the report named the voice and shape, confirmed the precondition (scene facts with a time), and listed the three shape moves it saw performed (open on a person, first number held to paragraph three, no summary ending); it did not name the dated update block, the cross-shape move the closing line now counts, so on that head the audited line and the review differ by that one move; scene detail was listed as the voice's known cost, not a defect. `Passed: 1, 2, 3, 4, 6, 7, 8, 9, 10`. Failed: `discourse-pass.md` §1 (four first sentences form a clean outline; the implied questions run "what → why → how big and who fixed it → afterwards", a linear interview) and `#5 Specificity` in two parts: the opened scene is never closed (when the department went back to the system is neither a fact nor a TODO, which is where the unused "return to the person" move would sit), and the load-bearing figures carry no source or method, with the two rates in different units. Style scan: none; rhythm 50/11/66/50/33/19/18 characters, no run of three near-equal sentences. `Verdict: isolated hits → refactor`.
 - Undeclared: `Passed: 1, 2, 3, 6, 7, 8, 9, 10`. Failed: `#5` three times (the 「那三張」 backreference, now fixed; the two rates in different units and 「大約 3 次」 unsourced; the system facts without provenance, the engineer attached to one sentence only) and `#4 Stance` twice (three agentless actions: found the cause, set the flag, changed the defaults; no comparison or verification paragraph, so the QUD holds only briefing → cause → consequence). It read the dated update block as rule-6-conformant. `Verdict: isolated hits → refactor`.
