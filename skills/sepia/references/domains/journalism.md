@@ -19,7 +19,7 @@ Lead and body are two registers: the standfirst gives the result, the first para
 | Every paragraph closing on the reporter's verdict sentence | Let the paragraph end on the source's words or the fact; one collecting sentence per section at most | close reading: paragraph-end verdicts are the exception |
 | Sections of equal length with the same inner order (context, quotation, verdict) | Depth follows what the reporting found; a section may be one paragraph | professional-pass check 9; close reading: mixed shapes in 98/169 |
 | Connectives opening consecutive paragraphs (「此外」「另一方面」「然而」) | Let the subhead or the juxtaposition do the switching | T human side: single connectives are register-normal, paragraph-initial chains are not counted (zh.md §1b, §5); Sepia inference |
-| Figures the reader cannot size, without a comparison or a local referent | Give it a baseline, a prior period or a referent the reader knows, in its own unit or with the conversion written out; rule 4 says which figures need one | close reading: data pieces pair every figure with a comparison |
+| Figures the reader cannot size, without a comparison or a local referent | Give each one a baseline, a prior period or a referent the reader knows, in the figure's own unit or with the conversion written out; rule 4 says which figures need one | close reading: data pieces pair their figures with a comparison |
 | Question asked and answered by the reporter in the same paragraph | The paragraph-end question is answered by the next speaker's data or words | close reading: question-as-transition is the norm; unmeasured on both sides (T and M count paragraph-ending questions, a different pattern from a question answered by the reporter within the paragraph) |
 
 ## Rules
