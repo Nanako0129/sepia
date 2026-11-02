@@ -57,7 +57,7 @@ Professional prose fails differently, and the structure-level finding holds ther
 | Postmortems | blameless toward people, merciless toward mechanisms; timestamps, dead ends, owned action items |
 | Tickets / work orders | title = outcome, testable acceptance criteria, link don't repeat |
 | Technical articles | open at the problem, one real dead end, one committed opinion, numbers with conditions |
-| Long-form journalism (features, investigations, data stories) | lead and body in two registers, quotations keep their spoken texture, every number carries a comparison, no summary ending |
+| Long-form journalism (features, investigations, data stories) | lead and body in two registers, quotations keep their spoken texture, numbers the reader can't size carry a comparison, no summary ending |
 
 > **Governing principle:** Calibrate to the human distribution, don't invert the AI one. Humans sit at moderate values; a story with every rule applied is a new fingerprint. The skill selects 3–5 moves per story and leaves slack.
 
