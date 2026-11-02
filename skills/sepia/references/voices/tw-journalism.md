@@ -142,7 +142,7 @@ After A — 場景導入 (moves: open on a person; hold the first number until t
 >
 > 電腦轉圈的原因：重試佇列沒有設 jitter，失敗的請求在同一個時間窗裡反覆重送，下游服務於是互相限流。
 >
-> 夾上白板的紙本檢傷單有三張；夾上去的時候，重送已經進行了三分鐘：200 毫秒內 412 次，相當於平時兩個多小時的量（平時每分鐘大約 3 次）。2 點 41 分找到原因；值班平台工程師說，這個佇列的預設值從來沒有人檢視過。2 點 47 分，`RETRY_JITTER=full` 設上。
+> 夾上白板的紙本檢傷單有三張。那時已經重送了三分鐘，其中 412 次落在同一個 200 毫秒裡，相當於平時兩個多小時的量；平時每分鐘大約 3 次。2 點 41 分找到原因；值班平台工程師說，這個佇列的預設值從來沒有人檢視過。2 點 47 分，`RETRY_JITTER=full` 設上。
 >
 > 更新（3 月 6 日）：所有佇列的預設值已改。
 >
@@ -153,7 +153,7 @@ After A — 場景導入 (moves: open on a person; hold the first number until t
 | 「本文將探討…」 | A date, a place, a person and a recorded action open the piece; open on a person | `journalism.md` tells row 1 |
 | Cause and consequence stated before any scene, with the date as the only concrete detail | The count of slips and every figure wait for paragraph three; the opening keeps only the date and time of day, which the move treats as scene facts; hold the first number | `journalism.md` rule 1 |
 | 「無奈地表示：“…”」 | The recorded action, then the approved quotation in 「」, no attribution verb, no adverb (a write from the fact list; on refactor the Before's quotation would stay as written) | zh.md §2 manner adverb; `journalism.md` rule 3 (attribution by context or a plain 說) |
-| 「——…——」 insertion with single-glyph dashes presenting the cause without a quantified baseline | One plain sentence carries 412 in 200 ms and its comparison written out as about two hours of normal traffic (the 3-per-minute baseline in brackets), in paragraph three; the two-cell paired 「──…──」 would itself be register-normal (zh.md §1b), the single-glyph 「—」 is the glyph slip | check 5; zh.md §1b single-glyph 「—」 row |
+| 「——…——」 insertion with single-glyph dashes presenting the cause without a quantified baseline | One plain sentence carries 412 in 200 ms and its comparison written out as about two hours of normal traffic (then the 3-per-minute baseline), in paragraph three; the two-cell paired 「──…──」 would itself be register-normal (zh.md §1b), the single-glyph 「—」 is the glyph slip | check 5; zh.md §1b single-glyph 「—」 row |
 | 「迅速地」「成功地」 | Absent (manner adverbs; register default) | zh.md §2 manner-adverb row |
 | 「非常」 | Absent because no approved fact supports an intensifier, not because one 「非常」 departs from the register (§1b: stacking against 「很」 is the departure) | check 5 |
 | 「總而言之…重要性…謹慎」 | The piece stops on the dated update; no summary ending. The update block is the cross-shape move and is counted, as in After B and After C; the frame that makes it post-publication is a stated assumption of the exercise | check 7 |
@@ -177,7 +177,7 @@ After B — 倒金字塔 (moves: the first sentence holds who, when, what, how m
 | Departure in the Before | What the After (a write) does instead; move | Check |
 |---|---|---|
 | 「本文將探討…」 → one sentence with date, actor, count and the setting time; recovery is a TODO because the facts stop at the setting | First sentence holds who, when, what, how many | `journalism.md` rule 1 (standfirst register); check 5 |
-| 412 in 200 ms with its comparison written out as "two hours" of normal traffic (412 ÷ 3 ≈ 137 minutes); the 3-per-minute baseline is unsourced in the fact list, so check 5 still reports it and a real piece needs the source | (register default under `journalism.md` rule 4 for the comparison; not the provisions move) | check 5 |
+| 412 in 200 ms with its comparison written out as "two hours" of normal traffic (412 ÷ 3 ≈ 137 minutes); the 3-per-minute baseline is unsourced in the fact list, so check 5 still reports it and a real piece needs the source; the comparison follows in paragraph two, the inverted pyramid's order | (register default under `journalism.md` rule 4 for the comparison; not the provisions move) | check 5 |
 | The nurse's action and words, then the engineer's statement, each in its own paragraph without a verdict | (register default) | check 7 |
 | 「總而言之…」 → a dated update line, and the piece stops there | Update block; no summary ending | check 7; `journalism.md` rule 6 |
 
@@ -189,7 +189,7 @@ After C — 論證式 spine (moves: question answered by the next speaker; updat
 >
 > 值班護理師 14:05 就把三張紙本檢傷單夾上白板。「電腦轉圈，我就先用紙。」
 >
-> 系統這邊的狀況是：重試佇列沒有設 jitter，200 毫秒內重送 412 次，相當於平時兩個多小時的量（平時每分鐘大約 3 次）；下游服務對彼此限流。
+> 系統這邊的狀況是：重試佇列沒有設 jitter，200 毫秒內重送 412 次，相當於平時兩個多小時的量，平時每分鐘大約 3 次；下游服務對彼此限流。
 >
 > 值班平台工程師說，這個佇列的預設值從來沒有人檢視過。14:47，`RETRY_JITTER=full` 設上。
 >
@@ -200,7 +200,7 @@ After C — 論證式 spine (moves: question answered by the next speaker; updat
 | Departure in the Before | What the After (a write) does instead; move | Check |
 |---|---|---|
 | 「本文將探討」 → two timestamps and a question that the nurse, not the reporter, answers in the next paragraph | Question answered by the next speaker | `discourse-pass.md` §1; `journalism.md` tells (self-answered question) |
-| 412 in 200 ms carries its comparison, written as about two hours of normal traffic (兩個多小時 and the 3-per-minute baseline are that comparison); 3 月 4 日, 14:02, 14:05, 14:41, 14:47, 39 分鐘 (arithmetic on two of those times), 三張, 200 毫秒 and 3 月 6 日 are figures the reader can size; the baseline is unsourced in the fact list, so check 5 still reports it. The cross-shape comparison move is not claimed | (register default under `journalism.md` rule 4) | check 5 |
+| 412 in 200 ms carries its comparison, written as about two hours of normal traffic (兩個多小時 and the 3-per-minute baseline are that comparison); 3 月 4 日, 14:02, 14:05, 14:41, 14:47, 39 分鐘 (arithmetic on two of those times), 三張, 200 毫秒 and 3 月 6 日 are figures the reader can size; the baseline is unsourced in the fact list, so check 5 still reports it | (register default under `journalism.md` rule 4) | check 5 |
 | 「總而言之…」 → a dated update line | Update block (cross-shape) | check 7; `journalism.md` rule 6 |
 | The piece stops on the update, no verdict | No summary ending (cross-shape) | check 7 |
 
@@ -208,7 +208,7 @@ Known cost of After C: the nurse and the engineer describe different sides of th
 
 ## Grounding
 
-Blind review of After A by a fresh executor (Claude Opus 5) on the professional route, 2026-09-16, once with the voice declared by the exact phrase and once without. The reviewed text is the After printed above except for one clause: the review read 「白板上那三張紙本檢傷單夾上去的時候」, the undeclared run reported 「那三張」 as a definite reference to a count never introduced (check 5), and the printed After now reads 「夾上白板的紙本檢傷單有三張；夾上去的時候」. Paragraph three has changed once more since: both runs failed check 5 on the two rates in different units, and the printed After now writes the comparison out (「相當於平時兩個多小時的量」), so the reviewed text and the printed After also differ in that clause. Both runs loaded `domains/journalism.md`; only the declared run loaded `voice-skills.md` and this body. Neither run printed a `Voice fit:` line (professional route, #227).
+Blind review of After A by a fresh executor (Claude Opus 5) on the professional route, 2026-09-16, once with the voice declared by the exact phrase and once without. The reviewed text is an earlier version of the After printed above, which differs in paragraph three: the review read 「白板上那三張紙本檢傷單夾上去的時候」, the undeclared run reported 「那三張」 as a definite reference to a count never introduced (check 5), and the next version read 「夾上白板的紙本檢傷單有三張；夾上去的時候」. On 2026-11-03 paragraph three changed again: both runs below failed check 5 on the two rates in different units, so the printed After writes the comparison out and splits that sentence. An undeclared review of the printed After by a fresh executor (Claude Opus 5.5, 2026-11-03, one run) read `journalism.md` rule 4 as met (412 carries its comparison with the conversion written out; 三張, 三分鐘 and the clock times sized at sight), found no style-scan hit, passed #10, and still failed #5 on sources: the 412 count, the unsourced baseline, the cause stated in the reporter's voice and the update, which the fact list leaves without a source. Both runs loaded `domains/journalism.md`; only the declared run loaded `voice-skills.md` and this body. Neither run printed a `Voice fit:` line (professional route, #227).
 
 - Declared: the report named the voice and shape, confirmed the precondition (scene facts with a time), and listed the three shape moves it saw performed (open on a person, first number held to paragraph three, no summary ending); it did not name the dated update block, the cross-shape move the closing line now counts, so on that head the audited line and the review differ by that one move; scene detail was listed as the voice's known cost, not a defect. `Passed: 1, 2, 3, 4, 6, 7, 8, 9, 10`. Failed: `discourse-pass.md` §1 (four first sentences form a clean outline; the implied questions run "what → why → how big and who fixed it → afterwards", a linear interview) and `#5 Specificity` in two parts: the opened scene is never closed (when the department went back to the system is neither a fact nor a TODO, which is where the unused "return to the person" move would sit), and the load-bearing figures carry no source or method, with the two rates in different units. Style scan: none; rhythm 50/11/66/50/33/19/18 characters, no run of three near-equal sentences. `Verdict: isolated hits → refactor`.
 - Undeclared: `Passed: 1, 2, 3, 6, 7, 8, 9, 10`. Failed: `#5` three times (the 「那三張」 backreference, now fixed; the two rates in different units and 「大約 3 次」 unsourced; the system facts without provenance, the engineer attached to one sentence only) and `#4 Stance` twice (three agentless actions: found the cause, set the flag, changed the defaults; no comparison or verification paragraph, so the QUD holds only briefing → cause → consequence). It read the dated update block as rule-6-conformant. `Verdict: isolated hits → refactor`.
