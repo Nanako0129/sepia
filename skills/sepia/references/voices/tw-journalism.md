@@ -64,7 +64,7 @@ Columns: Move / Source / Sepia check it maps to (I unless marked) / Known cost.
 |---|---|---|---|
 | End a paragraph on a question; the next paragraph answers it with a source's data or words, never the reporter's | C: paragraph-end questions are the norm | `discourse-pass.md` §1 QUD; `journalism.md` tells (self-answered question) | One question per section; more reads as rhetoric |
 | Put two or more experts in one section and let one disagree on the record | C: 9 of 11 pure argument pieces | check 4 stance as `journalism.md` rule 7 reads it | Needs two parties on the record; otherwise not available |
-| Every figure the reader cannot size carries a comparison or a conversion (`journalism.md` rule 4) | C; `journalism.md` rule 4 | check 5; `journalism.md` rule 4 | None |
+| Every figure the reader cannot size carries a comparison, stated in the figure's unit or with the conversion written out (`journalism.md` rule 4) | C; `journalism.md` rule 4 | check 5; `journalism.md` rule 4 | None |
 | One collecting sentence per section at most, and it names the disagreement rather than settling it | C | check 7 | Two per section is a template |
 
 ### 數據驅動 (data-led)
