@@ -48,6 +48,7 @@ Loaded: <files used>
 Model: author=<value> executor=<value>   (value: unknown | <family> version=unknown | <family> <release>; a release is an exact tag like Fable 5.1 or GPT-5.6 — "GPT-5" alone is a family, write "GPT version=unknown")
 Prose layer: author=<operative | prior | none> executor=<operative | prior | none>   (operative = the release's own table is operative and the family's other tables are priors)
 Venue corpus: <artifacts sampled, or "none — using domain baseline">
+Discourse: <discourse-pass.md §1–3 findings with quoted evidence, or none>   (long-form, where the outline test and QUD check above apply; omitted otherwise)
 Style scan: <style-pass §2–3 and §5 rhythm hits with quoted evidence, or none>
 Failed: <#n check-name — quoted evidence>   (one line per failed check)
 Deferred: <#n check-name, or the `SKILL.md` guardrail that held it back — quoted evidence — needs human | none>   (unattended runs only; omitted otherwise)

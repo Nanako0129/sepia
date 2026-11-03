@@ -91,6 +91,8 @@ Group B: observed signals … (…)
 Group C: observed signals …; n/a … (…)
 Group D: marker observations … (named intertextuality present — "…")
 Group E: observed signals … (…)
+Discourse: <discourse-pass.md findings with quoted evidence, or none>
+Style scan: <style-pass.md findings with quoted evidence, or none>
 Advisories: over-correction …; subplots …; single-location …
 Quoted evidence: <short phrase for each reported signal>
 Deferred: <row heading, or the `SKILL.md` guardrail that held it back — quoted evidence — needs human | none>   (unattended runs only; omitted otherwise)
