@@ -38,7 +38,7 @@ Which checks dominate depends on document shape (measured: S):
 
 Weighting sets the order and depth of attention, not an exemption: a short reply drowning in filler still fails density.
 
-For long-form (articles, postmortems), also run the outline test and QUD check in `discourse-pass.md` §1–3: extract first sentences per paragraph; a clean-summary outline and a briefing→justification→consequences→reflection question-sequence are both machine shapes.
+On every route that loads `discourse-pass.md` §1–3 (SKILL.md routing), also run its outline test and QUD check: extract first sentences per paragraph; a clean-summary outline and a briefing→justification→consequences→reflection question-sequence are both machine shapes.
 
 ## Report format (review; refactor stage 1 prints the same report before editing)
 
