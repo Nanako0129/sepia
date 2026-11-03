@@ -49,7 +49,7 @@ A persona is one writer's fingerprint, the third profile kind beside an author-l
 | Finding class | Handling under a declared voice |
 |---|---|
 | Over-correction advisories on axes the voice deliberately pushes (a minimalism method driving interior access, sensory density, or thematic explicitness to the low extreme) | Expected: report them as the voice's known cost, and do not prescribe fixes against the user's chosen aesthetic. Escalate only if the user hasn't been told the trade-off |
-| Uniformity findings: the same sentence recipe in every paragraph, the key line always closing the paragraph, a complete setup-payoff ledger, a formula ending | Hard findings at full strength — a voice does not excuse a metronome |
+| Uniformity findings: the same sentence recipe in every paragraph, the key line always closing the paragraph, a complete setup-payoff ledger, a formula ending, and the repetition items of `professional-pass.md` check 6 (every section the same length, lists of exactly three everywhere, a fractal summary at every level) | Hard findings at full strength — a voice does not excuse a metronome |
 | Style-pass vocabulary and syntax hits | Unchanged — style-pass's own clustering thresholds and whitelists stay in force; a declared voice neither excuses nor hardens them, except a `style-pass.md` §2, §3 or §4 item named in a persona's override table, which is reported as `Persona cost:`; §5 can never be named (persona section) |
 | Findings produced by a rule named in a persona's override table (uniformity findings excluded, see the row above) | Reported as `Persona cost: <rule token> — <quoted evidence>`; not a defect; not fixed on refactor |
 | Specificity and fact guardrails | Unchanged: never invent, voice or no voice |
