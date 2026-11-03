@@ -126,8 +126,7 @@ CHECK_RANGE = range(1, 11)
 
 NON_YIELDING = {
     # uniformity: sections whose whole content is uniformity. The Reviewing
-    # table's uniformity row stays at full strength regardless of any token
-    # (a formula ending named under narrative-pass.md §3 is still reported).
+    # table's uniformity row stays at full strength regardless of any token.
     "style-pass.md §5",
     "professional-pass.md check 8",
     "professional-pass.md check 9",
