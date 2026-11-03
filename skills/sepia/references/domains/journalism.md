@@ -33,4 +33,4 @@ Lead and body are two registers: the standfirst gives the result, the first para
 7. **Stance (check 4), read for this venue.** The judgment a report commits to is what the reporting established and where the parties disagree, named as such. A piece that asserts nothing it verified, or blurs a documented disagreement into "both sides", fails check 4 exactly as written; committing to the verified facts is the stance.
 8. **Density and relevance (checks 2 and 3), read for this venue.** The reader's task includes being placed in the scene, so a concrete detail that builds the picture is information and passes; a generic statement true in any context still fails. This narrows nothing in `professional-pass.md`; it says what counts as information for this reader.
 
-Weighting: article-like (`professional-pass.md` Domain weighting), then rules 7 and 8 as the venue's reading of those checks.
+Weighting: article-like (`professional-pass.md` Domain weighting), then rules 7 and 8 as the venue's reading of checks 4, 2 and 3.
