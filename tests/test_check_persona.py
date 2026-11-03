@@ -175,6 +175,7 @@ class CheckPersonaCase(unittest.TestCase):
     def test_non_yielding_tokens_fail(self):
         for tok in (
             "`style-pass.md §5`",
+            "`professional-pass.md check 8`",
             "`professional-pass.md check 9`",
             "`professional-pass.md check 5`",
             "`languages/zh.md §2 flat-sentence-length`",

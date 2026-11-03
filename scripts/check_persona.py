@@ -20,14 +20,10 @@ section):
   so the non-yielding rules can be refused by identity rather than by guessing
   at free text. Domain tells and SKILL.md guardrails are outside the grammar:
   no persona overrides them.
-- Non-yielding rules: uniformity (`style-pass.md §5`, `professional-pass.md
-  check 9`, `languages/zh.md §2 flat-sentence-length`, `discourse-pass.md §3`)
-  and never-invent (`professional-pass.md check 5`, and the domain rules that
-  restate the guardrail: `domains/journalism.md rule 1`,
-  `domains/tech-articles.md rule 1`, `domains/postmortems.md rule 2`) cannot
-  be overridden by any persona; nor can `domains/journalism.md rule 3`, which
-  restates the quoted-material guardrail. `languages/zh.md §2` must name a
-  row, so the whole section cannot be listed around its uniformity row.
+- Non-yielding rules: the tokens in `NON_YIELDING` below cannot be
+  overridden by any persona; `voice-skills.md` (Two things never yield) gives
+  the reason for each group. `languages/zh.md §2` must name a row, so the
+  whole section cannot be listed around its uniformity row.
 - Fenced code blocks are ignored when reading sections, so sample text in
   ``` cannot stand in for the override table or the Prohibitions list items.
 - Consent: one of five contributable forms, or `private study, not for
@@ -133,6 +129,7 @@ NON_YIELDING = {
     # table's uniformity row stays at full strength regardless of any token
     # (a formula ending named under narrative-pass.md §3 is still reported).
     "style-pass.md §5",
+    "professional-pass.md check 8",
     "professional-pass.md check 9",
     "languages/zh.md §2 flat-sentence-length",
     "discourse-pass.md §3",
