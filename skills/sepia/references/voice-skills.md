@@ -12,7 +12,7 @@ sepia calibrates toward the human distribution and the venue. A voice skill aims
 
 ## Composition order (write and recreate)
 
-For **recreate**, the canonical stages come first (`SKILL.md` Operations: the recreate row and the two-stage protocol under the table): the defect list of the source and the verified list of its facts, claims and intent both exist before step 1 begins.
+For **recreate**, the canonical stages come first: the defect list the two-stage protocol requires (`SKILL.md`, the line under the Operations table), scored as refactor stage 1 is below, and the verified list of the source's facts, claims and intent (`SKILL.md`, the recreate row) both exist before step 1 begins.
 
 1. sepia's architecture decisions first (fiction: the architecture sheet in `narrative-pass.md`; professional: the domain file).
 2. The voice skill's moves next, applied selectively (see below).
