@@ -1,6 +1,6 @@
 # Domain — release notes & announcements
 
-Covers changelogs, GitHub Releases, version announcements, and short launch posts. Run with `professional-pass.md`; add `style-pass.md` for anything longer than a changelog.
+Covers changelogs, GitHub Releases, version announcements, and short launch posts. Loads per `SKILL.md` Routing.
 
 ## Human baseline
 

@@ -1,6 +1,6 @@
 # Domain — PR replies, issue replies, review comments
 
-Covers replies on pull requests and issues, code-review comments, and discussion-thread responses. Run with `professional-pass.md` (short-answer weighting: factuality, specificity, templatedness).
+Covers replies on pull requests and issues, code-review comments, and discussion-thread responses. Loads per `SKILL.md` Routing, with `professional-pass.md` short-answer weighting.
 
 ## Human baseline
 
