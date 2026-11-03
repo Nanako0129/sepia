@@ -1,6 +1,6 @@
 # Domain — technical articles & blog posts
 
-Covers engineering blog posts, tutorials, architecture write-ups, experience reports. Loads per `SKILL.md` Routing, with `professional-pass.md` article-like weighting; every tech article counts as a long piece there and takes the whole style pass.
+Covers engineering blog posts, tutorials, architecture write-ups, experience reports. Loads per `SKILL.md` Routing, with `professional-pass.md` article-like weighting; everything this domain covers counts as a long piece there and takes the whole style pass (without its fiction-slop table, as `SKILL.md` says).
 
 ## Human baseline
 
