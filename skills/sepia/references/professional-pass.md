@@ -38,7 +38,7 @@ Which checks dominate depends on document shape (measured: S):
 
 Weighting sets the order and depth of attention, not an exemption: a short reply drowning in filler still fails density.
 
-For long-form (articles, postmortems), also run the outline test and QUD check in `discourse-pass.md` §1–3: extract first sentences per paragraph; a clean-summary outline and a briefing→justification→consequences→reflection question-sequence are both machine shapes.
+On every route that loads `discourse-pass.md` §1–3 (SKILL.md routing), also run its outline test and QUD check: extract first sentences per paragraph; a clean-summary outline and a briefing→justification→consequences→reflection question-sequence are both machine shapes.
 
 ## Report format (review; refactor stage 1 prints the same report before editing)
 
@@ -48,12 +48,13 @@ Loaded: <files used>
 Model: author=<value> executor=<value>   (value: unknown | <family> version=unknown | <family> <release>; a release is an exact tag like Fable 5.1 or GPT-5.6 — "GPT-5" alone is a family, write "GPT version=unknown")
 Prose layer: author=<operative | prior | none> executor=<operative | prior | none>   (operative = the release's own table is operative and the family's other tables are priors)
 Venue corpus: <artifacts sampled, or "none — using domain baseline">
-Style scan: <style-pass §2–3 and §5 rhythm hits with quoted evidence, or none>
+Discourse: <findings from the discourse-pass.md sections this route loads (SKILL.md routing), with quoted evidence, or none>   (omitted on routes that load none)
+Style scan: <findings from the style step this route runs (style-pass.md and the files that step loads), with quoted evidence, or none>
 Failed: <#n check-name — quoted evidence>   (one line per failed check)
-Deferred: <#n check-name, or the `SKILL.md` guardrail that held it back — quoted evidence — needs human | none>   (unattended runs only; omitted otherwise)
-Protected: <#n check-name — quoted evidence | none>   (when ranges were declared or protected quoted material holds a defect, omitted otherwise; the passage is identified by its quoted words, never by a number the model derives)
+Deferred: <#n check-name or the finding line's name, or the `SKILL.md` guardrail that held it back — quoted evidence — needs human | none>   (unattended runs only; omitted otherwise)
+Protected: <#n check-name or the finding line's name — quoted evidence | none>   (when ranges were declared or protected quoted material holds a defect, omitted otherwise; the passage is identified by its quoted words, never by a number the model derives)
 Passed: <check numbers only>
-Verdict: <clean / isolated hits / cluster> → <ship / refactor / recreate>
+Verdict: <clean / isolated hits / cluster> → <ship / refactor / recreate>   (read from every finding above, each defect counted once)
 ```
 
 ## Whitelist — conventional ≠ slop
