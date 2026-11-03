@@ -1,6 +1,6 @@
 # Domain — tickets & work orders
 
-Covers issue tickets, tasks, work orders, bug reports you file (not replies — that's `dev-replies.md`). Run with `professional-pass.md` (short-answer weighting).
+Covers issue tickets, tasks, work orders, bug reports you file (not replies — that's `dev-replies.md`). Loads per `SKILL.md` Routing, with `professional-pass.md` short-answer weighting.
 
 ## Human baseline
 

@@ -1,6 +1,6 @@
 # Domain — incident postmortems
 
-Covers incident reports, outage retrospectives, RCA documents. Run with `professional-pass.md` (article-like weighting: relevance, density, stance) plus `discourse-pass.md` §1–3.
+Covers incident reports, outage retrospectives, RCA documents. Loads per `SKILL.md` Routing, with `professional-pass.md` article-like weighting.
 
 ## Human baseline
 
