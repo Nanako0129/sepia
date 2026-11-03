@@ -127,6 +127,8 @@ CHECK_RANGE = range(1, 11)
 NON_YIELDING = {
     # uniformity: sections whose whole content is uniformity. The Reviewing
     # table's uniformity row stays at full strength regardless of any token.
+    # narrative-pass.md §3 stays overridable on purpose: a formula ending
+    # (voice-skills.md Selection) still reports through that row.
     "style-pass.md §5",
     "professional-pass.md check 8",
     "professional-pass.md check 9",
